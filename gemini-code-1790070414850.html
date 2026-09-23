@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funded Research & EdTech Projects | ELITE CUHK</title>
+    <!-- Google Font & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #003366;       /* CUHK Navy Blue */
+            --primary-light: #00509d;
+            --accent: #d4af37;        /* Gold accent */
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- Header / Banner --- */
+        .page-header {
+            background: linear-gradient(135deg, #002244 0%, #004080 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* --- Filter Bar --- */
+        .filter-container {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .filter-select, .search-input {
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .search-input {
+            width: 250px;
+        }
+
+        /* --- Project Card List --- */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            border-left: 5px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .project-meta-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .project-badge {
+            background: #e0f2fe;
+            color: var(--primary-light);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .project-year {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        /* Project Details Grid */
+        .project-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #edf2f7;
+        }
+
+        .detail-item {
+            font-size: 0.9rem;
+        }
+
+        .detail-item strong {
+            color: var(--text-dark);
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #f1f5f9;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="page-header">
+        <h1>Funded & Collaborative Projects</h1>
+        <p>Showcasing research initiatives, pedagogical development grants, and AI-enhanced learning projects supported by ELITE and faculty partners.</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Filter & Search Controls -->
+        <div class="filter-container">
+            <div class="filter-group">
+                <span class="filter-label"><i class="fa-solid fa-filter"></i> Filter by:</span>
+                <select class="filter-select">
+                    <option value="">All Funding Sources</option>
+                    <option value="TLG">Teaching Development Grants (TDG)</option>
+                    <option value="UGC">UGC Strategic Fund</option>
+                    <option value="RGC">RGC General Research Fund</option>
+                </select>
+
+                <select class="filter-select">
+                    <option value="">All Academic Years</option>
+                    <option value="2025-26">2025 - 2026</option>
+                    <option value="2024-25">2024 - 2025</option>
+                    <option value="2023-24">2023 - 2024</option>
+                </select>
+            </div>
+
+            <div>
+                <input type="text" class="search-input" placeholder="Search project, PI, department...">
+            </div>
+        </div>
+
+        <!-- Project List Directory -->
+        <div class="project-list">
+
+            <!-- Project Item 1 -->
+            <div class="project-card">
+                <div class="project-meta-top">
+                    <span class="project-badge">Teaching Development Grant (TDG)</span>
+                    <span class="project-year"><i class="fa-regular fa-calendar"></i> 2025 – 2027</span>
+                </div>
+                
+                <h2 class="project-title">Implementation of AI-Driven Interactive Mock Interview Simulations (Tellus) for Professional Skill Enhancement</h2>
+                
+                <div class="project-details-grid">
+                    <div class="detail-item">
+                        <strong>Principal Investigator (PI)</strong>
+                        Prof. Alex CHAN (Department of Management)
+                    </div>
+                    <div class="detail-item">
+                        <strong>Co-Investigators (Co-Is)</strong>
+                        Dr. Sarah LI (ELITE Team), Dr. Kevin WONG (Department of Psychology)
+                    </div>
+                    <div class="detail-item">
+                        <strong>Collaborating Department(s)</strong>
+                        Faculty of Business Administration, ELITE Centre
+                    </div>
+                    <div class="detail-item">
+                        <strong>Approved Budget</strong>
+                        HKD $480,000
+                    </div>
+                </div>
+
+                <p class="project-desc">
+                    This project integrates the Tellus platform into undergraduate business communication courses to provide personalized AI-guided interview simulations, dynamic scoring rubrics, and automated performance analytics for over 600 students annually.
+                </p>
+
+                <div class="project-tags">
+                    <span class="tag">#Tellus</span>
+                    <span class="tag">#AIInEducation</span>
+                    <span class="tag">#BusinessCommunication</span>
+                    <span class="tag">#InteractiveAssessment</span>
+                </div>
+            </div>
+
+            <!-- Project Item 2 -->
+            <div class="project-card" style="border-left-color: #059669;">
+                <div class="project-meta-top">
+                    <span class="project-badge" style="background: #d1fae5; color: #047857;">UGC Strategic Innovation Fund</span>
+                    <span class="project-year"><i class="fa-regular fa-calendar"></i> 2024 – 2026</span>
+                </div>
+                
+                <h2 class="project-title">Domain-Grounded Academic AI Tutor (AcademiChat) for Large-Scale Foundation Science Courses</h2>
+                
+                <div class="project-details-grid">
+                    <div class="detail-item">
+                        <strong>Principal Investigator (PI)</strong>
+                        Prof. Michael ZHANG (School of Life Sciences)
+                    </div>
+                    <div class="detail-item">
+                        <strong>Co-Investigators (Co-Is)</strong>
+                        Mr. Patrick LAU (ELITE Team), Prof. David CHEUNG (Department of Computer Science)
+                    </div>
+                    <div class="detail-item">
+                        <strong>Collaborating Department(s)</strong>
+                        Faculty of Science, ELITE Centre, KEEP Platform Team
+                    </div>
+                    <div class="detail-item">
+                        <strong>Approved Budget</strong>
+                        HKD $750,000
+                    </div>
+                </div>
+
+                <p class="project-desc">
+                    Developing and deploying custom-trained LLM academic conversational assistants to support 24/7 student inquiry resolution, course material navigation, and formative quiz feedback in introductory Biology and Chemistry lectures.
+                </p>
+
+                <div class="project-tags">
+                    <span class="tag">#AcademiChat</span>
+                    <span class="tag">#GenerativeAI</span>
+                    <span class="tag">#STEMEducation</span>
+                    <span class="tag">#AutomatedTutoring</span>
+                </div>
+            </div>
+
+            <!-- Project Item 3 -->
+            <div class="project-card" style="border-left-color: #d97706;">
+                <div class="project-meta-top">
+                    <span class="project-badge" style="background: #fef3c7; color: #b45309;">Faculty E-Learning Enhancement Fund</span>
+                    <span class="project-year"><i class="fa-regular fa-calendar"></i> 2024 – 2025</span>
+                </div>
+                
+                <h2 class="project-title">Enhancing Multilingual Academic Integrity and Text Originality Analytics in General Education Writing</h2>
+                
+                <div class="project-details-grid">
+                    <div class="detail-item">
+                        <strong>Principal Investigator (PI)</strong>
+                        Dr. Helen CHENG (Department of English)
+                    </div>
+                    <div class="detail-item">
+                        <strong>Co-Investigators (Co-Is)</strong>
+                        Ms. Ada LAM (ELITE Team), Dr. Raymond HO (Independent Learning Centre)
+                    </div>
+                    <div class="detail-item">
+                        <strong>Collaborating Department(s)</strong>
+                        Faculty of Arts, Independent Learning Centre (ILC), ELITE Centre
+                    </div>
+                    <div class="detail-item">
+                        <strong>Approved Budget</strong>
+                        HKD $320,000
+                    </div>
+                </div>
+
+                <p class="project-desc">
+                    An empirical evaluation on utilizing VeriGuide's advanced similarity detection and original AI writing analysis tools to foster academic integrity and ethical AI usage among first-year university undergraduates.
+                </p>
+
+                <div class="project-tags">
+                    <span class="tag">#VeriGuide</span>
+                    <span class="tag">#AcademicIntegrity</span>
+                    <span class="tag">#GeneralEducation</span>
+                    <span class="tag">#WritingPedagogy</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

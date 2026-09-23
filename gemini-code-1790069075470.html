@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELITE - Centre for e-Learning Innovation and Technology Enhancement</title>
+    <!-- Google Font & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #003366;       /* CUHK Navy Blue */
+            --primary-light: #00509d;
+            --accent: #d4af37;        /* Gold accent */
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Top Navigation Bar --- */
+        header {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 75px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            padding: 25px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-item:hover > .nav-link {
+            color: var(--primary-light);
+        }
+
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 220px;
+            background: #ffffff;
+            box-shadow: var(--card-shadow);
+            border-radius: 8px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            list-style: none;
+            border: 1px solid #edf2f7;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--text-dark);
+            display: block;
+            font-size: 0.92rem;
+            transition: var(--transition);
+        }
+
+        .dropdown-item a:hover {
+            background-color: #f1f5f9;
+            color: var(--primary-light);
+            padding-left: 24px;
+        }
+
+        /* Badge for AI feature */
+        .ai-badge {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        /* --- Section Shared Styles --- */
+        section {
+            padding: 70px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+
+        /* --- 1. Hero Carousel --- */
+        .hero-carousel {
+            background: linear-gradient(135deg, #002244 0%, #004080 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 60px 40px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 400px;
+        }
+
+        .hero-content {
+            max-width: 550px;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #c29d2b;
+        }
+
+        .btn-secondary {
+            border: 2px solid rgba(255,255,255,0.4);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .hero-preview {
+            width: 450px;
+            height: 260px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .hero-preview i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        /* Carousel Navigation Dots */
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+        }
+
+        .dot.active {
+            background: var(--accent);
+            width: 25px;
+            border-radius: 10px;
+        }
+
+        /* --- 2. Latest Highlights --- */
+        .highlights-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #f1f5f9;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-tag {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- 3. Featured Products --- */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            border-top: 4px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+
+        /* --- 4. What We Do --- */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            text-align: center;
+        }
+
+        .pillar-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .pillar-icon {
+            width: 60px;
+            height: 60px;
+            background: #e0f2fe;
+            color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 20px auto;
+        }
+
+        /* --- 5. Facility Showcase --- */
+        .facility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        .facility-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .facility-img {
+            height: 200px;
+            background: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .facility-content {
+            padding: 25px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 50px 20px 20px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Banner -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">ELITE <span>CUHK</span></a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">Who are we</a></li>
+                        <li class="dropdown-item"><a href="#">Our mission</a></li>
+                        <li class="dropdown-item"><a href="#">Partnership</a></li>
+                        <li class="dropdown-item"><a href="#">People</a></li>
+                        <li class="dropdown-item"><a href="#">Contact us</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">Tellus <span class="ai-badge">AI</span></a></li>
+                        <li class="dropdown-item"><a href="#">AcademiChat <span class="ai-badge">AI</span></a></li>
+                        <li class="dropdown-item"><a href="#">VeriGuide</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">e-Learning Consultation</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Facility <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="#">Multi-Purpose Open Area</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Homepage Content -->
+    <main>
+        <!-- 1. Hero Carousel Section -->
+        <section style="padding-top: 10px;">
+            <div class="hero-carousel">
+                <div class="hero-content">
+                    <h1>Shaping Education with AI-Enhanced Learning</h1>
+                    <p>Empowering educators, innovating pedagogy, and building intelligent platforms at The Chinese University of Hong Kong.</p>
+                    <div class="hero-btns">
+                        <a href="#products" class="btn btn-primary">Explore Products</a>
+                        <a href="#services" class="btn btn-secondary">Our Services</a>
+                    </div>
+                </div>
+                <div class="hero-preview">
+                    <i class="fa-solid fa-circle-play"></i>
+                    <p>Watch Intro Video (0:45)</p>
+                </div>
+                <div class="carousel-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Latest Highlights Section -->
+        <section id="highlights">
+            <h2 class="section-title">Latest Highlights</h2>
+            <p class="section-subtitle">Discover our recent research outputs, accolades, and upcoming events</p>
+            
+            <div class="highlights-tabs">
+                <button class="tab-btn active">All</button>
+                <button class="tab-btn">Research</button>
+                <button class="tab-btn">Awards</button>
+                <button class="tab-btn">Events</button>
+            </div>
+
+            <div class="highlights-grid">
+                <div class="card">
+                    <div class="card-tag"><i class="fa-solid fa-trophy"></i> Award</div>
+                    <h3>QS Reimagine Education 2026 Shortlist</h3>
+                    <p>Recognizing ELITE's efforts in pioneering generative AI tutors for higher education platforms.</p>
+                </div>
+                <div class="card">
+                    <div class="card-tag"><i class="fa-solid fa-microscope"></i> Research</div>
+                    <h3>AI-Driven Interview Rubric Evaluation</h3>
+                    <p>A joint research study analyzing automated student feedback models in professional communication.</p>
+                </div>
+                <div class="card">
+                    <div class="card-tag"><i class="fa-solid fa-calendar-days"></i> Event</div>
+                    <h3>CUHK e-Learning Expo & Showcase</h3>
+                    <p>Join us to explore hands-on workshops and live product demonstrations of Tellus and AcademiChat.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Featured Products Section -->
+        <section id="products" style="background: #ffffff; max-width: 100%; padding: 70px 20px;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h2 class="section-title">Featured Products</h2>
+                <p class="section-subtitle">Cutting-edge platforms developed in-house to transform teaching and assessment</p>
+
+                <div class="products-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div>
+                            <div class="product-header">
+                                <span class="product-title">Tellus</span>
+                                <span class="ai-badge" style="font-size: 0.8rem; padding: 4px 8px;">AI Platform</span>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Interactive AI-driven interview and assessment tool designed for student practice, dynamic scenarios, and automated feedback.</p>
+                        </div>
+                        <div class="product-actions">
+                            <a href="#" class="btn btn-outline">Explore More</a>
+                            <a href="#" class="btn btn-primary btn-sm">Launch Tool <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.7rem;"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div>
+                            <div class="product-header">
+                                <span class="product-title">AcademiChat</span>
+                                <span class="ai-badge" style="font-size: 0.8rem; padding: 4px 8px;">AI Platform</span>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Academic-focused conversational AI tutor tailored for course-specific contexts, student Q&A, and interactive learning support.</p>
+                        </div>
+                        <div class="product-actions">
+                            <a href="#" class="btn btn-outline">Explore More</a>
+                            <a href="#" class="btn btn-primary btn-sm">Launch Tool <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.7rem;"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div>
+                            <div class="product-header">
+                                <span class="product-title">VeriGuide</span>
+                                <span style="background: #e2e8f0; color: #475569; font-size: 0.8rem; padding: 4px 8px; border-radius: 12px; font-weight: 600;">Core Platform</span>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Comprehensive academic integrity system providing text similarity matching, originality analysis, and multilingual checks.</p>
+                        </div>
+                        <div class="product-actions">
+                            <a href="#" class="btn btn-outline">Explore More</a>
+                            <a href="#" class="btn btn-primary btn-sm">Launch Tool <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.7rem;"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. What We Do Section -->
+        <section id="services">
+            <h2 class="section-title">What We Do</h2>
+            <p class="section-subtitle">Supporting academic excellence through three key pillars</p>
+
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fa-solid fa-code"></i></div>
+                    <h3>AI & EdTech Development</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">Engineering intelligent software solutions tailored to university course needs.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fa-solid fa-comments"></i></div>
+                    <h3>e-Learning Consultation</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">Providing pedagogical guidance and instructional design for blended learning.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fa-solid fa-video"></i></div>
+                    <h3>Advanced Facilities</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">Offering studio facilities and collaborative spaces for content production.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Facilities Showcase Section -->
+        <section id="facility">
+            <h2 class="section-title">Facilities Showcase</h2>
+            <p class="section-subtitle">Explore our state-of-the-art media production studios and open areas</p>
+
+            <div class="facility-grid">
+                <div class="facility-card">
+                    <div class="facility-img"><i class="fa-solid fa-camera-retro fa-2x"></i> &nbsp; Studio Preview</div>
+                    <div class="facility-content">
+                        <h3>Professional Studios</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0 15px 0;">High-grade audio-visual recording spaces equipped with Lightboard technology for MOOC and online course creation.</p>
+                        <a href="#" class="btn btn-outline btn-sm">Learn & Book Studio</a>
+                    </div>
+                </div>
+
+                <div class="facility-card">
+                    <div class="facility-img"><i class="fa-solid fa-users fa-2x"></i> &nbsp; Open Area Preview</div>
+                    <div class="facility-content">
+                        <h3>Multi-Purpose Open Area</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0 15px 0;">Flexible physical space designed for interactive workshops, AI project demonstrations, and academic collaborations.</p>
+                        <a href="#" class="btn btn-outline btn-sm">Explore Open Space</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ELITE Centre</h4>
+                <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.5;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Facility</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">Tellus AI</a></li>
+                    <li><a href="#">AcademiChat AI</a></li>
+                    <li><a href="#">VeriGuide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p style="color: #cbd5e1; font-size: 0.9rem;">The Chinese University of Hong Kong<br>Shatin, N.T., Hong Kong</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Centre for e-Learning Innovation and Technology Enhancement (ELITE), CUHK. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
