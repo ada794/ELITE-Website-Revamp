@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - The Chinese University of Hong Kong</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Branding Color Palette */
+            --brand-gold: #F5B000;          
+            --brand-green: #8AC43A;         
+            --brand-purple-bright: #6366F1; 
+            --brand-purple-dark: #4F46E5;   
+            --brand-cyan: #38B6FF;          
+            --brand-pink: #E61B6B;          
+            
+            --bg-body: #F8FAFC;
+            --surface-white: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border-light: #E2E8F0;
+            
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 12px 30px rgba(79, 70, 229, 0.12);
+            --transition: all 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Navigation Bar --- */
+        header {
+            background: var(--surface-white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-top-bar {
+            height: 5px;
+            background: var(--brand-gold);
+            width: 100%;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 75px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--brand-purple-dark);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-badge {
+            font-size: 0.75rem;
+            background: #FFFBEB;
+            color: var(--brand-gold);
+            border: 1px solid var(--brand-gold);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 26px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        /* Section Specific ELITE Branding Colors */
+        /* 1. Home - Gold */
+        .nav-item.nav-home:hover > .nav-link {
+            color: var(--brand-gold);
+            border-bottom-color: var(--brand-gold);
+        }
+        .nav-item.nav-home .dropdown {
+            border-top: 3px solid var(--brand-gold);
+        }
+        .nav-item.nav-home .dropdown-item a:hover {
+            background-color: #FFFBEB;
+            color: var(--brand-gold);
+        }
+
+        /* 2. About - Green */
+        .nav-item.nav-about:hover > .nav-link {
+            color: var(--brand-green);
+            border-bottom-color: var(--brand-green);
+        }
+        .nav-item.nav-about .dropdown {
+            border-top: 3px solid var(--brand-green);
+        }
+        .nav-item.nav-about .dropdown-item a:hover {
+            background-color: #F0FDF4;
+            color: var(--brand-green);
+        }
+
+        /* 3. Products - Purple */
+        .nav-item.nav-products:hover > .nav-link {
+            color: var(--brand-purple-bright);
+            border-bottom-color: var(--brand-purple-bright);
+        }
+        .nav-item.nav-products .dropdown {
+            border-top: 3px solid var(--brand-purple-bright);
+        }
+        .nav-item.nav-products .dropdown-item a:hover {
+            background-color: #EEF2FF;
+            color: var(--brand-purple-bright);
+        }
+
+        /* 4. Services - Cyan */
+        .nav-item.nav-services:hover > .nav-link {
+            color: var(--brand-cyan);
+            border-bottom-color: var(--brand-cyan);
+        }
+        .nav-item.nav-services .dropdown {
+            border-top: 3px solid var(--brand-cyan);
+        }
+        .nav-item.nav-services .dropdown-item a:hover {
+            background-color: #F0F9FF;
+            color: var(--brand-cyan);
+        }
+
+        /* 5. Facility - Pink */
+        .nav-item.nav-facility:hover > .nav-link {
+            color: var(--brand-pink);
+            border-bottom-color: var(--brand-pink);
+        }
+        .nav-item.nav-facility .dropdown {
+            border-top: 3px solid var(--brand-pink);
+        }
+        .nav-item.nav-facility .dropdown-item a:hover {
+            background-color: #FDF2F8;
+            color: var(--brand-pink);
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 230px;
+            background: var(--surface-white);
+            box-shadow: var(--shadow-md);
+            border-radius: 12px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            list-style: none;
+            border: 1px solid var(--border-light);
+        }
+
+        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .dropdown-item a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .ai-badge {
+            background: var(--brand-pink);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        /* --- Hero Section --- */
+        .page-hero {
+            background: linear-gradient(135deg, var(--brand-purple-dark) 0%, var(--brand-purple-bright) 60%, var(--brand-cyan) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.15);
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            backdrop-filter: blur(8px);
+        }
+
+        .page-hero h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .page-hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        /* --- Contact Layout Section --- */
+        .contact-section {
+            padding: 70px 0 90px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* Left Side: Exact Official Details */
+        .info-card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 36px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-card h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #EEF2FF;
+            color: var(--brand-purple-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .info-text h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .info-text p, .info-text a {
+            font-size: 1rem;
+            color: var(--text-main);
+            font-weight: 600;
+            text-decoration: none;
+            line-height: 1.5;
+        }
+
+        .info-text a:hover {
+            color: var(--brand-purple-bright);
+            text-decoration: underline;
+        }
+
+        .hours-list {
+            margin-top: 4px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .hours-list div {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+        }
+
+        /* Right Side: Contact Form */
+        .form-card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 36px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-card h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .form-card p {
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            background: #F8FAFC;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--brand-purple-bright);
+            background: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--brand-purple-dark);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+        }
+
+        .submit-btn:hover {
+            background: var(--brand-purple-bright);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
+        }
+
+        /* --- Map Banner --- */
+        .map-section {
+            padding-bottom: 80px;
+        }
+
+        .map-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            height: 380px;
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--brand-gold);
+            color: #000000;
+            padding: 60px 20px 25px 20px;
+            position: relative;
+        }
+
+        .footer-rainbow-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 100%;
+            background: linear-gradient(to right, var(--brand-gold) 20%, var(--brand-green) 20% 40%, var(--brand-purple-bright) 40% 60%, var(--brand-cyan) 60% 80%, var(--brand-pink) 80%);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            color: var(--brand-purple-dark);
+            font-weight: 800;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+
+        .footer-col ul li a {
+            color: #2D2100;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--brand-purple-dark);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            color: #3D2D00;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar & Header Navigation -->
+    <header>
+        <div class="header-top-bar"></div>
+        <div class="nav-container">
+            <a href="index.html" class="logo-text">
+                ELITE <span class="logo-badge">CUHK</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item nav-home">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                
+                <li class="nav-item nav-about">
+                    <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="index.html#vision-mission">Vision & Mission</a></li>
+                        <li class="dropdown-item"><a href="people.html">People</a></li>
+                        <li class="dropdown-item"><a href="partners.html">Our Partners</a></li>
+                        <li class="dropdown-item"><a href="contact.html">Contact us</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-products">
+                    <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="tellus.html">Tellus <span class="ai-badge">AI</span></a></li>
+                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="ai-badge">AI</span></a></li>
+                        <li class="dropdown-item"><a href="veriguide.html">VeriGuide</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-services">
+                    <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">e-Learning Consultation</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-facility">
+                    <a href="#" class="nav-link">Facility <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="#">Multi-Purpose Open Area</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <span class="hero-chip"><i class="fa-solid fa-envelope"></i> Get In Touch</span>
+        <h1>Contact Us</h1>
+        <p>Have questions, project inquiries, or feedback? Reach out to our team at The Chinese University of Hong Kong.</p>
+    </section>
+
+    <!-- Main Content Section -->
+    <main>
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    
+                    <!-- Left: Official Contact Info -->
+                    <div class="info-card">
+                        <h2>Contact Information</h2>
+                        
+                        <!-- Address -->
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="info-text">
+                                <h4>Address</h4>
+                                <p>6/F, Hui Yeung Shing Building,<br>The Chinese University of Hong Kong,<br>Shatin, N.T., Hong Kong</p>
+                            </div>
+                        </div>
+
+                        <!-- Opening Hours -->
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div class="info-text" style="width: 100%;">
+                                <h4>Opening Hours</h4>
+                                <div class="hours-list">
+                                    <div><span>Monday - Thursday:</span> <strong>8:45am - 5:30pm</strong></div>
+                                    <div><span>Friday:</span> <strong>8:45am - 5:45pm</strong></div>
+                                    <div><span>Saturday, Sunday & Public Holidays:</span> <strong>Closed</strong></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Telephone -->
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div class="info-text">
+                                <h4>Tel</h4>
+                                <p><a href="tel:+85239439262">(852) 3943 9262</a></p>
+                            </div>
+                        </div>
+
+                        <!-- Fax -->
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fa-solid fa-fax"></i>
+                            </div>
+                            <div class="info-text">
+                                <h4>Fax</h4>
+                                <p>(852) 3942 0926</p>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="info-text">
+                                <h4>Email</h4>
+                                <p><a href="mailto:elite-centre@cuhk.edu.hk">elite-centre@cuhk.edu.hk</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Interactive Contact Form -->
+                    <div class="form-card">
+                        <h2>What can we help you with?</h2>
+                        <p>Fill out the form below and our team will get back to you as soon as possible.</p>
+                        
+                        <form action="#" method="POST">
+                            <div class="form-group">
+                                <label class="form-label" for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" class="form-input" placeholder="e.g. Prof. / Dr. / Mr. / Ms." required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="email">Email Address *</label>
+                                <input type="email" id="email" class="form-input" placeholder="name@example.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="subject">Inquiry Subject *</label>
+                                <select id="subject" class="form-select" required>
+                                    <option value="" disabled selected>Select a subject...</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="elearning">e-Learning Consultation & MMCD</option>
+                                    <option value="studios">Studio & Facility Booking</option>
+                                    <option value="products">Products (Tellus / AcademiChat / VeriGuide)</option>
+                                    <option value="other">Other Inquiry</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="message">Your Message *</label>
+                                <textarea id="message" class="form-textarea" placeholder="How can we assist you?" required></textarea>
+                            </div>
+
+                            <button type="submit" class="submit-btn">
+                                <i class="fa-solid fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Google Maps Embed for Hui Yeung Shing Building -->
+        <section class="map-section">
+            <div class="container">
+                <div class="map-wrapper">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3688.3585807952226!2d114.20455587600862!3d22.41551603838423!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x340408A02A0B7F83%3A0x643171D67B2FBB3E!2sHui%20Yeung%20Shing%20Building!5e0!3m2!1sen!2shk!4v1714500000000!5m2!1sen!2shk" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-rainbow-bar"></div>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>Centre Information</h4>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
+                    Promoting AI-enhanced learning, courseware development, and educational technology innovation at CUHK.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#vision-mission">Vision & Mission</a></li>
+                    <li><a href="people.html">People</a></li>
+                    <li><a href="partners.html">Our Partners</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="tellus.html">Tellus AI</a></li>
+                    <li><a href="academichat.html">AcademiChat AI</a></li>
+                    <li><a href="veriguide.html">VeriGuide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
+                    6/F, Hui Yeung Shing Building<br>
+                    The Chinese University of Hong Kong<br>
+                    Shatin, N.T., Hong Kong<br><br>
+                    Email: elite-centre@cuhk.edu.hk
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 The Chinese University of Hong Kong. All Rights Reserved. | <a href="#" style="color: #3D2D00;">Privacy</a> | <a href="#" style="color: #3D2D00;">Disclaimer</a>
+        </div>
+    </footer>
+
+</body>
+</html>

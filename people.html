@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People - ELITE | CUHK</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Palette extracted directly from the ELITE Logo */
+            --elite-gold: #F5B000;          
+            --elite-green: #8AC43A;         
+            --elite-purple-bright: #6366F1; 
+            --elite-purple-dark: #4F46E5;   
+            --elite-cyan: #38B6FF;          
+            --elite-pink: #E61B6B;          
+            
+            --bg-body: #F8FAFC;
+            --surface-white: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border-light: #E2E8F0;
+            
+            --shadow-sm: 0 4px 12px rgba(99, 102, 241, 0.08);
+            --shadow-md: 0 12px 30px rgba(99, 102, 241, 0.15);
+            --transition: all 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: var(--surface-white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-gold-bar {
+            height: 5px;
+            background: var(--elite-gold);
+            width: 100%;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 75px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        .logo-e1 { color: var(--elite-gold); }
+        .logo-l  { color: var(--elite-green); }
+        .logo-i  { color: var(--elite-purple-bright); }
+        .logo-t  { color: var(--elite-cyan); }
+        .logo-e2 { color: var(--elite-pink); }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            background: #FFFBEB;
+            color: var(--elite-gold);
+            border: 1px solid var(--elite-gold);
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-left: 10px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 26px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-item.nav-home:hover > .nav-link { color: #D99B00; border-bottom-color: var(--elite-gold); }
+        .nav-item.nav-about:hover > .nav-link { color: var(--elite-green); border-bottom-color: var(--elite-green); }
+        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-green); }
+        .nav-item.nav-about .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
+
+        .nav-item.nav-products:hover > .nav-link { color: var(--elite-purple-bright); border-bottom-color: var(--elite-purple-bright); }
+        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-purple-bright); }
+        .nav-item.nav-products .dropdown-item a:hover { background-color: #EEF2FF; color: var(--elite-purple-dark); }
+
+        .nav-item.nav-services:hover > .nav-link { color: #0088CC; border-bottom-color: var(--elite-cyan); }
+        .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
+        .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
+
+        .nav-item.nav-facility:hover > .nav-link { color: var(--elite-pink); border-bottom-color: var(--elite-pink); }
+        .nav-item.nav-facility .dropdown { border-top: 3px solid var(--elite-pink); }
+        .nav-item.nav-facility .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 230px;
+            background: var(--surface-white);
+            box-shadow: var(--shadow-md);
+            border-radius: 12px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            list-style: none;
+            border: 1px solid var(--border-light);
+        }
+
+        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .dropdown-item a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .ai-badge-pink { background: var(--elite-pink); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+        .ai-badge-cyan { background: var(--elite-cyan); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+
+        /* --- Hero Header --- */
+        .page-hero {
+            background: linear-gradient(135deg, var(--elite-purple-dark) 0%, var(--elite-purple-bright) 50%, var(--elite-cyan) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            backdrop-filter: blur(8px);
+        }
+
+        .page-hero h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .page-hero p {
+            font-size: 1.1rem;
+            max-width: 780px;
+            margin: 0 auto;
+            opacity: 0.92;
+        }
+
+        /* --- Leadership Grid Section --- */
+        .leadership-section {
+            padding: 60px 0 30px 0;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--elite-purple-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 24px;
+            background: var(--elite-purple-bright);
+            border-radius: 4px;
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr; /* 2 Columns: Director (1/3) | Associate Directors (2/3) */
+            gap: 30px;
+        }
+
+        .director-col, .associate-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .assoc-cards-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .director-card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            padding: 24px;
+            text-align: center;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        .director-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--elite-purple-bright);
+        }
+
+        .photo-placeholder {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: #EDF2F7;
+            border: 3px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94A3B8;
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .director-card h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #0F172A;
+            margin-bottom: 6px;
+        }
+
+        .director-role {
+            display: inline-block;
+            background: #EEF2FF;
+            color: var(--elite-purple-dark);
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+        }
+
+        .director-email {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .director-email:hover {
+            color: var(--elite-pink);
+        }
+
+        /* --- Staff Directory Sections & Tables --- */
+        .staff-tables-container {
+            padding: 10px 0 80px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .table-card {
+            background: var(--surface-white);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+
+        .people-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .people-table thead {
+            background: #2D3748; /* Clean Dark Slate Header */
+            color: #FFFFFF;
+        }
+
+        .people-table th {
+            padding: 16px 24px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            border: none;
+        }
+
+        .people-table tbody tr {
+            border-bottom: 1px solid #E2E8F0;
+            transition: var(--transition);
+        }
+
+        .people-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .people-table tbody tr:nth-child(even) {
+            background-color: #F8FAFC;
+        }
+
+        .people-table tbody tr:hover {
+            background-color: #F1F5F9;
+        }
+
+        .people-table td {
+            padding: 16px 24px;
+            font-size: 0.95rem;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .staff-name {
+            font-weight: 700;
+            color: #0F172A;
+            font-size: 1rem;
+        }
+
+        .staff-title {
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .staff-email {
+            color: var(--elite-purple-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .staff-email:hover {
+            color: var(--elite-pink);
+            text-decoration: underline;
+        }
+
+        .staff-email i {
+            color: #94A3B8;
+            font-size: 0.88rem;
+        }
+
+        .team-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .badge-elite {
+            background: #EFF6FF;
+            color: var(--elite-purple-dark);
+            border: 1px solid #BFDBFE;
+        }
+
+        .badge-keep-veriguide {
+            background: #F0FDF4;
+            color: #15803D;
+            border: 1px solid #BBF7D0;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--elite-gold);
+            color: #000000;
+            padding: 60px 20px 25px 20px;
+            position: relative;
+        }
+
+        .footer-rainbow-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 100%;
+            background: linear-gradient(to right, var(--elite-gold) 20%, var(--elite-green) 20% 40%, var(--elite-purple-bright) 40% 60%, var(--elite-cyan) 60% 80%, var(--elite-pink) 80%);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            color: var(--elite-purple-dark);
+            font-weight: 800;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+
+        .footer-col ul li a {
+            color: #2D2100;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--elite-purple-dark);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            color: #3D2D00;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
+            .assoc-cards-row {
+                grid-template-columns: 1fr;
+            }
+            .table-card {
+                overflow-x: auto;
+            }
+            .people-table th, .people-table td {
+                padding: 12px 16px;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Banner -->
+    <header>
+        <div class="header-gold-bar"></div>
+        <div class="nav-container">
+            <a href="index.html" class="logo-text">
+                <span class="logo-e1">E</span><span class="logo-l">L</span><span class="logo-i">I</span><span class="logo-t">T</span><span class="logo-e2">E</span>
+                <span class="logo-sub">CUHK</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item nav-home">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                
+                <li class="nav-item nav-about">
+                    <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="index.html#vision-mission">Vision & Mission</a></li>
+                        <li class="dropdown-item"><a href="people.html">People</a></li>
+                        <li class="dropdown-item"><a href="partners.html">Our Partners</a></li>
+                        <li class="dropdown-item"><a href="#contact">Contact us</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-products">
+                    <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="tellus.html">Tellus <span class="ai-badge-pink">AI</span></a></li>
+                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="ai-badge-cyan">AI</span></a></li>
+                        <li class="dropdown-item"><a href="veriguide.html">VeriGuide</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-services">
+                    <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">e-Learning Consultation</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-facility">
+                    <a href="#" class="nav-link">Facility <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="#">Multi-Purpose Open Area</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Page Hero Banner -->
+    <header class="page-hero">
+        <span class="hero-chip"><i class="fa-solid fa-users"></i> Staff Directory</span>
+        <h1>People</h1>
+        <p>Meet the leadership, project management, technical, and administrative teams driving e-learning innovation at CUHK.</p>
+    </header>
+
+    <main>
+        <!-- 1. SECTION TOP: Director & Associate Directors (2 Separate Columns) -->
+        <section class="leadership-section">
+            <div class="container">
+                <div class="leadership-grid">
+                    
+                    <!-- Column 1: Director -->
+                    <div class="director-col">
+                        <div class="section-title">Director</div>
+                        <div class="director-card">
+                            <div class="photo-placeholder">
+                                <i class="fa-solid fa-user"></i>
+                                <!-- Replace with: <img src="path/to/irwin-king.jpg" alt="Prof. KING Irwin Kuo Chin"> -->
+                            </div>
+                            <h3>Prof. KING Irwin Kuo Chin</h3>
+                            <span class="director-role">Director</span>
+                            <a href="mailto:iking@cuhk.edu.hk" class="director-email"><i class="fa-regular fa-envelope"></i> iking@cuhk.edu.hk</a>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Associate Directors -->
+                    <div class="associate-col">
+                        <div class="section-title">Associate Directors</div>
+                        <div class="assoc-cards-row">
+                            
+                            <div class="director-card">
+                                <div class="photo-placeholder">
+                                    <i class="fa-solid fa-user"></i>
+                                    <!-- Replace with: <img src="path/to/morris-jong.jpg" alt="Prof. JONG Siu Yung Morris"> -->
+                                </div>
+                                <h3>Prof. JONG Siu Yung Morris</h3>
+                                <span class="director-role">Associate Director</span>
+                                <a href="mailto:mjong@cuhk.edu.hk" class="director-email"><i class="fa-regular fa-envelope"></i> mjong@cuhk.edu.hk</a>
+                            </div>
+
+                            <div class="director-card">
+                                <div class="photo-placeholder">
+                                    <i class="fa-solid fa-user"></i>
+                                    <!-- Replace with: <img src="path/to/judy-lo.jpg" alt="Ms. LO Tsui Sim Judy"> -->
+                                </div>
+                                <h3>Ms. LO Tsui Sim Judy</h3>
+                                <span class="director-role">Associate Director</span>
+                                <a href="mailto:judyl@cuhk.edu.hk" class="director-email"><i class="fa-regular fa-envelope"></i> judyl@cuhk.edu.hk</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- STAFF DIRECTORY TABLES CATEGORIZED BY JOB NATURE -->
+        <div class="container staff-tables-container">
+
+            <!-- 2. SECTION: Project Supporting Staff (Raven, Patrick) -->
+            <section class="staff-group-section">
+                <div class="section-title">Project Supporting Staff</div>
+                <div class="table-card">
+                    <table class="people-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Title</th>
+                                <th>Email</th>
+                                <th>Team</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Raven Hon -->
+                            <tr>
+                                <td class="staff-name">Mr. HON Chi Wai Raven</td>
+                                <td class="staff-title">Product Manager</td>
+                                <td><a href="mailto:raven@keep.edu.hk" class="staff-email"><i class="fa-regular fa-envelope"></i> raven@keep.edu.hk</a></td>
+                                <td><span class="team-badge badge-keep-veriguide">KEEP / VeriGuide Team</span></td>
+                            </tr>
+                            <!-- Patrick Lau -->
+                            <tr>
+                                <td class="staff-name">Mr. LAU Tak Pang Patrick</td>
+                                <td class="staff-title">Computer Officer II</td>
+                                <td><a href="mailto:tplau@cse.cuhk.edu.hk" class="staff-email"><i class="fa-regular fa-envelope"></i> tplau@cse.cuhk.edu.hk</a></td>
+                                <td><span class="team-badge badge-keep-veriguide">KEEP / VeriGuide Team</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 3. SECTION: Technical Development and Supporting Staff (All except Ada, Cherry, Raven, Patrick) -->
+            <section class="staff-group-section">
+                <div class="section-title">Technical Development & Supporting Staff</div>
+                <div class="table-card">
+                    <table class="people-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Title</th>
+                                <th>Email</th>
+                                <th>Team</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Larry Law -->
+                            <tr>
+                                <td class="staff-name">Mr. LAW Hoi Fung Larry</td>
+                                <td class="staff-title">Assistant Computer Officer</td>
+                                <td><a href="mailto:larry@keep.edu.hk" class="staff-email"><i class="fa-regular fa-envelope"></i> larry@keep.edu.hk</a></td>
+                                <td><span class="team-badge badge-keep-veriguide">KEEP / VeriGuide Team</span></td>
+                            </tr>
+                            <!-- Timothy Hui -->
+                            <tr>
+                                <td class="staff-name">Mr. HUI Yan Kit Timothy</td>
+                                <td class="staff-title">Instructional Media Production Specialist</td>
+                                <td><a href="mailto:timothyhui@cuhk.edu.hk" class="staff-email"><i class="fa-regular fa-envelope"></i> timothyhui@cuhk.edu.hk</a></td>
+                                <td><span class="team-badge badge-elite">ELITE Team</span></td>
+                            </tr>
+                            <!-- Kenneth Lai -->
+                            <tr>
+                                <td class="staff-name">Mr. LAI Chung Hin Kenneth</td>
+                                <td class="staff-title">Instructional Media Production Specialist</td>
+                                <td><a href="mailto:chunghinlai@cuhk.edu.hk" class="staff-email"><i class="fa-regular fa-envelope"></i> chunghinlai@cuhk.edu.hk</a></td>
+                                <td><span class="team-badge badge-elite">ELITE Team</span></td>
+                            </tr>
+                            <!-- James Muk -->
+                            <tr>
+                                <td class="staff-name">Mr. MUK Ka Kuen James</td>
+                                <td class="staff-title">Instructional Media Production Specialist</td>
+                                <td><a href="mailto:jamesmuk@cuhk.edu.hk" class="staff-email"><i class="fa-regular fa-envelope"></i> jamesmuk@cuhk.edu.hk</a></td>
+                                <td><span class="team-badge badge-elite">ELITE Team</span></td>
+                            </tr>
+                            <!-- Angus Lau -->
+                            <tr>
+                                <td class="staff-name">Mr. LAU Ching Fai Angus</td>
+                                <td class="staff-title">Computer Technician II</td>
+                                <td><a href="mailto:angus@keep.edu.hk" class="staff-email"><i class="fa-regular fa-envelope"></i> angus@keep.edu.hk</a></td>
+                                <td><span class="team-badge badge-keep-veriguide">KEEP / VeriGuide Team</span></td>
+                            </tr>
+                            <!-- Shicheng Ma -->
+                            <tr>
+                                <td class="staff-name">Mr. MA Shicheng</td>
+                                <td class="staff-title">Computer Technician II</td>
+                                <td><a href="mailto:shicheng@keep.edu.hk" class="staff-email"><i class="fa-regular fa-envelope"></i> shicheng@keep.edu.hk</a></td>
+                                <td><span class="team-badge badge-keep-veriguide">KEEP / VeriGuide Team</span></td>
+                            </tr>
+                            <!-- Lenny Wong -->
+                            <tr>
+                                <td class="staff-name">Mr. WONG Ka Long Lenny</td>
+                                <td class="staff-title">Computer Technician II</td>
+                                <td><a href="mailto:lenny@keep.edu.hk" class="staff-email"><i class="fa-regular fa-envelope"></i> lenny@keep.edu.hk</a></td>
+                                <td><span class="team-badge badge-keep-veriguide">KEEP / VeriGuide Team</span></td>
+                            </tr>
+                            <!-- Kevin Lam -->
+                            <tr>
+                                <td class="staff-name">Mr. LAM King Fung Kevin</td>
+                                <td class="staff-title">Computer Technician II</td>
+                                <td><a href="mailto:kevin@veriguide.org" class="staff-email"><i class="fa-regular fa-envelope"></i> kevin@veriguide.org</a></td>
+                                <td><span class="team-badge badge-keep-veriguide">KEEP / VeriGuide Team</span></td>
+                            </tr>
+                            <!-- Yuqin Shu -->
+                            <tr>
+                                <td class="staff-name">Mr. SHU Yuqin</td>
+                                <td class="staff-title">Research Assistant</td>
+                                <td><a href="mailto:yuqin@veriguide.org" class="staff-email"><i class="fa-regular fa-envelope"></i> yuqin@veriguide.org</a></td>
+                                <td><span class="team-badge badge-keep-veriguide">KEEP / VeriGuide Team</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 4. SECTION: Administrative Staff (Ada, Cherry) -->
+            <section class="staff-group-section">
+                <div class="section-title">Administrative Staff</div>
+                <div class="table-card">
+                    <table class="people-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Title</th>
+                                <th>Email</th>
+                                <th>Team</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Ada Lam -->
+                            <tr>
+                                <td class="staff-name">Miss LAM Wing Shan Ada</td>
+                                <td class="staff-title">Project Assistant</td>
+                                <td><a href="mailto:ada@keep.edu.hk" class="staff-email"><i class="fa-regular fa-envelope"></i> ada@keep.edu.hk</a></td>
+                                <td><span class="team-badge badge-keep-veriguide">KEEP / VeriGuide Team</span></td>
+                            </tr>
+                            <!-- Cherry Chiu -->
+                            <tr>
+                                <td class="staff-name">Miss CHIU Man Ying Cherry</td>
+                                <td class="staff-title">Office Assistant</td>
+                                <td><a href="mailto:cherry.chiu@cuhk.edu.hk" class="staff-email"><i class="fa-regular fa-envelope"></i> cherry.chiu@cuhk.edu.hk</a></td>
+                                <td><span class="team-badge badge-elite">ELITE Team</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-rainbow-top-bar"></div>
+        <div class="footer-container" id="contact">
+            <div class="footer-col">
+                <h4>ELITE Centre</h4>
+                <p style="color: #2D2100; font-size: 0.9rem; line-height: 1.5; font-weight: 500;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#vision-mission">Vision & Mission</a></li>
+                    <li><a href="people.html">People</a></li>
+                    <li><a href="partners.html">Our Partners</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="tellus.html">Tellus AI</a></li>
+                    <li><a href="academichat.html">AcademiChat AI</a></li>
+                    <li><a href="veriguide.html">VeriGuide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
+                    6/F, Hui Yeung Shing Building<br>
+                    The Chinese University of Hong Kong<br>
+                    Shatin, N.T., Hong Kong<br><br>
+                    Email: elite-centre@cuhk.edu.hk
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Centre for e-Learning Innovation and Technology Enhancement (ELITE), CUHK. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

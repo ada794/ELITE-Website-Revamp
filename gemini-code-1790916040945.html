@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELITE - Centre for e-Learning Innovation and Technology Enhancement</title>
+    <!-- Google Font & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Palette extracted directly from the ELITE Logo */
+            --elite-gold: #F5B000;       /* 'E' Gold */
+            --elite-green: #8AC43A;      /* 'L' Green */
+            --elite-purple: #4A2582;     /* 'I' Deep Purple */
+            --elite-cyan: #38B6FF;       /* 'T' Cyan Blue */
+            --elite-pink: #E61B6B;       /* 'E' Magenta Pink */
+            
+            --bg-body: #F8FAFC;
+            --surface-white: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border-light: #E2E8F0;
+            
+            --shadow-sm: 0 4px 12px rgba(74, 37, 130, 0.05);
+            --shadow-md: 0 12px 30px rgba(74, 37, 130, 0.1);
+            --transition: all 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Top Navigation Banner --- */
+        header {
+            background: var(--surface-white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Header Gold Accent Line */
+        .header-gold-bar {
+            height: 5px;
+            background: var(--elite-gold);
+            width: 100%;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 75px;
+        }
+
+        /* Logo Text Colors Matching Logo Spectrum */
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        .logo-e1 { color: var(--elite-gold); }
+        .logo-l  { color: var(--elite-green); }
+        .logo-i  { color: var(--elite-purple); }
+        .logo-t  { color: var(--elite-cyan); }
+        .logo-e2 { color: var(--elite-pink); }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            background: #FFFBEB;
+            color: var(--elite-gold);
+            border: 1px solid var(--elite-gold);
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-left: 10px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 26px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        /* Logo-Colored Hover States for Top Nav */
+        .nav-item.nav-home:hover > .nav-link {
+            color: #D99B00;
+            border-bottom-color: var(--elite-gold);
+        }
+        
+        .nav-item.nav-about:hover > .nav-link {
+            color: var(--elite-green);
+            border-bottom-color: var(--elite-green);
+        }
+        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-green); }
+        .nav-item.nav-about .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
+
+        .nav-item.nav-products:hover > .nav-link {
+            color: var(--elite-purple);
+            border-bottom-color: var(--elite-purple);
+        }
+        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-purple); }
+        .nav-item.nav-products .dropdown-item a:hover { background-color: #F4F0FA; color: var(--elite-purple); }
+
+        .nav-item.nav-services:hover > .nav-link {
+            color: #0088CC;
+            border-bottom-color: var(--elite-cyan);
+        }
+        .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
+        .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
+
+        .nav-item.nav-facility:hover > .nav-link {
+            color: var(--elite-pink);
+            border-bottom-color: var(--elite-pink);
+        }
+        .nav-item.nav-facility .dropdown { border-top: 3px solid var(--elite-pink); }
+        .nav-item.nav-facility .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
+
+        /* Dropdown Base Styles */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 230px;
+            background: var(--surface-white);
+            box-shadow: var(--shadow-md);
+            border-radius: 12px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            list-style: none;
+            border: 1px solid var(--border-light);
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        /* AI Badges */
+        .ai-badge-pink { background: var(--elite-pink); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+        .ai-badge-cyan { background: var(--elite-cyan); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+
+        /* --- Sections Shared Styling --- */
+        section {
+            padding: 70px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.1rem;
+            color: var(--elite-purple);
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 45px;
+            font-size: 1.05rem;
+        }
+
+        /* --- 1. Hero Carousel Section --- */
+        .hero-carousel {
+            background: linear-gradient(135deg, var(--elite-purple) 0%, #632DA8 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 60px 50px;
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 15px 35px rgba(74, 37, 130, 0.2);
+        }
+
+        .hero-carousel::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 350px;
+            height: 350px;
+            background: var(--elite-gold);
+            filter: blur(90px);
+            opacity: 0.35;
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 560px;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 2.6rem;
+            line-height: 1.25;
+            margin-bottom: 18px;
+            font-weight: 800;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            opacity: 0.92;
+            margin-bottom: 30px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 13px 26px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .btn-gold {
+            background: var(--elite-gold);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(245, 176, 0, 0.4);
+        }
+
+        .btn-gold:hover {
+            background: #E0A000;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-outline-white:hover {
+            background: white;
+            color: var(--elite-purple);
+        }
+
+        .hero-preview {
+            width: 440px;
+            height: 260px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .hero-preview i {
+            font-size: 3.5rem;
+            margin-bottom: 12px;
+            color: var(--elite-gold);
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 3;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+        }
+
+        .dot.active {
+            background: var(--elite-gold);
+            width: 28px;
+            border-radius: 10px;
+        }
+
+        /* --- 2. Latest Highlights Section --- */
+        .highlights-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .tab-btn {
+            padding: 9px 22px;
+            border-radius: 25px;
+            border: 1px solid var(--border-light);
+            background: var(--surface-white);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--elite-gold);
+            color: #000;
+            border-color: var(--elite-gold);
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tag-gold { color: #B27B00; background: #FFFBEB; }
+        .tag-green { color: var(--elite-green); background: #F4F9ED; }
+        .tag-cyan { color: #0088CC; background: #EDF8FF; }
+
+        .card-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- 3. Featured Products Section --- */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn-outline-gold {
+            border: 1.5px solid var(--elite-gold);
+            color: #8D6100;
+            background: transparent;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-outline-gold:hover {
+            background: #FFFBEB;
+        }
+
+        .btn-gold-sm {
+            background: var(--elite-gold);
+            color: #000;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-gold-sm:hover {
+            background: #E0A000;
+        }
+
+        /* --- 4. What We Do Section --- */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .pillar-card {
+            background: var(--surface-white);
+            padding: 40px 28px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .pillar-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .pillar-icon-gold {
+            background: #FFFBEB;
+            color: var(--elite-gold);
+        }
+
+        .pillar-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin: 0 auto 22px auto;
+        }
+
+        /* --- 5. Facilities Showcase Section --- */
+        .facility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        .facility-card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .facility-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .facility-img {
+            height: 210px;
+            background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8D6100;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .facility-content {
+            padding: 28px;
+        }
+
+        /* --- Full Amber Gold Footer with 5-Color Logo Border Line on Top --- */
+        footer {
+            background: var(--elite-gold); /* Full Amber Gold background */
+            color: #000000;
+            padding: 60px 20px 25px 20px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        /* Rainbow line showing the 5 colors of the logo at the top edge of the footer */
+        .footer-rainbow-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 100%;
+            background: linear-gradient(to right, var(--elite-gold) 20%, var(--elite-green) 20% 40%, var(--elite-purple) 40% 60%, var(--elite-cyan) 60% 80%, var(--elite-pink) 80%);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            color: var(--elite-purple);
+            font-weight: 800;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #2D2100;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--elite-purple);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            color: #3D2D00;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Banner -->
+    <header>
+        <div class="header-gold-bar"></div>
+        <div class="nav-container">
+            <a href="elite%20hmpage%20.html" class="logo-text">
+                <span class="logo-e1">E</span><span class="logo-l">L</span><span class="logo-i">I</span><span class="logo-t">T</span><span class="logo-e2">E</span>
+                <span class="logo-sub">CUHK</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item nav-home">
+                    <a href="elite%20hmpage%20.html" class="nav-link">Home</a>
+                </li>
+                
+                <li class="nav-item nav-about">
+                    <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="mission%20and%20vision.html">Vision & Mission</a></li>
+                        <li class="dropdown-item"><a href="people.html">People</a></li>
+                        <li class="dropdown-item"><a href="our%20partner.html">Our Partners</a></li>
+                        <li class="dropdown-item"><a href="contact%20us.html">Contact us</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-products">
+                    <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="tellus.html">Tellus <span class="ai-badge-pink">AI</span></a></li>
+                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="ai-badge-cyan">AI</span></a></li>
+                        <li class="dropdown-item"><a href="veriguide.html">VeriGuide</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-services">
+                    <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">e-Learning Consultation</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-facility">
+                    <a href="#" class="nav-link">Facility <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="studio.html">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="studio.html#open-area">Multi-Purpose Open Area</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Homepage Content -->
+    <main>
+        <!-- 1. Hero Carousel Section -->
+        <section style="padding-top: 10px;">
+            <div class="hero-carousel">
+                <div class="hero-content">
+                    <h1>Shaping Education with AI-Enhanced Learning</h1>
+                    <p>Empowering educators, innovating pedagogy, and building intelligent learning platforms at The Chinese University of Hong Kong.</p>
+                    <div class="hero-btns">
+                        <a href="#products" class="btn btn-gold">Explore Products</a>
+                        <a href="#services" class="btn btn-outline-white">Our Services</a>
+                    </div>
+                </div>
+                <div class="hero-preview">
+                    <i class="fa-solid fa-circle-play"></i>
+                    <p style="font-weight:600;">Watch Intro Video (0:45)</p>
+                </div>
+                <div class="carousel-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Latest Highlights Section -->
+        <section id="highlights">
+            <h2 class="section-title">Latest Highlights</h2>
+            <p class="section-subtitle">Discover our recent research outputs, accolades, and upcoming events</p>
+            
+            <div class="highlights-tabs">
+                <button class="tab-btn active">All</button>
+                <button class="tab-btn">Research</button>
+                <button class="tab-btn">Awards</button>
+                <button class="tab-btn">Events</button>
+            </div>
+
+            <div class="highlights-grid">
+                <div class="card">
+                    <div class="card-tag tag-gold"><i class="fa-solid fa-trophy"></i> Award</div>
+                    <h3>QS Reimagine Education 2026 Shortlist</h3>
+                    <p>Recognizing ELITE's efforts in pioneering generative AI tutors for higher education platforms.</p>
+                </div>
+                <div class="card">
+                    <div class="card-tag tag-green"><i class="fa-solid fa-microscope"></i> Research</div>
+                    <h3>AI-Driven Interview Rubric Evaluation</h3>
+                    <p>A joint research study analyzing automated student feedback models in professional communication.</p>
+                </div>
+                <div class="card">
+                    <div class="card-tag tag-cyan"><i class="fa-solid fa-calendar-days"></i> Event</div>
+                    <h3>CUHK e-Learning Expo & Showcase</h3>
+                    <p>Join us to explore hands-on workshops and live product demonstrations of Tellus and AcademiChat.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Featured Products Section -->
+        <section id="products" style="background: var(--surface-white); max-width: 100%; padding: 70px 20px; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h2 class="section-title">Featured Products</h2>
+                <p class="section-subtitle">Cutting-edge platforms developed in-house to transform teaching and assessment</p>
+
+                <div class="products-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card" style="border-top: 5px solid var(--elite-gold);">
+                        <div>
+                            <div class="product-header">
+                                <span class="product-title" style="color: #8D6100;">Tellus</span>
+                                <span class="ai-badge-pink">AI Platform</span>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Interactive AI-driven interview and assessment tool designed for student practice, dynamic scenarios, and automated feedback.</p>
+                        </div>
+                        <div class="product-actions">
+                            <a href="tellus.html" class="btn-outline-gold">Explore More</a>
+                            <a href="#" class="btn-gold-sm">Launch Tool <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card" style="border-top: 5px solid var(--elite-cyan);">
+                        <div>
+                            <div class="product-header">
+                                <span class="product-title" style="color: #0088CC;">AcademiChat</span>
+                                <span class="ai-badge-cyan">AI Platform</span>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Academic-focused conversational AI tutor tailored for course-specific contexts, student Q&A, and interactive learning support.</p>
+                        </div>
+                        <div class="product-actions">
+                            <a href="academichat.html" class="btn-outline-gold">Explore More</a>
+                            <a href="#" class="btn-gold-sm">Launch Tool <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card" style="border-top: 5px solid var(--elite-green);">
+                        <div>
+                            <div class="product-header">
+                                <span class="product-title" style="color: #629918;">VeriGuide</span>
+                                <span style="background: #F4F9ED; color: #629918; font-size: 0.8rem; padding: 4px 10px; border-radius: 12px; font-weight: 700;">Core Platform</span>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Comprehensive academic integrity system providing text similarity matching, originality analysis, and multilingual checks.</p>
+                        </div>
+                        <div class="product-actions">
+                            <a href="veriguide.html" class="btn-outline-gold">Explore More</a>
+                            <a href="#" class="btn-gold-sm">Launch Tool <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. What We Do Section -->
+        <section id="services">
+            <h2 class="section-title">What We Do</h2>
+            <p class="section-subtitle">Supporting academic excellence through three key pillars</p>
+
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <div class="pillar-icon pillar-icon-gold"><i class="fa-solid fa-code"></i></div>
+                    <h3 style="font-weight:700;">AI & EdTech Development</h3>
+                    <p style="color: var(--text-muted); font-size: 0.92rem; margin-top: 10px;">Engineering intelligent software solutions tailored to university course needs.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon pillar-icon-gold"><i class="fa-solid fa-comments"></i></div>
+                    <h3 style="font-weight:700;">e-Learning Consultation</h3>
+                    <p style="color: var(--text-muted); font-size: 0.92rem; margin-top: 10px;">Providing pedagogical guidance and instructional design for blended learning.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon pillar-icon-gold"><i class="fa-solid fa-video"></i></div>
+                    <h3 style="font-weight:700;">Advanced Facilities</h3>
+                    <p style="color: var(--text-muted); font-size: 0.92rem; margin-top: 10px;">Offering studio facilities and collaborative spaces for content production.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Facilities Showcase Section -->
+        <section id="facility">
+            <h2 class="section-title">Facilities Showcase</h2>
+            <p class="section-subtitle">Explore our state-of-the-art media production studios and open areas</p>
+
+            <div class="facility-grid">
+                <div class="facility-card">
+                    <div class="facility-img"><i class="fa-solid fa-camera-retro fa-xl"></i> &nbsp; Professional Studio Preview</div>
+                    <div class="facility-content">
+                        <h3 style="font-weight:700;">Professional Studios</h3>
+                        <p style="color: var(--text-muted); font-size: 0.92rem; margin: 10px 0 18px 0;">High-grade audio-visual recording spaces equipped with Lightboard technology for MOOC and online course creation.</p>
+                        <a href="studio.html" class="btn-outline-gold" style="display:inline-block; font-size:0.85rem;">Learn & Book Studio</a>
+                    </div>
+                </div>
+
+                <div class="facility-card">
+                    <div class="facility-img"><i class="fa-solid fa-users fa-xl"></i> &nbsp; Open Area Preview</div>
+                    <div class="facility-content">
+                        <h3 style="font-weight:700;">Multi-Purpose Open Area</h3>
+                        <p style="color: var(--text-muted); font-size: 0.92rem; margin: 10px 0 18px 0;">Flexible physical space designed for interactive workshops, AI project demonstrations, and academic collaborations.</p>
+                        <a href="studio.html#open-area" class="btn-outline-gold" style="display:inline-block; font-size:0.85rem;">Explore Open Space</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer with 5-Color Rainbow Top Edge Bar -->
+    <footer>
+        <div class="footer-rainbow-top-bar"></div>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ELITE Centre</h4>
+                <p style="color: #2D2100; font-size: 0.9rem; line-height: 1.5; font-weight: 500;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="elite%20hmpage%20.html">Home</a></li>
+                    <li><a href="mission%20and%20vision.html">About Us</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="studio.html">Facility</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="tellus.html">Tellus AI</a></li>
+                    <li><a href="academichat.html">AcademiChat AI</a></li>
+                    <li><a href="veriguide.html">VeriGuide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">The Chinese University of Hong Kong<br>Shatin, N.T., Hong Kong</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Centre for e-Learning Innovation and Technology Enhancement (ELITE), CUHK. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

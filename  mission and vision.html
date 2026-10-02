@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centre for e-Learning Innovation and Technology Enhancement (ELITE)</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Palette extracted directly from the ELITE Logo */
+            --elite-gold: #F5B000;          /* 'E' Gold */
+            --elite-green: #8AC43A;         /* 'L' Green */
+            --elite-purple-bright: #6366F1; /* Brighter Violet-Purple Accent */
+            --elite-purple-dark: #4F46E5;   /* Primary Dark Royal Purple */
+            --elite-cyan: #38B6FF;          /* 'T' Cyan Blue */
+            --elite-pink: #E61B6B;          /* 'E' Magenta Pink */
+            
+            --bg-body: #F8FAFC;
+            --surface-white: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border-light: #E2E8F0;
+            
+            --shadow-sm: 0 4px 12px rgba(99, 102, 241, 0.08);
+            --shadow-md: 0 12px 30px rgba(99, 102, 241, 0.15);
+            --transition: all 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header & Top Navigation Banner --- */
+        header {
+            background: var(--surface-white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-gold-bar {
+            height: 5px;
+            background: var(--elite-gold);
+            width: 100%;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 75px;
+        }
+
+        /* Logo Text Colors Matching Logo Spectrum */
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        .logo-e1 { color: var(--elite-gold); }
+        .logo-l  { color: var(--elite-green); }
+        .logo-i  { color: var(--elite-purple-bright); }
+        .logo-t  { color: var(--elite-cyan); }
+        .logo-e2 { color: var(--elite-pink); }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            background: #FFFBEB;
+            color: var(--elite-gold);
+            border: 1px solid var(--elite-gold);
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-left: 10px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 26px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        /* Dynamic Logo-Colored Navigation Hover States */
+        .nav-item.nav-home:hover > .nav-link { color: #D99B00; border-bottom-color: var(--elite-gold); }
+        
+        .nav-item.nav-about:hover > .nav-link { color: var(--elite-green); border-bottom-color: var(--elite-green); }
+        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-green); }
+        .nav-item.nav-about .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
+
+        .nav-item.nav-products:hover > .nav-link { color: var(--elite-purple-bright); border-bottom-color: var(--elite-purple-bright); }
+        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-purple-bright); }
+        .nav-item.nav-products .dropdown-item a:hover { background-color: #EEF2FF; color: var(--elite-purple-dark); }
+
+        .nav-item.nav-services:hover > .nav-link { color: #0088CC; border-bottom-color: var(--elite-cyan); }
+        .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
+        .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
+
+        .nav-item.nav-facility:hover > .nav-link { color: var(--elite-pink); border-bottom-color: var(--elite-pink); }
+        .nav-item.nav-facility .dropdown { border-top: 3px solid var(--elite-pink); }
+        .nav-item.nav-facility .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
+
+        /* Dropdown Base Styles */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 230px;
+            background: var(--surface-white);
+            box-shadow: var(--shadow-md);
+            border-radius: 12px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            list-style: none;
+            border: 1px solid var(--border-light);
+        }
+
+        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .dropdown-item a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        /* AI Badges */
+        .ai-badge-pink { background: var(--elite-pink); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+        .ai-badge-cyan { background: var(--elite-cyan); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+
+        /* --- Page Hero Header --- */
+        .page-hero {
+            background: linear-gradient(135deg, var(--elite-purple-bright) 0%, #38B6FF 100%);
+            color: white;
+            padding: 75px 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
+        }
+
+        .ai-banner-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.25);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            backdrop-filter: blur(8px);
+        }
+
+        .page-hero h1 {
+            font-size: 2.7rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .page-hero p {
+            font-size: 1.15rem;
+            max-width: 820px;
+            margin: 0 auto;
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+
+        /* --- Section Common Rules --- */
+        section {
+            padding: 70px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title {
+            font-size: 2.1rem;
+            color: var(--elite-purple-dark);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* --- Vision & Mission Dual Cards --- */
+        .vm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .vm-card {
+            background: var(--surface-white);
+            border-radius: 18px;
+            padding: 40px 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vm-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .vm-card.vision { border-top: 6px solid var(--elite-purple-bright); }
+        .vm-card.mission { border-top: 6px solid var(--elite-cyan); }
+
+        .vm-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 22px;
+        }
+
+        .vision .vm-icon { background: #EEF2FF; color: var(--elite-purple-dark); }
+        .mission .vm-icon { background: #EDF8FF; color: #0088CC; }
+
+        .vm-card h2 {
+            font-size: 1.6rem;
+            color: var(--text-main);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .vm-card p {
+            color: var(--text-muted);
+            font-size: 1.02rem;
+            line-height: 1.7;
+        }
+
+        /* --- Dedicated AI Focus Pillars --- */
+        .ai-focus-section {
+            background: linear-gradient(180deg, #F8FAFC 0%, #EEF2FF 100%);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .ai-card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 30px 24px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .ai-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: #C7D2FE;
+        }
+
+        .ai-card-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 18px;
+        }
+
+        .ai-card-1 .ai-card-icon { background: #FDF2F7; color: var(--elite-pink); }
+        .ai-card-2 .ai-card-icon { background: #EDF8FF; color: #0088CC; }
+        .ai-card-3 .ai-card-icon { background: #FFFBEB; color: #B27B00; }
+        .ai-card-4 .ai-card-icon { background: #F4F9ED; color: var(--elite-green); }
+
+        .ai-card h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .ai-card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* --- 7 Strategic Aims Section --- */
+        .aims-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .aim-card {
+            background: var(--surface-white);
+            padding: 28px 24px;
+            border-radius: 14px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            transition: var(--transition);
+        }
+
+        .aim-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: #C7D2FE;
+        }
+
+        .aim-number {
+            width: 42px;
+            height: 42px;
+            background: #EEF2FF;
+            color: var(--elite-purple-dark);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .aim-content h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .aim-content p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Full Amber Gold Footer with 5-Color Rainbow Top Edge Bar --- */
+        footer {
+            background: var(--elite-gold);
+            color: #000000;
+            padding: 60px 20px 25px 20px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .footer-rainbow-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 100%;
+            background: linear-gradient(to right, var(--elite-gold) 20%, var(--elite-green) 20% 40%, var(--elite-purple-bright) 40% 60%, var(--elite-cyan) 60% 80%, var(--elite-pink) 80%);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            color: var(--elite-purple-dark);
+            font-weight: 800;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #2D2100;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--elite-purple-dark);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            color: #3D2D00;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Banner -->
+    <header>
+        <div class="header-gold-bar"></div>
+        <div class="nav-container">
+            <a href="index.html" class="logo-text">
+                <span class="logo-e1">E</span><span class="logo-l">L</span><span class="logo-i">I</span><span class="logo-t">T</span><span class="logo-e2">E</span>
+                <span class="logo-sub">CUHK</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item nav-home">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                
+                <li class="nav-item nav-about">
+                    <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#vision-mission">Vision & Mission</a></li>
+                        <li class="dropdown-item"><a href="people.html">People</a></li>
+                        <li class="dropdown-item"><a href="#contact">Contact us</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-products">
+                    <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="tellus.html">Tellus <span class="ai-badge-pink">AI</span></a></li>
+                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="ai-badge-cyan">AI</span></a></li>
+                        <li class="dropdown-item"><a href="veriguide.html">VeriGuide</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-services">
+                    <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">e-Learning Consultation</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-facility">
+                    <a href="#" class="nav-link">Facility <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="#">Multi-Purpose Open Area</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Page Hero Banner -->
+    <header class="page-hero">
+        <span class="ai-banner-chip"><i class="fa-solid fa-brain"></i> Pioneering Next-Gen AI Learning Solutions</span>
+        <h1>Centre for e-Learning Innovation and Technology Enhancement</h1>
+        <p>In response to rapid developments in artificial intelligence, ELITE leads <strong>AI-Empowered Learning</strong> at CUHK—engineering in-house AI platforms, smart assessment tools, and adaptive pedagogical frameworks.</p>
+    </header>
+
+    <main>
+        <!-- 1. Vision & Mission Section -->
+        <section id="vision-mission">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Vision & Mission</h2>
+                    <p class="section-subtitle">Driving forward intelligence-driven pedagogy and digital innovation across CUHK.</p>
+                </div>
+                <div class="vm-grid">
+                    <div class="vm-card vision">
+                        <div class="vm-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <h2>Our Vision</h2>
+                        <p>We spearhead <strong>AI-empowered learning and intelligence-driven pedagogy</strong>. We build university capacity to harness artificial intelligence effectively, ensuring educators and learners excel in an AI-integrated academic ecosystem.</p>
+                    </div>
+
+                    <div class="vm-card mission">
+                        <div class="vm-icon"><i class="fa-solid fa-microchip"></i></div>
+                        <h2>Our Mission</h2>
+                        <p>To serve as CUHK's innovation engine by delivering specialized AI products, customized course tutors, and adaptive learning platforms, advancing CUHK's global position as a leader in educational technology.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Core AI Focus Areas Banner -->
+        <section class="ai-focus-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Our Focus Areas in AI-Empowered Learning</h2>
+                    <p class="section-subtitle">Delivering bespoke AI platforms and pedagogical solutions designed specifically for higher education.</p>
+                </div>
+
+                <div class="ai-grid">
+                    <div class="ai-card ai-card-1">
+                        <div class="ai-card-icon"><i class="fa-solid fa-comments"></i></div>
+                        <h3>Interactive AI Assessment</h3>
+                        <p>Pioneering multi-modal interview evaluation and soft-skill scoring platforms like <strong>Tellus</strong> to deliver objective, automated feedback.</p>
+                    </div>
+
+                    <div class="ai-card ai-card-2">
+                        <div class="ai-card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <h3>Socratic AI Tutors</h3>
+                        <p>Developing domain-grounded chatbots like <strong>AcademiChat</strong> that guide students step-by-step through critical thinking rather than giving raw answers.</p>
+                    </div>
+
+                    <div class="ai-card ai-card-3">
+                        <div class="ai-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>AI Integrity & Analytics</h3>
+                        <p>Enhancing systems like <strong>VeriGuide</strong> with advanced AI Writing Detection (AWD) and automated essay feedback tools (AEGIS).</p>
+                    </div>
+
+                    <div class="ai-card ai-card-4">
+                        <div class="ai-card-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                        <h3>AI Pedagogical Integration</h3>
+                        <p>Consulting with teaching teams to seamlessly embed generative AI, learning analytics, and custom course guardrails into LMS workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Seven Strategic Aims Section -->
+        <section id="aims">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Our Seven Strategic Aims</h2>
+                    <p class="section-subtitle">Driving AI innovation while supporting comprehensive university e-learning infrastructure.</p>
+                </div>
+
+                <div class="aims-grid">
+                    <div class="aim-card">
+                        <div class="aim-number"><i class="fa-solid fa-robot" style="font-size:0.9rem;"></i></div>
+                        <div class="aim-content">
+                            <h3>AI & Digital Education Leadership</h3>
+                            <p>Enhance the global visibility and leadership role of CUHK in pioneering AI-empowered education.</p>
+                        </div>
+                    </div>
+
+                    <div class="aim-card">
+                        <div class="aim-number"><i class="fa-solid fa-network-wired" style="font-size:0.9rem;"></i></div>
+                        <div class="aim-content">
+                            <h3>Global Alliances & Platforms</h3>
+                            <p>Strengthen connections with global institutions via strategic learning networks and AI tool partnerships.</p>
+                        </div>
+                    </div>
+
+                    <div class="aim-card">
+                        <div class="aim-number"><i class="fa-solid fa-lightbulb" style="font-size:0.9rem;"></i></div>
+                        <div class="aim-content">
+                            <h3>AI-Enhanced Course Pedagogy</h3>
+                            <p>Transform course delivery and assessment by integrating intelligent tutors and interactive media.</p>
+                        </div>
+                    </div>
+
+                    <div class="aim-card">
+                        <div class="aim-number"><i class="fa-solid fa-server" style="font-size:0.9rem;"></i></div>
+                        <div class="aim-content">
+                            <h3>Smart Capacity & Infrastructure</h3>
+                            <p>Strengthen technical systems, AI guardrails, and data analytics infrastructure across the university.</p>
+                        </div>
+                    </div>
+
+                    <div class="aim-card">
+                        <div class="aim-number"><i class="fa-solid fa-cubes" style="font-size:0.9rem;"></i></div>
+                        <div class="aim-content">
+                            <h3>Flexible Learning Formats</h3>
+                            <p>Support micro-modules, blended courses, and specialized online delivery options alongside AI platform adoption.</p>
+                        </div>
+                    </div>
+
+                    <div class="aim-card">
+                        <div class="aim-number"><i class="fa-solid fa-sliders" style="font-size:0.9rem;"></i></div>
+                        <div class="aim-content">
+                            <h3>Lower Barrier for AI Adoption</h3>
+                            <p>Provide intuitive tools and turn-key AI setups so educators can easily implement smart technologies in class.</p>
+                        </div>
+                    </div>
+
+                    <div class="aim-card">
+                        <div class="aim-number"><i class="fa-solid fa-users" style="font-size:0.9rem;"></i></div>
+                        <div class="aim-content">
+                            <h3>Community of Practice</h3>
+                            <p>Cultivate an active educator network focused on evidence-based AI teaching practices and innovation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer with 5-Color Rainbow Top Edge Bar -->
+    <footer>
+        <div class="footer-rainbow-top-bar"></div>
+        <div class="footer-container" id="contact">
+            <div class="footer-col">
+                <h4>ELITE Centre</h4>
+                <p style="color: #2D2100; font-size: 0.9rem; line-height: 1.5; font-weight: 500;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#vision-mission">Vision & Mission</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Facility</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="tellus.html">Tellus AI</a></li>
+                    <li><a href="academichat.html">AcademiChat AI</a></li>
+                    <li><a href="veriguide.html">VeriGuide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
+                    6/F, Hui Yeung Shing Building<br>
+                    The Chinese University of Hong Kong<br>
+                    Shatin, N.T., Hong Kong<br><br>
+                    Email: elite-centre@cuhk.edu.hk
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Centre for e-Learning Innovation and Technology Enhancement (ELITE), CUHK. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

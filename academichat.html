@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcademiChat - The Socratic AI Tutor | ELITE CUHK</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Palette extracted directly from the ELITE Logo */
+            --elite-gold: #F5B000;          /* 'E' Gold */
+            --elite-green: #8AC43A;         /* 'L' Green */
+            --elite-purple-bright: #6366F1; /* Brighter Violet-Purple Accent */
+            --elite-purple-dark: #4F46E5;   /* Readable Bright Purple for Titles */
+            --elite-cyan: #38B6FF;          /* 'T' Cyan Blue */
+            --elite-pink: #E61B6B;          /* 'E' Magenta Pink */
+            
+            --bg-body: #F8FAFC;
+            --surface-white: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border-light: #E2E8F0;
+            
+            --shadow-sm: 0 4px 12px rgba(99, 102, 241, 0.08);
+            --shadow-md: 0 12px 30px rgba(99, 102, 241, 0.15);
+            --transition: all 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header & Top Navigation Banner --- */
+        header {
+            background: var(--surface-white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-gold-bar {
+            height: 5px;
+            background: var(--elite-gold);
+            width: 100%;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 75px;
+        }
+
+        /* Logo Text Colors Matching Logo Spectrum */
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        .logo-e1 { color: var(--elite-gold); }
+        .logo-l  { color: var(--elite-green); }
+        .logo-i  { color: var(--elite-purple-bright); }
+        .logo-t  { color: var(--elite-cyan); }
+        .logo-e2 { color: var(--elite-pink); }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            background: #FFFBEB;
+            color: var(--elite-gold);
+            border: 1px solid var(--elite-gold);
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-left: 10px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 26px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        /* Dynamic Logo-Colored Navigation Hover States */
+        .nav-item.nav-home:hover > .nav-link { color: #D99B00; border-bottom-color: var(--elite-gold); }
+        
+        .nav-item.nav-about:hover > .nav-link { color: var(--elite-green); border-bottom-color: var(--elite-green); }
+        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-green); }
+        .nav-item.nav-about .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
+
+        .nav-item.nav-products:hover > .nav-link { color: var(--elite-purple-bright); border-bottom-color: var(--elite-purple-bright); }
+        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-purple-bright); }
+        .nav-item.nav-products .dropdown-item a:hover { background-color: #EEF2FF; color: var(--elite-purple-dark); }
+
+        .nav-item.nav-services:hover > .nav-link { color: #0088CC; border-bottom-color: var(--elite-cyan); }
+        .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
+        .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
+
+        .nav-item.nav-facility:hover > .nav-link { color: var(--elite-pink); border-bottom-color: var(--elite-pink); }
+        .nav-item.nav-facility .dropdown { border-top: 3px solid var(--elite-pink); }
+        .nav-item.nav-facility .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
+
+        /* Dropdown Base Styles */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 230px;
+            background: var(--surface-white);
+            box-shadow: var(--shadow-md);
+            border-radius: 12px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            list-style: none;
+            border: 1px solid var(--border-light);
+        }
+
+        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .dropdown-item a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        /* AI Badges */
+        .ai-badge-pink { background: var(--elite-pink); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+        .ai-badge-cyan { background: var(--elite-cyan); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+
+        /* --- SECTION 1: HERO SECTION (Brighter Vivid Purple-Cyan Gradient) --- */
+        .product-hero {
+            background: linear-gradient(135deg, var(--elite-purple-bright) 0%, #38B6FF 100%);
+            color: white;
+            padding: 75px 0 65px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.25);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.22);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            color: #FFFFFF;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .product-hero h1 {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .product-hero p {
+            font-size: 1.15rem;
+            color: #F8FAFC;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 26px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .btn-gold {
+            background: var(--elite-gold);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(245, 176, 0, 0.4);
+        }
+
+        .btn-gold:hover {
+            background: #E0A000;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            color: white;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-outline-white:hover {
+            background: white;
+            color: var(--elite-purple-dark);
+        }
+
+        .hero-preview-box {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(14px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .chat-mockup-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.25);
+            margin-bottom: 15px;
+        }
+
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            color: var(--elite-purple-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .chat-msg {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            border-left: 3px solid #FFFFFF;
+            color: white;
+        }
+
+        .user-msg {
+            background: rgba(245, 176, 0, 0.3);
+            border-left: 3px solid var(--elite-gold);
+            margin-left: 20px;
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+
+        /* --- Common Section Styles --- */
+        section {
+            padding: 70px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title {
+            font-size: 2.1rem;
+            color: var(--elite-purple-dark);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* --- Section 2: Key Features & Highlights --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: var(--surface-white);
+            padding: 35px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: #C7D2FE;
+        }
+
+        .feature-icon {
+            width: 58px;
+            height: 58px;
+            background: #EEF2FF;
+            color: var(--elite-purple-bright);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        /* --- Section 3: Detailed Functions (User Roles) --- */
+        .functions-section {
+            background: #F8FAFC;
+        }
+
+        .roles-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .role-btn {
+            padding: 10px 26px;
+            border-radius: 25px;
+            border: 2px solid var(--elite-purple-bright);
+            background: transparent;
+            color: var(--elite-purple-dark);
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .role-btn.active, .role-btn:hover {
+            background: var(--elite-purple-bright);
+            color: white;
+            border-color: var(--elite-purple-bright);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .function-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .function-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .function-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .function-list li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--elite-green);
+        }
+
+        /* --- Section 4: Related Projects & Case Studies --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .case-card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            border-left: 5px solid var(--elite-purple-bright);
+            transition: var(--transition);
+        }
+
+        .case-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .case-tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--elite-purple-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .case-card h3 {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .case-impact {
+            background: #EEF2FF;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--elite-purple-dark);
+            margin-top: 18px;
+            font-weight: 600;
+        }
+
+        /* --- Section 5: Testimonials & Endorsements --- */
+        .testimonials-section {
+            background: #F8FAFC;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--surface-white);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .quote-icon {
+            font-size: 1.8rem;
+            color: var(--elite-gold);
+            margin-bottom: 12px;
+        }
+
+        .testimonial-text {
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-bottom: 22px;
+            line-height: 1.6;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #FFFBEB;
+            border: 1.5px solid var(--elite-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #B27B00;
+        }
+
+        .author-details h4 {
+            font-size: 0.95rem;
+            color: var(--elite-purple-dark);
+            font-weight: 700;
+        }
+
+        .author-details p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Section 6: Call to Action Banner (Brighter Purple Gradient) --- */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--elite-purple-bright) 0%, #4338CA 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 60px;
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.25);
+        }
+
+        .cta-banner h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .cta-banner p {
+            font-size: 1.1rem;
+            opacity: 0.92;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Full Amber Gold Footer with 5-Color Rainbow Top Edge Bar --- */
+        footer {
+            background: var(--elite-gold);
+            color: #000000;
+            padding: 60px 20px 25px 20px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .footer-rainbow-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 100%;
+            background: linear-gradient(to right, var(--elite-gold) 20%, var(--elite-green) 20% 40%, var(--elite-purple-bright) 40% 60%, var(--elite-cyan) 60% 80%, var(--elite-pink) 80%);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            color: var(--elite-purple-dark);
+            font-weight: 800;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #2D2100;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--elite-purple-dark);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            color: #3D2D00;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Banner -->
+    <header>
+        <div class="header-gold-bar"></div>
+        <div class="nav-container">
+            <a href="#" class="logo-text">
+                <span class="logo-e1">E</span><span class="logo-l">L</span><span class="logo-i">I</span><span class="logo-t">T</span><span class="logo-e2">E</span>
+                <span class="logo-sub">CUHK</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item nav-home">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                
+                <li class="nav-item nav-about">
+                    <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">Who are we</a></li>
+                        <li class="dropdown-item"><a href="#">Our mission</a></li>
+                        <li class="dropdown-item"><a href="#">Partnership</a></li>
+                        <li class="dropdown-item"><a href="#">People</a></li>
+                        <li class="dropdown-item"><a href="#">Contact us</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-products">
+                    <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">Tellus <span class="ai-badge-pink">AI</span></a></li>
+                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="ai-badge-cyan">AI</span></a></li>
+                        <li class="dropdown-item"><a href="#">VeriGuide</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-services">
+                    <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">e-Learning Consultation</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-facility">
+                    <a href="#" class="nav-link">Facility <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="#">Multi-Purpose Open Area</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- SECTION 1: HERO SECTION -->
+    <header class="product-hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div>
+                    <span class="hero-badge"><i class="fa-solid fa-graduation-cap"></i> Socratic AI Tutor for Higher Education</span>
+                    <h1>AcademiChat</h1>
+                    <p>Guide students toward critical thinking and concept mastery with a process-oriented, Socratic AI mentor grounded in your university course materials.</p>
+                    <div class="hero-actions">
+                        <a href="https://keep.edu.hk/academichat/" target="_blank" class="btn btn-gold">Start Free Trial / Demo <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.8rem;"></i></a>
+                        <a href="#consultation" class="btn btn-outline-white">Adopt for Your Course</a>
+                    </div>
+                </div>
+
+                <div class="hero-preview-box">
+                    <div class="chat-mockup-header">
+                        <div class="chat-avatar"><i class="fa-solid fa-robot"></i></div>
+                        <div>
+                            <strong style="display:block; font-size:0.95rem;">AcademiChat Tutor</strong>
+                            <span style="font-size:0.78rem; color:#FFFFFF; font-weight:700;">Socratic Dialogue Mode Active</span>
+                        </div>
+                    </div>
+                    <div class="chat-msg user-msg">
+                        "Can you just give me the answer for Question 3 on enzyme kinetics?"
+                    </div>
+                    <div class="chat-msg">
+                        "Instead of giving you the final formula directly, let's step back. What happens to the reaction rate when you double the substrate concentration in your lab data?"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 2: KEY FEATURES & HIGHLIGHTS -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Adopt AcademiChat?</h2>
+                <p class="section-subtitle">Move beyond simple AI search answers with an interactive mentor built explicitly for deep academic inquiry.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h3>Socratic Guided Dialogue</h3>
+                    <p>Engages students with probing questions and hints, pushing them to explain reasoning and identify knowledge gaps independently.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                    <h3>Course-Grounded Context</h3>
+                    <p>Instructors easily upload lecture slides, syllabi, and readings to keep the AI strictly bounded within official course scope.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>Learning Milestones & Analytics</h3>
+                    <p>Tracks student inquiry trends and common conceptual roadblocks, providing teachers with real-time insight into class comprehension.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
+                    <h3>Automated Quiz & Schema Generator</h3>
+                    <p>Instantly converts existing lecture materials into tailored practice quizzes, structural layout mappings, and grading rubrics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: DETAILED FUNCTIONS & USER ROLES -->
+    <section class="functions-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Designed for Instructors and Students</h2>
+                <p class="section-subtitle">Tailored workflows that empower teaching teams while offering personalized 24/7 support to learners.</p>
+            </div>
+
+            <div class="roles-tabs">
+                <button class="role-btn active">For Instructors & TAs</button>
+                <button class="role-btn">For Students</button>
+            </div>
+
+            <div class="function-row">
+                <div>
+                    <h3 style="font-size: 1.6rem; color: var(--elite-purple-dark); font-weight:800; margin-bottom: 15px;">Transforming Course Management & Insights</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Save time on routine Q&A while gaining unprecedented clarity into how your students process difficult course concepts.</p>
+                    
+                    <ul class="function-list">
+                        <li><strong>Instant Material Conversion:</strong> Upload lecture PDFs to automatically build Socratic review guides and practice sets.</li>
+                        <li><strong>Customizable Guardrails:</strong> Set strict guidelines for answer lengths, allowed hints, and strict adherence to course sources.</li>
+                        <li><strong>Discussion Analytics:</strong> Access automated summaries and sentiment logs of student-AI interactions to fine-tune upcoming lectures.</li>
+                        <li><strong>LMS Integration:</strong> Connect seamlessly with CUHK Blackboard and Open edX platforms.</li>
+                    </ul>
+                </div>
+
+                <div style="background: #EEF2FF; height: 300px; border-radius: 14px; border: 1.5px dashed var(--elite-purple-bright); display:flex; align-items:center; justify-content:center; color: var(--elite-purple-dark); font-weight:700;">
+                    [Instructor Dashboard UI Preview]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: RELATED PROJECTS & CASE STUDIES -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Real-World University Implementations</h2>
+                <p class="section-subtitle">See how faculties at CUHK are adopting AcademiChat to enhance learning outcomes at scale.</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="case-card">
+                    <div class="case-tag">UGC Strategic Fund Project</div>
+                    <h3>Foundation Biology: 24/7 Socratic Learning Assistant</h3>
+                    <p style="color: var(--text-muted); font-size:0.92rem;">Deployed in a 400-student lecture setting to assist with complex biochemical pathway problem sets without giving direct answers.</p>
+                    <div class="case-impact">
+                        <i class="fa-solid fa-chart-pie" style="color:var(--elite-purple-dark);"></i> <strong>Impact:</strong> 88% of students reported higher confidence during mid-term exam prep.
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-tag">Faculty of Business Project</div>
+                    <h3>Case Study Analysis & Socratic Guidance</h3>
+                    <p style="color: var(--text-muted); font-size:0.92rem;">Integrated into MBA strategy modules to challenge students' underlying business model assumptions prior to class presentations.</p>
+                    <div class="case-impact">
+                        <i class="fa-solid fa-clock" style="color:var(--elite-purple-dark);"></i> <strong>Impact:</strong> Reduced TA routine e-mail volume by over 60%.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: TESTIMONIALS & ENDORSEMENTS -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Faculty & Student Endorsements</h2>
+                <p class="section-subtitle">Hear what educators and learners say about their experience with AcademiChat.</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+                    <p class="testimonial-text">"AcademiChat solved our biggest concern with Generative AI—students copying answers. By enforcing Socratic dialogue, it forces them to think deeply and explain their logic step-by-step."</p>
+                    <div class="author-info">
+                        <div class="author-avatar">SL</div>
+                        <div class="author-details">
+                            <h4>Prof. S. Lam</h4>
+                            <p>School of Life Sciences, CUHK</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+                    <p class="testimonial-text">"It feels like having a private tutor available at 2 AM. When I get stuck on a physics concept, AcademiChat doesn't just hand me the solution—it asks me the right question to help me figure it out myself."</p>
+                    <div class="author-info">
+                        <div class="author-avatar">KY</div>
+                        <div class="author-details">
+                            <h4>Kevin Y.</h4>
+                            <p>Year 2 Science Undergraduate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: CALL TO ACTION BANNER -->
+    <section style="padding: 0 20px;">
+        <div class="container">
+            <div class="cta-banner" id="consultation">
+                <h2>Interested in Adopting AcademiChat for Your Course?</h2>
+                <p>Contact the ELITE team to schedule a personalized platform demonstration, set up course guardrails, or launch a pilot run for your department.</p>
+                <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
+                    <a href="mailto:elite@cuhk.edu.hk" class="btn btn-gold">Request Course Pilot</a>
+                    <a href="https://keep.edu.hk/academichat/" target="_blank" class="btn btn-outline-white">Visit KEEP AcademiChat Portal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer with 5-Color Rainbow Top Edge Bar -->
+    <footer>
+        <div class="footer-rainbow-top-bar"></div>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ELITE Centre</h4>
+                <p style="color: #2D2100; font-size: 0.9rem; line-height: 1.5; font-weight: 500;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Facility</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">Tellus AI</a></li>
+                    <li><a href="academichat.html">AcademiChat AI</a></li>
+                    <li><a href="#">VeriGuide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">The Chinese University of Hong Kong<br>Shatin, N.T., Hong Kong</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Centre for e-Learning Innovation and Technology Enhancement (ELITE), CUHK. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
