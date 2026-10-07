@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funded Research & EdTech Projects | ELITE CUHK</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* 5 Logo Brand Colors */
+            --brand-gold: #FFC000;          
+            --brand-green: #8AC43A;         
+            --brand-blue-primary: #0099FF;  
+            --brand-cyan: #00E5FF;          
+            --brand-pink: #E61B6B;          
+            
+            --brand-blue-dark: #0066CC;     
+            --brand-blue-light: #F0F9FF;    
+            
+            --bg-body: #FFFFFF;
+            --surface-white: #FFFFFF;
+            --text-main: #0A2540;
+            --text-muted: #526075;
+            --border-light: #E0EEF9;
+            
+            --shadow-sm: 0 4px 15px rgba(0, 153, 255, 0.06);
+            --shadow-md: 0 12px 35px rgba(0, 153, 255, 0.16);
+            --transition: all 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: var(--surface-white);
+            box-shadow: 0 4px 20px rgba(0, 153, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Top Bar: Solid Golden Yellow */
+        .header-top-bar {
+            height: 5px;
+            width: 100%;
+            background-color: var(--brand-gold);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 75px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--brand-blue-dark);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            background: #FFFBEB;
+            color: var(--brand-gold);
+            border: 1px solid var(--brand-gold);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 26px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        /* --- Individual 5-Color Hover Styles for Nav Items --- */
+        .nav-item.nav-gold:hover > .nav-link,
+        .nav-item.nav-gold .nav-link.active {
+            color: var(--brand-gold);
+            border-bottom-color: var(--brand-gold);
+        }
+        .nav-item.nav-gold .dropdown { border-top: 3px solid var(--brand-gold); }
+
+        .nav-item.nav-green:hover > .nav-link,
+        .nav-item.nav-green .nav-link.active {
+            color: var(--brand-green);
+            border-bottom-color: var(--brand-green);
+        }
+        .nav-item.nav-green .dropdown { border-top: 3px solid var(--brand-green); }
+
+        .nav-item.nav-blue:hover > .nav-link,
+        .nav-item.nav-blue .nav-link.active {
+            color: var(--brand-blue-primary);
+            border-bottom-color: var(--brand-blue-primary);
+        }
+        .nav-item.nav-blue .dropdown { border-top: 3px solid var(--brand-blue-primary); }
+
+        .nav-item.nav-cyan:hover > .nav-link,
+        .nav-item.nav-cyan .nav-link.active {
+            color: var(--brand-cyan);
+            border-bottom-color: var(--brand-cyan);
+        }
+        .nav-item.nav-cyan .dropdown { border-top: 3px solid var(--brand-cyan); }
+
+        .nav-item.nav-pink:hover > .nav-link,
+        .nav-item.nav-pink .nav-link.active {
+            color: var(--brand-pink);
+            border-bottom-color: var(--brand-pink);
+        }
+        .nav-item.nav-pink .dropdown { border-top: 3px solid var(--brand-pink); }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 240px;
+            background: var(--surface-white);
+            box-shadow: 0 12px 30px rgba(0,153,255,0.15);
+            border-radius: 0 0 12px 12px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            list-style: none;
+            border-left: 1px solid var(--border-light);
+            border-right: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .dropdown-item a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .dropdown-item a:hover {
+            background-color: var(--brand-blue-light);
+            color: var(--brand-blue-dark);
+        }
+
+        .ai-badge-blue {
+            font-size: 0.65rem;
+            background: #E0F2FE;
+            color: var(--brand-blue-primary);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 800;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(135deg, #00C6FF 0%, #0072FF 50%, #0052D4 100%);
+            color: white;
+            padding: 85px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 820px;
+            margin: 0 auto 30px auto;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .facility-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .f-badge {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            backdrop-filter: blur(8px);
+        }
+
+        /* --- Main Content Area --- */
+        .main-content {
+            padding: 60px 0 80px 0;
+            background-color: #FAFCFF;
+        }
+
+        /* --- Filter Container --- */
+        .filter-container {
+            background: var(--surface-white);
+            padding: 24px 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            margin-bottom: 35px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-weight: 800;
+            font-size: 0.92rem;
+            color: var(--brand-blue-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-select, .search-input {
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border-light);
+            background-color: var(--brand-blue-light);
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-main);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .filter-select:focus, .search-input:focus {
+            border-color: var(--brand-blue-primary);
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.15);
+        }
+
+        .search-input {
+            width: 280px;
+        }
+
+        /* --- Project List & Cards --- */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .project-card {
+            background: var(--surface-white);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            border-left: 6px solid var(--brand-blue-primary);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .project-meta-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .badge-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .project-badge {
+            font-size: 0.82rem;
+            font-weight: 800;
+            padding: 5px 14px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Scheme Badge Styles */
+        .badge-scheme-tdleg { background: #E0F2FE; color: #0066CC; border: 1px solid #BAE6FD; }
+        .badge-scheme-fite  { background: #FCE7F3; color: #9D174D; border: 1px solid #FBCFE8; }
+        .badge-scheme-cdg   { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
+        .badge-scheme-iica  { background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; }
+        .badge-scheme-le    { background: #F3E8FF; color: #6B21A8; border: 1px solid #E9D5FF; }
+
+        /* Status & Role Badges */
+        .status-pill {
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-current { background: #D1FAE5; color: #065F46; }
+        .status-completed { background: #E2E8F0; color: #475569; }
+
+        .role-pill {
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 12px;
+            background: #F0F9FF;
+            color: #0284C7;
+            border: 1px solid #BAE6FD;
+        }
+
+        .project-year {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .project-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 18px;
+            line-height: 1.45;
+        }
+
+        /* Project Details Grid */
+        .project-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+            background: var(--brand-blue-light);
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #E0EEF9;
+        }
+
+        .detail-item {
+            font-size: 0.92rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .detail-item strong {
+            color: var(--brand-blue-dark);
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 4px;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            line-height: 1.65;
+            margin-bottom: 18px;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #F1F5F9;
+            color: var(--brand-blue-dark);
+            border: 1px solid var(--border-light);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        /* --- Bottom Call To Action Banner --- */
+        .booking-banner-section {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            padding: 60px 20px;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .booking-banner-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--surface-white);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .booking-banner-card h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--brand-blue-dark);
+            margin-bottom: 12px;
+        }
+
+        .booking-banner-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+        }
+
+        .booking-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--brand-pink) 0%, #C7135A 100%);
+            color: white;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(230, 27, 107, 0.35);
+            transition: var(--transition);
+        }
+
+        .booking-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(230, 27, 107, 0.45);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--brand-gold);
+            color: #000000;
+            padding: 65px 20px 25px 20px;
+            position: relative;
+        }
+
+        .footer-rainbow-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 100%;
+            background: linear-gradient(to right, var(--brand-gold) 20%, var(--brand-green) 20% 40%, var(--brand-blue-primary) 40% 60%, var(--brand-cyan) 60% 80%, var(--brand-pink) 80%);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.15rem;
+            margin-bottom: 18px;
+            color: var(--brand-blue-dark);
+            font-weight: 800;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+
+        .footer-col ul li a {
+            color: #2D2100;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.94rem;
+            font-weight: 600;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--brand-blue-dark);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            color: #3D2D00;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.4rem; }
+            .search-input { width: 100%; }
+            .filter-container { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <!-- Solid Golden Yellow Line on Top Nav -->
+        <div class="header-top-bar"></div>
+        <div class="nav-container">
+            <a href="index.html" class="logo-text">
+                ELITE <span class="logo-sub">CUHK</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <!-- Color 1: Gold (Home) -->
+                <li class="nav-item nav-gold">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                
+                <!-- Color 2: Green (About) -->
+                <li class="nav-item nav-green">
+                    <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="index.html#vision-mission">Vision & Mission</a></li>
+                        <li class="dropdown-item"><a href="people.html">People</a></li>
+                        <li class="dropdown-item"><a href="partners.html">Our Partners</a></li>
+                        <li class="dropdown-item"><a href="contact.html">Contact us</a></li>
+                    </ul>
+                </li>
+
+                <!-- Color 3: Blue (Products) -->
+                <li class="nav-item nav-blue">
+                    <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="tellus.html">Tellus <span class="ai-badge-blue">AI</span></a></li>
+                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="ai-badge-blue">AI</span></a></li>
+                        <li class="dropdown-item"><a href="veriguide.html">VeriGuide</a></li>
+                    </ul>
+                </li>
+
+                <!-- Color 4: Cyan (Services) -->
+                <li class="nav-item nav-cyan">
+                    <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">e-Learning Consultation</a></li>
+                    </ul>
+                </li>
+
+                <!-- Color 5: Pink (Projects Active) -->
+                <li class="nav-item nav-pink">
+                    <a href="project.html" class="nav-link active">Projects <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="studios.html">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="studios.html#open-area">Multi-Purpose Open Area</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Header -->
+    <section class="hero">
+        <div class="container">
+            <h1>Funded & Collaborative Projects</h1>
+            <p>Demonstrating cross-disciplinary research initiatives, pedagogical innovation grants, and technological collaborations led by or supported by ELITE across CUHK faculties and departments.</p>
+            <div class="facility-badges">
+                <span class="f-badge"><i class="fa-solid fa-graduation-cap"></i> TDLEG / FITE / CDG / IICA Grants</span>
+                <span class="f-badge"><i class="fa-solid fa-handshake"></i> Cross-Disciplinary Collaborations</span>
+                <span class="f-badge"><i class="fa-solid fa-layer-group"></i> Active & Completed Projects</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="main-content">
+        <div class="container">
+            
+            <!-- Filter & Search Controls -->
+            <div class="filter-container">
+                <div class="filter-group">
+                    <span class="filter-label"><i class="fa-solid fa-filter"></i> Filter by:</span>
+                    
+                    <!-- Funding Scheme Filter -->
+                    <select class="filter-select">
+                        <option value="">All Funding Schemes</option>
+                        <option value="TDLEG">TDLEG (Teaching & Learning Development Grant)</option>
+                        <option value="FITE">FITE (Fund for Innovation and Technology in Education)</option>
+                        <option value="CDG">CDG (Courseware Development Grant)</option>
+                        <option value="IICA">IICA (Impact Innovation Collaboration Award)</option>
+                        <option value="LE">LE (Language Enhancement Project Fund)</option>
+                    </select>
+
+                    <!-- Status Filter -->
+                    <select class="filter-select">
+                        <option value="">All Statuses</option>
+                        <option value="Current">Current Projects</option>
+                        <option value="Completed">Completed Projects</option>
+                    </select>
+
+                    <!-- Faculty Filter -->
+                    <select class="filter-select">
+                        <option value="">All Faculties</option>
+                        <option value="Arts">Faculty of Arts</option>
+                        <option value="Business">Faculty of Business Administration</option>
+                        <option value="Education">Faculty of Education</option>
+                        <option value="Engineering">Faculty of Engineering</option>
+                        <option value="Medicine">Faculty of Medicine</option>
+                        <option value="Science">Faculty of Science</option>
+                        <option value="SocialScience">Faculty of Social Science</option>
+                    </select>
+                </div>
+
+                <div>
+                    <input type="text" class="search-input" placeholder="Search title, teacher, department...">
+                </div>
+            </div>
+
+            <!-- Project Directory List -->
+            <div class="project-list">
+
+                <!-- Project Item 1 (TDLEG Scheme) -->
+                <div class="project-card" style="border-left-color: var(--brand-blue-primary);">
+                    <div class="project-meta-top">
+                        <div class="badge-group">
+                            <span class="project-badge badge-scheme-tdleg"><i class="fa-solid fa-award"></i> TDLEG</span>
+                            <span class="status-pill status-current">Current</span>
+                            <span class="role-pill"><i class="fa-solid fa-gear"></i> Technological & Pedagogical Partner</span>
+                        </div>
+                        <span class="project-year"><i class="fa-regular fa-calendar"></i> 2025 – 2027</span>
+                    </div>
+                    
+                    <h2 class="project-title">Implementation of AI-Driven Interactive Mock Interview Simulations (Tellus) for Professional Skill Enhancement</h2>
+                    
+                    <div class="project-details-grid">
+                        <div class="detail-item">
+                            <strong>Lead / Participating Teachers</strong>
+                            Prof. Alex CHAN (PI, Dept. of Management), Dr. Kevin WONG (Co-I, Dept. of Psychology), Dr. Sarah LI (ELITE)
+                        </div>
+                        <div class="detail-item">
+                            <strong>Faculty & Department</strong>
+                            Faculty of Business Administration (Dept. of Management) & Dept. of Psychology
+                        </div>
+                        <div class="detail-item">
+                            <strong>Funding Scheme & Amount</strong>
+                            TDLEG – HKD $480,000
+                        </div>
+                        <div class="detail-item">
+                            <strong>ELITE Support Role</strong>
+                            Platform Development, AI Scoring Rubric Customization & Pedagogical Evaluation
+                        </div>
+                    </div>
+
+                    <p class="project-desc">
+                        Integrating the Tellus AI simulation framework into undergraduate business communication and psychology courses across CUHK to provide structured mock interview exercises, real-time feedback, and learning analytics.
+                    </p>
+
+                    <div class="project-tags">
+                        <span class="tag">#Tellus</span>
+                        <span class="tag">#AIInEducation</span>
+                        <span class="tag">#BusinessCommunication</span>
+                        <span class="tag">#CrossDisciplinary</span>
+                    </div>
+                </div>
+
+                <!-- Project Item 2 (FITE Scheme) -->
+                <div class="project-card" style="border-left-color: var(--brand-pink);">
+                    <div class="project-meta-top">
+                        <div class="badge-group">
+                            <span class="project-badge badge-scheme-fite"><i class="fa-solid fa-laptop-code"></i> FITE</span>
+                            <span class="status-pill status-current">Current</span>
+                            <span class="role-pill"><i class="fa-solid fa-flag"></i> Project Lead (ELITE)</span>
+                        </div>
+                        <span class="project-year"><i class="fa-regular fa-calendar"></i> 2024 – 2026</span>
+                    </div>
+                    
+                    <h2 class="project-title">Domain-Grounded Academic AI Conversational Tutor (AcademiChat) for Large Foundation Courses</h2>
+                    
+                    <div class="project-details-grid">
+                        <div class="detail-item">
+                            <strong>Lead / Participating Teachers</strong>
+                            Prof. Michael ZHANG (School of Life Sciences), Prof. David CHEUNG (Computer Science), Mr. Patrick LAU (ELITE)
+                        </div>
+                        <div class="detail-item">
+                            <strong>Faculty & Department</strong>
+                            Faculty of Science (Life Sciences) & Faculty of Engineering (Computer Science)
+                        </div>
+                        <div class="detail-item">
+                            <strong>Funding Scheme & Amount</strong>
+                            FITE – HKD $750,000
+                        </div>
+                        <div class="detail-item">
+                            <strong>ELITE Support Role</strong>
+                            Project Leader, Model Fine-Tuning, LMS/KEEP System Integration & Technical Deployment
+                        </div>
+                    </div>
+
+                    <p class="project-desc">
+                        Designing domain-specific LLM assistants to provide 24/7 course-specific question resolution, guided problem-solving, and formative feedback for introductory STEM lectures across multiple faculties.
+                    </p>
+
+                    <div class="project-tags">
+                        <span class="tag">#AcademiChat</span>
+                        <span class="tag">#GenerativeAI</span>
+                        <span class="tag">#STEMEducation</span>
+                        <span class="tag">#AutomatedTutoring</span>
+                    </div>
+                </div>
+
+                <!-- Project Item 3 (CDG Scheme) -->
+                <div class="project-card" style="border-left-color: var(--brand-green);">
+                    <div class="project-meta-top">
+                        <div class="badge-group">
+                            <span class="project-badge badge-scheme-cdg"><i class="fa-solid fa-cubes"></i> CDG</span>
+                            <span class="status-pill status-completed">Completed</span>
+                            <span class="role-pill"><i class="fa-solid fa-gear"></i> Technological Collaborator</span>
+                        </div>
+                        <span class="project-year"><i class="fa-regular fa-calendar"></i> 2023 – 2025</span>
+                    </div>
+                    
+                    <h2 class="project-title">Immersive Extended Reality (XR) Clinical Skill Workstations for General Medical Education</h2>
+                    
+                    <div class="project-details-grid">
+                        <div class="detail-item">
+                            <strong>Lead / Participating Teachers</strong>
+                            Dr. Raymond LO (PI, MBChB Programme), Dr. Florence LEE (School of Nursing)
+                        </div>
+                        <div class="detail-item">
+                            <strong>Faculty & Department</strong>
+                            Faculty of Medicine (Surgical Studies & Nursing)
+                        </div>
+                        <div class="detail-item">
+                            <strong>Funding Scheme & Amount</strong>
+                            CDG – HKD $350,000
+                        </div>
+                        <div class="detail-item">
+                            <strong>ELITE Support Role</strong>
+                            XR Media Studio Production, 3D Asset Integration & Student Testing Facility Setup
+                        </div>
+                    </div>
+
+                    <p class="project-desc">
+                        Constructing interactive 3D virtual clinical simulation modules that medical and nursing students can access in the ELITE XR Studio for procedural training prior to hospital bedside placements.
+                    </p>
+
+                    <div class="project-tags">
+                        <span class="tag">#XRStudio</span>
+                        <span class="tag">#MedicalPedagogy</span>
+                        <span class="tag">#VirtualSimulation</span>
+                        <span class="tag">#InteractiveCourseware</span>
+                    </div>
+                </div>
+
+                <!-- Project Item 4 (IICA Scheme) -->
+                <div class="project-card" style="border-left-color: var(--brand-gold);">
+                    <div class="project-meta-top">
+                        <div class="badge-group">
+                            <span class="project-badge badge-scheme-iica"><i class="fa-solid fa-lightbulb"></i> IICA</span>
+                            <span class="status-pill status-current">Current</span>
+                            <span class="role-pill"><i class="fa-solid fa-handshake"></i> Co-Investigator & Tech Partner</span>
+                        </div>
+                        <span class="project-year"><i class="fa-regular fa-calendar"></i> 2025 – 2026</span>
+                    </div>
+                    
+                    <h2 class="project-title">AI Speech Impairment Analysis & Interactive Therapy Tools for Inclusive Special Needs Education</h2>
+                    
+                    <div class="project-details-grid">
+                        <div class="detail-item">
+                            <strong>Lead / Participating Teachers</strong>
+                            Prof. Grace LEUNG (PI, Dept. of Special Education), Ms. Ada LAM (ELITE Team), Dr. Iris HO (Dept. of Linguistics)
+                        </div>
+                        <div class="detail-item">
+                            <strong>Faculty & Department</strong>
+                            Faculty of Education & Dept. of Linguistics and Modern Languages
+                        </div>
+                        <div class="detail-item">
+                            <strong>Funding Scheme & Amount</strong>
+                            IICA – HKD $520,000
+                        </div>
+                        <div class="detail-item">
+                            <strong>ELITE Support Role</strong>
+                            Speech Assessment Engine Integration, Interactive UI Design & Data Security Handling
+                        </div>
+                    </div>
+
+                    <p class="project-desc">
+                        Building specialized conversational assessment tools to assist educators and speech therapists in identifying acoustic speech variations and supporting special educational needs (SEN) learning environments.
+                    </p>
+
+                    <div class="project-tags">
+                        <span class="tag">#InclusiveEducation</span>
+                        <span class="tag">#SpeechTherapy</span>
+                        <span class="tag">#SENSupport</span>
+                        <span class="tag">#EdTechInnovation</span>
+                    </div>
+                </div>
+
+                <!-- Project Item 5 (LE Scheme) -->
+                <div class="project-card" style="border-left-color: var(--brand-cyan);">
+                    <div class="project-meta-top">
+                        <div class="badge-group">
+                            <span class="project-badge badge-scheme-le"><i class="fa-solid fa-language"></i> LE</span>
+                            <span class="status-pill status-completed">Completed</span>
+                            <span class="role-pill"><i class="fa-solid fa-gear"></i> Technological Collaborator</span>
+                        </div>
+                        <span class="project-year"><i class="fa-regular fa-calendar"></i> 2023 – 2024</span>
+                    </div>
+                    
+                    <h2 class="project-title">Enhancing Multilingual Originality Analytics & Textual Integrity using VeriGuide Tools</h2>
+                    
+                    <div class="project-details-grid">
+                        <div class="detail-item">
+                            <strong>Lead / Participating Teachers</strong>
+                            Dr. Helen CHENG (PI, Dept. of English), Dr. Raymond HO (Independent Learning Centre)
+                        </div>
+                        <div class="detail-item">
+                            <strong>Faculty & Department</strong>
+                            Faculty of Arts (Dept. of English) & Independent Learning Centre (ILC)
+                        </div>
+                        <div class="detail-item">
+                            <strong>Funding Scheme & Amount</strong>
+                            LE – HKD $320,000
+                        </div>
+                        <div class="detail-item">
+                            <strong>ELITE Support Role</strong>
+                            VeriGuide API Integration, Text Similarity Analytics & Academic Integrity Workshops
+                        </div>
+                    </div>
+
+                    <p class="project-desc">
+                        Assessing similarity detection and ethical AI writing analytics in General Education writing courses to foster academic integrity and proper citation practices among first-year university undergraduates.
+                    </p>
+
+                    <div class="project-tags">
+                        <span class="tag">#VeriGuide</span>
+                        <span class="tag">#AcademicIntegrity</span>
+                        <span class="tag">#LanguageEnhancement</span>
+                        <span class="tag">#WritingPedagogy</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Call To Action Banner -->
+    <section class="booking-banner-section">
+        <div class="container">
+            <div class="booking-banner-card">
+                <h3>Collaborate or Apply for EdTech Funding</h3>
+                <p>Learn how the ELITE team can partner with your faculty or department to co-develop innovative eLearning tools and support grant proposals.</p>
+                <a href="contact.html" class="booking-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Contact Project Specialists</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-rainbow-bar"></div>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ELITE Centre</h4>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
+                    Promoting AI-enhanced learning and educational technology innovation at CUHK.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#vision-mission">Vision & Mission</a></li>
+                    <li><a href="people.html">People</a></li>
+                    <li><a href="partners.html">Our Partners</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="tellus.html">Tellus AI</a></li>
+                    <li><a href="academichat.html">AcademiChat AI</a></li>
+                    <li><a href="veriguide.html">VeriGuide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
+                    6/F, Hui Yeung Shing Building<br>
+                    The Chinese University of Hong Kong<br>
+                    Shatin, N.T., Hong Kong<br><br>
+                    Email: elite-centre@cuhk.edu.hk
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Centre for e-Learning Innovation and Technology Enhancement (ELITE), CUHK. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
