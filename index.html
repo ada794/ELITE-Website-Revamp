@@ -50,10 +50,10 @@
             z-index: 1000;
         }
 
-        /* Header  Accent Line */
-        .header--bar {
+        /* Header Gold Accent Line */
+        .header-gold-bar {
             height: 5px;
-            background: var();
+            background: var(--elite-gold);
             width: 100%;
         }
 
@@ -116,30 +116,36 @@
             border-bottom: 3px solid transparent;
         }
 
-        /* Logo-Colored Hover States for Top Nav */
+        /* Home Link: Stays black without color hover change */
         .nav-item.nav-home:hover > .nav-link {
+            color: var(--text-main);
+            border-bottom-color: transparent;
+        }
+        
+        /* 5 Logo Colors Starting from About Us */
+        /* Item 1: About (Gold) */
+        .nav-item.nav-about:hover > .nav-link {
             color: #D99B00;
             border-bottom-color: var(--elite-gold);
         }
-        
-        .nav-item.nav-about:hover > .nav-link {
-              color: #D99B00;
-            border-bottom-color: var(--elite-gold);
-        }
         .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-gold); }
-        .nav-item.nav-about .dropdown-item a:hover { background-color:var(--elite-gold); color: var(--elite-gold); }
+        .nav-item.nav-about .dropdown-item a:hover { background-color: #FFFBEB; color: #D99B00; }
 
+        /* Item 2: Products (Green) */
         .nav-item.nav-products:hover > .nav-link {
             color: var(--elite-green);
             border-bottom-color: var(--elite-green);
         }
         .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-green); }
-        .nav-item.nav-products .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); } 
+        .nav-item.nav-products .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
 
+        /* Item 3: Projects (Purple - Direct Link) */
         .nav-item.nav-projects:hover > .nav-link {
             color: var(--elite-purple);
             border-bottom-color: var(--elite-purple);
         }
+
+        /* Item 4: Services (Cyan) */
         .nav-item.nav-services:hover > .nav-link {
             color: #0088CC;
             border-bottom-color: var(--elite-cyan);
@@ -147,12 +153,13 @@
         .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
         .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
 
-        .nav-item.nav-facilities:hover > .nav-link {
+        /* Item 5: Facilities (Pink) */
+        .nav-item.nav-facility:hover > .nav-link {
             color: var(--elite-pink);
             border-bottom-color: var(--elite-pink);
         }
-        .nav-item.nav-facilities .dropdown { border-top: 3px solid var(--elite-pink); }
-        .nav-item.nav-facilities .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
+        .nav-item.nav-facility .dropdown { border-top: 3px solid var(--elite-pink); }
+        .nav-item.nav-facility .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
 
         /* Dropdown Base Styles */
         .dropdown {
@@ -190,9 +197,8 @@
             transition: var(--transition);
         }
 
-        /* AI Badges */
-        .ai-badge-pink { background: var(--elite-pink); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
-        .ai-badge-cyan { background: var(--elite-cyan); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+        /* Badges */
+        .badge-beta { background: var(--elite-gold); color: #000; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; text-transform: uppercase; }
 
         /* --- Sections Shared Styling --- */
         section {
@@ -228,6 +234,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 30px;
             box-shadow: 0 15px 35px rgba(74, 37, 130, 0.2);
         }
 
@@ -245,7 +252,7 @@
         }
 
         .hero-content {
-            max-width: 560px;
+            max-width: 520px;
             z-index: 2;
         }
 
@@ -279,13 +286,13 @@
             font-size: 0.95rem;
         }
 
-        .btn- {
+        .btn-gold {
             background: var(--elite-gold);
             color: #000;
             box-shadow: 0 4px 15px rgba(245, 176, 0, 0.4);
         }
 
-        .btn-:hover {
+        .btn-gold:hover {
             background: #E0A000;
             transform: translateY(-2px);
         }
@@ -301,25 +308,75 @@
             color: var(--elite-purple);
         }
 
-        .hero-preview {
-            width: 440px;
-            height: 260px;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(12px);
-            border-radius: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
+        /* --- Interactive Hero Video Container --- */
+        .hero-video-wrapper {
+            width: 460px;
+            height: 265px;
+            position: relative;
             z-index: 2;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            background: #000;
+            transition: var(--transition);
         }
 
-        .hero-preview i {
-            font-size: 3.5rem;
-            margin-bottom: 12px;
+        .hero-video-wrapper:hover {
+            transform: scale(1.03);
+            border-color: var(--elite-gold);
+            box-shadow: 0 16px 40px rgba(245, 176, 0, 0.3);
+        }
+
+        .hero-video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Video Click Indicator Overlay */
+        .video-overlay-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
             color: var(--elite-gold);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+            z-index: 3;
+            border: 1px solid rgba(245, 176, 0, 0.4);
+        }
+
+        /* Keyframe Pulse Animation to Invite Clicking */
+        @keyframes pulse-play {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(245, 176, 0, 0.7);
+            }
+            70% {
+                transform: scale(1.15);
+                box-shadow: 0 0 0 10px rgba(245, 176, 0, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(245, 176, 0, 0);
+            }
+        }
+
+        .pulse-icon {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--elite-gold);
+            border-radius: 50%;
+            animation: pulse-play 1.8s infinite;
         }
 
         .carousel-dots {
@@ -365,9 +422,9 @@
         }
 
         .tab-btn.active, .tab-btn:hover {
-            background: var(--elite-);
+            background: var(--elite-gold);
             color: #000;
-            border-color: var(--elite-);
+            border-color: var(--elite-gold);
         }
 
         .highlights-grid {
@@ -390,7 +447,7 @@
             box-shadow: var(--shadow-md);
         }
 
-        .tag- { color: #B27B00; background: #FFFBEB; }
+        .tag-gold { color: #B27B00; background: #FFFBEB; }
         .tag-green { color: var(--elite-green); background: #F4F9ED; }
         .tag-cyan { color: #0088CC; background: #EDF8FF; }
 
@@ -458,8 +515,8 @@
             margin-top: 25px;
         }
 
-        .btn-outline- {
-            border: 1.5px solid var(--elite-);
+        .btn-outline-gold {
+            border: 1.5px solid var(--elite-gold);
             color: #8D6100;
             background: transparent;
             padding: 9px 18px;
@@ -470,12 +527,12 @@
             transition: var(--transition);
         }
 
-        .btn-outline-:hover {
+        .btn-outline-gold:hover {
             background: #FFFBEB;
         }
 
-        .btn--sm {
-            background: var(--elite-);
+        .btn-gold-sm {
+            background: var(--elite-gold);
             color: #000;
             padding: 9px 18px;
             border-radius: 8px;
@@ -485,7 +542,7 @@
             transition: var(--transition);
         }
 
-        .btn--sm:hover {
+        .btn-gold-sm:hover {
             background: #E0A000;
         }
 
@@ -511,9 +568,9 @@
             transform: translateY(-4px);
         }
 
-        .pillar-icon- {
+        .pillar-icon-gold {
             background: #FFFBEB;
-            color: var(--elite-);
+            color: var(--elite-gold);
         }
 
         .pillar-icon {
@@ -528,13 +585,13 @@
         }
 
         /* --- 5. Facilities Showcase Section --- */
-        .facilities-grid {
+        .facility-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 30px;
         }
 
-        .facilities-card {
+        .facility-card {
             background: var(--surface-white);
             border-radius: 16px;
             overflow: hidden;
@@ -543,11 +600,11 @@
             transition: var(--transition);
         }
 
-        .facilities-card:hover {
+        .facility-card:hover {
             box-shadow: var(--shadow-md);
         }
 
-        .facilities-img {
+        .facility-img {
             height: 210px;
             background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
             display: flex;
@@ -558,20 +615,19 @@
             font-size: 1.1rem;
         }
 
-        .facilities-content {
+        .facility-content {
             padding: 28px;
         }
 
         /* --- Full Amber Gold Footer with 5-Color Logo Border Line on Top --- */
         footer {
-            background: var(--elite-gold); /* Full Amber Gold background */
+            background: var(--elite-gold);
             color: #000000;
             padding: 60px 20px 25px 20px;
             margin-top: 60px;
             position: relative;
         }
 
-        /* Rainbow line showing the 5 colors of the logo at the top edge of the footer */
         .footer-rainbow-top-bar {
             position: absolute;
             top: 0;
@@ -585,32 +641,35 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 35px;
             margin-bottom: 40px;
         }
 
-        .footer-col h4 {
+        /* Non-clickable Section Header Titles */
+        .footer-col-title {
             font-size: 1.1rem;
             margin-bottom: 18px;
             color: var(--elite-purple);
             font-weight: 800;
+            display: block;
+            cursor: default;
+            user-select: none;
         }
 
-        .footer-col ul {
-            list-style: none;
-        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
 
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
-
+        /* Clickable Dropdown Sub-links */
         .footer-col ul li a {
             color: #2D2100;
             text-decoration: none;
             transition: var(--transition);
             font-size: 0.92rem;
             font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .footer-col ul li a:hover {
@@ -626,6 +685,17 @@
             font-size: 0.88rem;
             font-weight: 600;
         }
+
+        @media (max-width: 992px) {
+            .hero-carousel {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 20px;
+            }
+            .hero-content { max-width: 100%; }
+            .hero-btns { justify-content: center; }
+            .hero-video-wrapper { width: 100%; max-width: 460px; }
+        }
     </style>
 </head>
 <body>
@@ -634,39 +704,45 @@
     <header>
         <div class="header-gold-bar"></div>
         <div class="nav-container">
-            <a href="elite%20hmpage%20.html" class="logo-text">
+            <a href="index.html" class="logo-text">
                 <span class="logo-e1">E</span><span class="logo-l">L</span><span class="logo-i">I</span><span class="logo-t">T</span><span class="logo-e2">E</span>
                 <span class="logo-sub">CUHK</span>
             </a>
             
             <ul class="nav-menu">
+                <!-- Neutral Home Button -->
                 <li class="nav-item nav-home">
                     <a href="index.html" class="nav-link">Home</a>
                 </li>
                 
+                <!-- Color 1: About (Gold) -->
                 <li class="nav-item nav-about">
                     <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="missionandvision.html">Vision & Mission</a></li>
-                        <li class="dropdown-item"><a href="people.html">People</a></li>
-                        <li class="dropdown-item"><a href="our%20partner.html">Our Partners</a></li>
-                        <li class="dropdown-item"><a href="contact%20us.html">Contact us</a></li>
+                        <li class="dropdown-item"><a href="#">Who are we</a></li>
+                        <li class="dropdown-item"><a href="#">Our mission</a></li>
+                        <li class="dropdown-item"><a href="#">Partnership</a></li>
+                        <li class="dropdown-item"><a href="#">People</a></li>
+                        <li class="dropdown-item"><a href="#">Contact us</a></li>
                     </ul>
                 </li>
 
+                <!-- Color 2: Products (Green) -->
                 <li class="nav-item nav-products">
                     <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="tellus.html">Tellus <span class="ai-badge-pink">AI</span></a></li>
-                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="ai-badge-cyan">AI</span></a></li>
-                        <li class="dropdown-item"><a href="veriguide.html">VeriGuide</a></li>
+                        <li class="dropdown-item"><a href="#">Tellus</a></li>
+                        <li class="dropdown-item"><a href="#">AcademiChat <span class="badge-beta">Beta</span></a></li>
+                        <li class="dropdown-item"><a href="#">VeriGuide</a></li>
                     </ul>
                 </li>
 
-                 <li class="nav-item nav-projects">
-                    <a href="projects.html" class="nav-link">Projects</a>
+                <!-- Color 3: Projects (Purple - Direct Link, No Dropdown) -->
+                <li class="nav-item nav-projects">
+                    <a href="project.html" class="nav-link">Projects</a>
                 </li>
-                
+
+                <!-- Color 4: Services (Cyan) -->
                 <li class="nav-item nav-services">
                     <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
@@ -674,11 +750,12 @@
                     </ul>
                 </li>
 
-                <li class="nav-item nav-facilities">
+                <!-- Color 5: Facilities (Pink) -->
+                <li class="nav-item nav-facility">
                     <a href="#" class="nav-link">Facilities <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="studio.html">Professional Studios</a></li>
-                        <li class="dropdown-item"><a href="openarea.html">Multi-Purpose Open Area</a></li>
+                        <li class="dropdown-item"><a href="#">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="#">Multi-Purpose Open Area</a></li>
                     </ul>
                 </li>
             </ul>
@@ -687,7 +764,7 @@
 
     <!-- Main Homepage Content -->
     <main>
-        <!-- 1. Hero Carousel Section -->
+        <!-- 1. Hero Carousel Section with Custom YouTube Embed -->
         <section style="padding-top: 10px;">
             <div class="hero-carousel">
                 <div class="hero-content">
@@ -698,10 +775,25 @@
                         <a href="#services" class="btn btn-outline-white">Our Services</a>
                     </div>
                 </div>
-                <div class="hero-preview">
-                    <i class="fa-solid fa-circle-play"></i>
-                    <p style="font-weight:600;">Watch Intro Video (0:45)</p>
+
+                <!-- Video Frame with Your Provided YouTube Embed -->
+                <div class="hero-video-wrapper">
+                    <div class="video-overlay-badge">
+                        <span class="pulse-icon"></span>
+                        <span>Click to Play Intro</span>
+                    </div>
+                    <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube.com/embed/f2Wjz8gFCbI?si=wm-AuPGCyZ-E1uC7" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
+
                 <div class="carousel-dots">
                     <div class="dot active"></div>
                     <div class="dot"></div>
@@ -753,12 +845,11 @@
                         <div>
                             <div class="product-header">
                                 <span class="product-title" style="color: #8D6100;">Tellus</span>
-                                <span class="ai-badge-pink">AI Platform</span>
                             </div>
                             <p style="color: var(--text-muted); font-size: 0.95rem;">Interactive AI-driven interview and assessment tool designed for student practice, dynamic scenarios, and automated feedback.</p>
                         </div>
                         <div class="product-actions">
-                            <a href="tellus.html" class="btn-outline-gold">Explore More</a>
+                            <a href="#" class="btn-outline-gold">Explore More</a>
                             <a href="#" class="btn-gold-sm">Launch Tool <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i></a>
                         </div>
                     </div>
@@ -768,12 +859,12 @@
                         <div>
                             <div class="product-header">
                                 <span class="product-title" style="color: #0088CC;">AcademiChat</span>
-                                <span class="ai-badge-cyan">AI Platform</span>
+                                <span class="badge-beta">Beta</span>
                             </div>
                             <p style="color: var(--text-muted); font-size: 0.95rem;">Academic-focused conversational AI tutor tailored for course-specific contexts, student Q&A, and interactive learning support.</p>
                         </div>
                         <div class="product-actions">
-                            <a href="academichat.html" class="btn-outline-gold">Explore More</a>
+                            <a href="#" class="btn-outline-gold">Explore More</a>
                             <a href="#" class="btn-gold-sm">Launch Tool <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i></a>
                         </div>
                     </div>
@@ -783,12 +874,11 @@
                         <div>
                             <div class="product-header">
                                 <span class="product-title" style="color: #629918;">VeriGuide</span>
-                                <span style="background: #F4F9ED; color: #629918; font-size: 0.8rem; padding: 4px 10px; border-radius: 12px; font-weight: 700;">Core Platform</span>
                             </div>
                             <p style="color: var(--text-muted); font-size: 0.95rem;">Comprehensive academic integrity system providing text similarity matching, originality analysis, and multilingual checks.</p>
                         </div>
                         <div class="product-actions">
-                            <a href="veriguide.html" class="btn-outline-gold">Explore More</a>
+                            <a href="#" class="btn-outline-gold">Explore More</a>
                             <a href="#" class="btn-gold-sm">Launch Tool <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i></a>
                         </div>
                     </div>
@@ -825,56 +915,71 @@
             <h2 class="section-title">Facilities Showcase</h2>
             <p class="section-subtitle">Explore our state-of-the-art media production studios and open areas</p>
 
-            <div class="facilities-grid">
-                <div class="facilities-card">
-                    <div class="facilities-img"><i class="fa-solid fa-camera-retro fa-xl"></i> &nbsp; Professional Studio Preview</div>
-                    <div class="facilities-content">
+            <div class="facility-grid">
+                <div class="facility-card">
+                    <div class="facility-img"><i class="fa-solid fa-camera-retro fa-xl"></i> &nbsp; Professional Studio Preview</div>
+                    <div class="facility-content">
                         <h3 style="font-weight:700;">Professional Studios</h3>
                         <p style="color: var(--text-muted); font-size: 0.92rem; margin: 10px 0 18px 0;">High-grade audio-visual recording spaces equipped with Lightboard technology for MOOC and online course creation.</p>
-                        <a href="studio.html" class="btn-outline-gold" style="display:inline-block; font-size:0.85rem;">Learn & Book Studio</a>
+                        <a href="#" class="btn-outline-gold" style="display:inline-block; font-size:0.85rem;">Learn & Book Studio</a>
                     </div>
                 </div>
 
-                <div class="facilities-card">
-                    <div class="facilities-img"><i class="fa-solid fa-users fa-xl"></i> &nbsp; Open Area Preview</div>
-                    <div class="facilities-content">
+                <div class="facility-card">
+                    <div class="facility-img"><i class="fa-solid fa-users fa-xl"></i> &nbsp; Open Area Preview</div>
+                    <div class="facility-content">
                         <h3 style="font-weight:700;">Multi-Purpose Open Area</h3>
                         <p style="color: var(--text-muted); font-size: 0.92rem; margin: 10px 0 18px 0;">Flexible physical space designed for interactive workshops, AI project demonstrations, and academic collaborations.</p>
-                        <a href="openarea.html" class="btn-outline-gold" style="display:inline-block; font-size:0.85rem;">Explore Open Space</a>
+                        <a href="#" class="btn-outline-gold" style="display:inline-block; font-size:0.85rem;">Explore Open Space</a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-    
+
     <!-- Footer with 5-Color Rainbow Top Edge Bar -->
     <footer>
         <div class="footer-rainbow-top-bar"></div>
         <div class="footer-container">
+            <!-- Col 1: ELITE Centre Info -->
             <div class="footer-col">
-                <h4>ELITE Centre</h4>
+                <span class="footer-col-title">ELITE Centre</span>
                 <p style="color: #2D2100; font-size: 0.9rem; line-height: 1.5; font-weight: 500;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
             </div>
+
+            <!-- Col 2: About Us (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Navigation</h4>
+                <span class="footer-col-title">About Us</span>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="missionandvision.html">About Us</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#facilities">Facilities</a></li>
+                    <li><a href="#">Who are we</a></li>
+                    <li><a href="#">Our mission</a></li>
+                    <li><a href="#">Partnership</a></li>
+                    <li><a href="#">People</a></li>
+                    <li><a href="#">Contact us</a></li>
                 </ul>
             </div>
+
+            <!-- Col 3: Products (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Products</h4>
+                <span class="footer-col-title">Products</span>
                 <ul>
-                    <li><a href="tellus.html">Tellus AI</a></li>
-                    <li><a href="academichat.html">AcademiChat AI</a></li>
-                    <li><a href="veriguide.html">VeriGuide</a></li>
+                    <li><a href="#">Tellus</a></li>
+                    <li><a href="#">AcademiChat <span class="badge-beta">Beta</span></a></li>
+                    <li><a href="#">VeriGuide</a></li>
                 </ul>
             </div>
+
+            <!-- Col 4: Services (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Contact Us</h4>
+                <span class="footer-col-title">Services</span>
+                <ul>
+                    <li><a href="#">e-Learning Consultation</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 5: Contact Us -->
+            <div class="footer-col">
+                <span class="footer-col-title">Contact Us</span>
                 <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">The Chinese University of Hong Kong<br>Shatin, N.T., Hong Kong</p>
             </div>
         </div>
