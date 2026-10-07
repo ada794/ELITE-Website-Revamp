@@ -8,14 +8,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-   <style>
+    <style>
         :root {
             /* Palette extracted directly from the ELITE Logo */
-            --elite-gold: #F5B000;       /* 'E' Gold */
-            --elite-green: #8AC43A;      /* 'L' Green */
-            --elite-purple: #4A2582;     /* 'I' Deep Purple */
-            --elite-cyan: #38B6FF;       /* 'T' Cyan Blue */
-            --elite-pink: #E61B6B;       /* 'E' Magenta Pink */
+            --elite-gold: #F5B000;          /* 'E' Gold */
+            --elite-green: #8AC43A;         /* 'L' Green */
+            --elite-purple-bright: #6366F1; /* Brighter Violet-Purple Accent */
+            --elite-purple-dark: #4F46E5;   /* Readable Bright Purple for Titles */
+            --elite-cyan: #38B6FF;          /* 'T' Cyan Blue */
+            --elite-pink: #E61B6B;          /* 'E' Magenta Pink */
             
             --bg-body: #F8FAFC;
             --surface-white: #FFFFFF;
@@ -23,8 +24,8 @@
             --text-muted: #64748B;
             --border-light: #E2E8F0;
             
-            --shadow-sm: 0 4px 12px rgba(74, 37, 130, 0.05);
-            --shadow-md: 0 12px 30px rgba(74, 37, 130, 0.1);
+            --shadow-sm: 0 4px 12px rgba(99, 102, 241, 0.08);
+            --shadow-md: 0 12px 30px rgba(99, 102, 241, 0.15);
             --transition: all 0.25s ease;
         }
 
@@ -41,6 +42,13 @@
             line-height: 1.6;
         }
 
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
         /* --- Header & Top Navigation Banner --- */
         header {
             background: var(--surface-white);
@@ -50,7 +58,6 @@
             z-index: 1000;
         }
 
-        /* Header Gold Accent Line */
         .header-gold-bar {
             height: 5px;
             background: var(--elite-gold);
@@ -78,7 +85,7 @@
         }
         .logo-e1 { color: var(--elite-gold); }
         .logo-l  { color: var(--elite-green); }
-        .logo-i  { color: var(--elite-purple); }
+        .logo-i  { color: var(--elite-purple-bright); }
         .logo-t  { color: var(--elite-cyan); }
         .logo-e2 { color: var(--elite-pink); }
 
@@ -116,48 +123,22 @@
             border-bottom: 3px solid transparent;
         }
 
-        /* Home Link: Stays black without color hover change */
-        .nav-item.nav-home:hover > .nav-link {
-            color: var(--text-main);
-            border-bottom-color: transparent;
-        }
+        /* Dynamic Logo-Colored Navigation Hover States */
+        .nav-item.nav-home:hover > .nav-link { color: #D99B00; border-bottom-color: var(--elite-gold); }
         
-        /* 5 Logo Colors Starting from About Us */
-        /* Item 1: About (Gold) */
-        .nav-item.nav-about:hover > .nav-link {
-            color: #D99B00;
-            border-bottom-color: var(--elite-gold);
-        }
-        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-gold); }
-        .nav-item.nav-about .dropdown-item a:hover { background-color: #FFFBEB; color: #D99B00; }
+        .nav-item.nav-about:hover > .nav-link { color: var(--elite-green); border-bottom-color: var(--elite-green); }
+        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-green); }
+        .nav-item.nav-about .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
 
-        /* Item 2: Products (Green) */
-        .nav-item.nav-products:hover > .nav-link {
-            color: var(--elite-green);
-            border-bottom-color: var(--elite-green);
-        }
-        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-green); }
-        .nav-item.nav-products .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
+        .nav-item.nav-products:hover > .nav-link { color: var(--elite-purple-bright); border-bottom-color: var(--elite-purple-bright); }
+        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-purple-bright); }
+        .nav-item.nav-products .dropdown-item a:hover { background-color: #EEF2FF; color: var(--elite-purple-dark); }
 
-        /* Item 3: Projects (Purple - Direct Link) */
-        .nav-item.nav-projects:hover > .nav-link {
-            color: var(--elite-purple);
-            border-bottom-color: var(--elite-purple);
-        }
-
-        /* Item 4: Services (Cyan) */
-        .nav-item.nav-services:hover > .nav-link {
-            color: #0088CC;
-            border-bottom-color: var(--elite-cyan);
-        }
+        .nav-item.nav-services:hover > .nav-link { color: #0088CC; border-bottom-color: var(--elite-cyan); }
         .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
         .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
 
-        /* Item 5: Facilities (Pink) */
-        .nav-item.nav-facility:hover > .nav-link {
-            color: var(--elite-pink);
-            border-bottom-color: var(--elite-pink);
-        }
+        .nav-item.nav-facility:hover > .nav-link { color: var(--elite-pink); border-bottom-color: var(--elite-pink); }
         .nav-item.nav-facility .dropdown { border-top: 3px solid var(--elite-pink); }
         .nav-item.nav-facility .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
 
@@ -179,11 +160,7 @@
             border: 1px solid var(--border-light);
         }
 
-        .nav-item:hover .dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
+        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
 
         .dropdown-item a {
             padding: 12px 20px;
@@ -195,31 +172,6 @@
             font-size: 0.92rem;
             font-weight: 500;
             transition: var(--transition);
-        }
-
-        /* Badges */
-        .badge-beta { background: var(--elite-gold); color: #000; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; text-transform: uppercase; }
-
-        /* --- Sections Shared Styling --- */
-        section {
-            padding: 70px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.1rem;
-            color: var(--elite-purple);
-            margin-bottom: 8px;
-            font-weight: 800;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 45px;
-            font-size: 1.05rem;
         }
 
         /* AI Badges */
@@ -741,8 +693,8 @@
                     </ul>
                 </li>
 
-                <li class="nav-item nav-facilities">
-                    <a href="#" class="nav-link">facilities <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <li class="nav-item nav-facility">
+                    <a href="#" class="nav-link">Facility <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
                         <li class="dropdown-item"><a href="#">Professional Studios</a></li>
                         <li class="dropdown-item"><a href="#">Multi-Purpose Open Area</a></li>
@@ -949,7 +901,7 @@
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Products</a></li>
                     <li><a href="#">Services</a></li>
-                    <li><a href="#">facilities</a></li>
+                    <li><a href="#">Facility</a></li>
                 </ul>
             </div>
             <div class="footer-col">
