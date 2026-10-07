@@ -147,7 +147,7 @@
         .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
         .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
 
-        .nav-item.nav-facility:hover > .nav-link {
+        .nav-item.nav-facilities:hover > .nav-link {
             color: var(--elite-pink);
             border-bottom-color: var(--elite-pink);
         }
@@ -528,13 +528,13 @@
         }
 
         /* --- 5. Facilities Showcase Section --- */
-        .facility-grid {
+        .facilities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 30px;
         }
 
-        .facility-card {
+        .facilities-card {
             background: var(--surface-white);
             border-radius: 16px;
             overflow: hidden;
@@ -543,11 +543,11 @@
             transition: var(--transition);
         }
 
-        .facility-card:hover {
+        .facilities-card:hover {
             box-shadow: var(--shadow-md);
         }
 
-        .facility-img {
+        .facilities-img {
             height: 210px;
             background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
             display: flex;
@@ -558,7 +558,7 @@
             font-size: 1.1rem;
         }
 
-        .facility-content {
+        .facilities-content {
             padding: 28px;
         }
 
@@ -674,7 +674,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item nav-facility">
+                <li class="nav-item nav-facilities">
                     <a href="#" class="nav-link">Facilities <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
                         <li class="dropdown-item"><a href="studio.html">Professional Studios</a></li>
@@ -821,26 +821,80 @@
         </section>
 
         <!-- 5. Facilities Showcase Section -->
-        <section id="facility">
+        <section id="facilities">
             <h2 class="section-title">Facilities Showcase</h2>
             <p class="section-subtitle">Explore our state-of-the-art media production studios and open areas</p>
 
-            <div class="facility-grid">
-                <div class="facility-card">
-                    <div class="facility-img"><i class="fa-solid fa-camera-retro fa-xl"></i> &nbsp; Professional Studio Preview</div>
-                    <div class="facility-content">
+            <div class="facilities-grid">
+                <div class="facilities-card">
+                    <div class="facilities-img"><i class="fa-solid fa-camera-retro fa-xl"></i> &nbsp; Professional Studio Preview</div>
+                    <div class="facilities-content">
                         <h3 style="font-weight:700;">Professional Studios</h3>
                         <p style="color: var(--text-muted); font-size: 0.92rem; margin: 10px 0 18px 0;">High-grade audio-visual recording spaces equipped with Lightboard technology for MOOC and online course creation.</p>
                         <a href="studio.html" class="btn-outline-gold" style="display:inline-block; font-size:0.85rem;">Learn & Book Studio</a>
                     </div>
                 </div>
 
-                <div class="facility-card">
-                    <div class="facility-img"><i class="fa-solid fa-users fa-xl"></i> &nbsp; Open Area Preview</div>
-                    <div class="facility-content">
+                <div class="facilities-card">
+                    <div class="facilities-img"><i class="fa-solid fa-users fa-xl"></i> &nbsp; Open Area Preview</div>
+                    <div class="facilities-content">
                         <h3 style="font-weight:700;">Multi-Purpose Open Area</h3>
                         <p style="color: var(--text-muted); font-size: 0.92rem; margin: 10px 0 18px 0;">Flexible physical space designed for interactive workshops, AI project demonstrations, and academic collaborations.</p>
                         <a href="openarea.html" class="btn-outline-gold" style="display:inline-block; font-size:0.85rem;">Explore Open Space</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 6. Testimonials Showcase Section -->
+        <section class="testimonials-section">
+            <h2 class="section-title">What CUHK Faculty & Students Say</h2>
+            <p class="section-subtitle">Empowering teaching innovation across departments and disciplines</p>
+
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-right quote-icon"></i>
+                    <p class="testimonial-text">
+                        "Collaborating with the ELITE team transformed our business communication curriculum. Integrating the Tellus AI interview tool gave over 600 students realistic practice and actionable automated feedback."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AC</div>
+                        <div class="author-info">
+                            <h4>Prof. Alex CHAN</h4>
+                            <p>Department of Management, CUHK</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-right quote-icon"></i>
+                    <p class="testimonial-text">
+                        "AcademiChat solved a major bottleneck in our large foundation biology lectures. Having a domain-grounded AI tutor available 24/7 meant students got immediate support without sacrificing academic rigor."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="color: var(--elite-cyan);">MZ</div>
+                        <div class="author-info">
+                            <h4>Prof. Michael ZHANG</h4>
+                            <p>School of Life Sciences, CUHK</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-right quote-icon"></i>
+                    <p class="testimonial-text">
+                        "The studio facilities and technical consultation provided by ELITE enabled us to seamlessly record high-production-value XR courseware. Their team makes complex EdTech accessible to teachers."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="color: var(--elite-pink);">HC</div>
+                        <div class="author-info">
+                            <h4>Dr. Helen CHENG</h4>
+                            <p>Faculty of Arts, CUHK</p>
+                        </div>
                     </div>
                 </div>
             </div>
