@@ -10,13 +10,13 @@
     
     <style>
         :root {
-            /* Branding Color Palette */
-            --brand-gold: #F5B000;          
-            --brand-green: #8AC43A;         
-            --brand-purple-bright: #6366F1; 
-            --brand-purple-dark: #4F46E5;   
-            --brand-cyan: #38B6FF;          
-            --brand-pink: #E61B6B;          
+            /* Palette extracted directly from the ELITE Logo */
+            --elite-gold: #F5B000;          /* 'E' Gold */
+            --elite-green: #8AC43A;         /* 'L' Green */
+            --elite-purple-bright: #6366F1; /* Brighter Violet-Purple Accent */
+            --elite-purple-dark: #4A2582;   /* Primary Dark Royal Purple */
+            --elite-cyan: #38B6FF;          /* 'T' Cyan Blue */
+            --elite-pink: #E61B6B;          /* 'E' Magenta Pink */
             
             --bg-body: #F8FAFC;
             --surface-white: #FFFFFF;
@@ -24,8 +24,8 @@
             --text-muted: #64748B;
             --border-light: #E2E8F0;
             
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 12px 30px rgba(79, 70, 229, 0.12);
+            --shadow-sm: 0 4px 12px rgba(74, 37, 130, 0.05);
+            --shadow-md: 0 12px 30px rgba(74, 37, 130, 0.15);
             --transition: all 0.25s ease;
         }
 
@@ -48,7 +48,7 @@
             padding: 0 20px;
         }
 
-        /* --- Navigation Bar --- */
+        /* --- Header & Top Navigation Banner --- */
         header {
             background: var(--surface-white);
             box-shadow: 0 2px 15px rgba(0,0,0,0.05);
@@ -57,9 +57,9 @@
             z-index: 1000;
         }
 
-        .header-top-bar {
+        .header-gold-bar {
             height: 5px;
-            background: var(--brand-gold);
+            background: var(--elite-gold);
             width: 100%;
         }
 
@@ -73,24 +73,29 @@
             height: 75px;
         }
 
+        /* Logo Text Colors Matching Logo Spectrum */
         .logo-text {
             font-size: 1.8rem;
             font-weight: 800;
             text-decoration: none;
-            color: var(--brand-purple-dark);
-            letter-spacing: -0.5px;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 10px;
         }
+        .logo-e1 { color: var(--elite-gold); }
+        .logo-l  { color: var(--elite-green); }
+        .logo-i  { color: var(--elite-purple-dark); }
+        .logo-t  { color: var(--elite-cyan); }
+        .logo-e2 { color: var(--elite-pink); }
 
-        .logo-badge {
+        .logo-sub {
             font-size: 0.75rem;
             background: #FFFBEB;
-            color: var(--brand-gold);
-            border: 1px solid var(--brand-gold);
+            color: var(--elite-gold);
+            border: 1px solid var(--elite-gold);
             padding: 2px 8px;
             border-radius: 6px;
+            margin-left: 10px;
             font-weight: 700;
         }
 
@@ -100,7 +105,9 @@
             gap: 8px;
         }
 
-        .nav-item { position: relative; }
+        .nav-item {
+            position: relative;
+        }
 
         .nav-link {
             text-decoration: none;
@@ -115,72 +122,52 @@
             border-bottom: 3px solid transparent;
         }
 
-        /* Section Specific ELITE Branding Colors */
-        /* 1. Home - Gold */
+        /* Home Link: Stays black without color hover change */
         .nav-item.nav-home:hover > .nav-link {
-            color: var(--brand-gold);
-            border-bottom-color: var(--brand-gold);
-        }
-        .nav-item.nav-home .dropdown {
-            border-top: 3px solid var(--brand-gold);
-        }
-        .nav-item.nav-home .dropdown-item a:hover {
-            background-color: #FFFBEB;
-            color: var(--brand-gold);
+            color: var(--text-main);
+            border-bottom-color: transparent;
         }
 
-        /* 2. About - Green */
+        /* 5 Logo Colors Starting from About Us */
+        /* Item 1: About (Gold) */
         .nav-item.nav-about:hover > .nav-link {
-            color: var(--brand-green);
-            border-bottom-color: var(--brand-green);
+            color: #D99B00;
+            border-bottom-color: var(--elite-gold);
         }
-        .nav-item.nav-about .dropdown {
-            border-top: 3px solid var(--brand-green);
-        }
-        .nav-item.nav-about .dropdown-item a:hover {
-            background-color: #F0FDF4;
-            color: var(--brand-green);
-        }
+        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-gold); }
+        .nav-item.nav-about .dropdown-item a:hover { background-color: #FFFBEB; color: #D99B00; }
 
-        /* 3. Products - Purple */
+        /* Item 2: Products (Green) */
         .nav-item.nav-products:hover > .nav-link {
-            color: var(--brand-purple-bright);
-            border-bottom-color: var(--brand-purple-bright);
+            color: var(--elite-green);
+            border-bottom-color: var(--elite-green);
         }
-        .nav-item.nav-products .dropdown {
-            border-top: 3px solid var(--brand-purple-bright);
-        }
-        .nav-item.nav-products .dropdown-item a:hover {
-            background-color: #EEF2FF;
-            color: var(--brand-purple-bright);
+        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-green); }
+        .nav-item.nav-products .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
+
+        /* Item 3: Projects (Purple - Direct Link) */
+        .nav-item.nav-projects:hover > .nav-link {
+            color: var(--elite-purple-dark);
+            border-bottom-color: var(--elite-purple-dark);
         }
 
-        /* 4. Services - Cyan */
+        /* Item 4: Services (Cyan) */
         .nav-item.nav-services:hover > .nav-link {
-            color: var(--brand-cyan);
-            border-bottom-color: var(--brand-cyan);
+            color: #0088CC;
+            border-bottom-color: var(--elite-cyan);
         }
-        .nav-item.nav-services .dropdown {
-            border-top: 3px solid var(--brand-cyan);
-        }
-        .nav-item.nav-services .dropdown-item a:hover {
-            background-color: #F0F9FF;
-            color: var(--brand-cyan);
-        }
+        .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
+        .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
 
-        /* 5. facilities - Pink */
-        .nav-item.nav-facilities:hover > .nav-link {
-            color: var(--brand-pink);
-            border-bottom-color: var(--brand-pink);
+        /* Item 5: Facilities (Pink) */
+        .nav-item.nav-facility:hover > .nav-link {
+            color: var(--elite-pink);
+            border-bottom-color: var(--elite-pink);
         }
-        .nav-item.nav-facilities .dropdown {
-            border-top: 3px solid var(--brand-pink);
-        }
-        .nav-item.nav-facilities .dropdown-item a:hover {
-            background-color: #FDF2F8;
-            color: var(--brand-pink);
-        }
+        .nav-item.nav-facility .dropdown { border-top: 3px solid var(--elite-pink); }
+        .nav-item.nav-facility .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
 
+        /* Dropdown Styling */
         .dropdown {
             position: absolute;
             top: 100%;
@@ -196,9 +183,23 @@
             transition: var(--transition);
             list-style: none;
             border: 1px solid var(--border-light);
+            z-index: 10000;
+            pointer-events: none;
         }
 
-        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        /* Hover Interaction */
+        .nav-item:hover .dropdown { 
+            opacity: 1 !important; 
+            visibility: visible !important; 
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+        }
+
+        .dropdown-item {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
 
         .dropdown-item a {
             padding: 12px 20px;
@@ -210,24 +211,21 @@
             font-size: 0.92rem;
             font-weight: 500;
             transition: var(--transition);
+            width: 100%;
         }
 
-        .ai-badge {
-            background: var(--brand-pink);
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 7px;
-            border-radius: 10px;
-            font-weight: 700;
-        }
+        /* Badges */
+        .badge-beta { background: var(--elite-gold); color: #000; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; text-transform: uppercase; }
 
         /* --- Hero Section --- */
         .page-hero {
-            background: linear-gradient(135deg, var(--brand-purple-dark) 0%, var(--brand-purple-bright) 60%, var(--brand-cyan) 100%);
+            background: linear-gradient(135deg, var(--elite-purple-dark) 0%, var(--elite-purple-bright) 60%, var(--elite-cyan) 100%);
             color: white;
             padding: 60px 20px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.15);
+            box-shadow: 0 15px 35px rgba(74, 37, 130, 0.15);
+            position: relative;
+            z-index: 1;
         }
 
         .hero-chip {
@@ -260,6 +258,8 @@
         /* --- Contact Layout Section --- */
         .contact-section {
             padding: 70px 0 90px 0;
+            position: relative;
+            z-index: 1;
         }
 
         .contact-grid {
@@ -303,7 +303,7 @@
             height: 44px;
             border-radius: 12px;
             background: #EEF2FF;
-            color: var(--brand-purple-dark);
+            color: var(--elite-purple-dark);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -329,7 +329,7 @@
         }
 
         .info-text a:hover {
-            color: var(--brand-purple-bright);
+            color: var(--elite-purple-bright);
             text-decoration: underline;
         }
 
@@ -392,7 +392,7 @@
 
         .form-input:focus, .form-textarea:focus, .form-select:focus {
             outline: none;
-            border-color: var(--brand-purple-bright);
+            border-color: var(--elite-purple-bright);
             background: #FFFFFF;
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
         }
@@ -404,7 +404,7 @@
 
         .submit-btn {
             width: 100%;
-            background: var(--brand-purple-dark);
+            background: var(--elite-purple-dark);
             color: white;
             border: none;
             padding: 14px 24px;
@@ -417,18 +417,20 @@
             justify-content: center;
             gap: 10px;
             transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+            box-shadow: 0 4px 12px rgba(74, 37, 130, 0.25);
         }
 
         .submit-btn:hover {
-            background: var(--brand-purple-bright);
+            background: var(--elite-purple-bright);
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
+            box-shadow: 0 6px 18px rgba(74, 37, 130, 0.35);
         }
 
         /* --- Map Banner --- */
         .map-section {
             padding-bottom: 80px;
+            position: relative;
+            z-index: 1;
         }
 
         .map-wrapper {
@@ -445,52 +447,62 @@
             border: 0;
         }
 
-        /* --- Footer --- */
+        /* --- Full Amber Gold Footer with 5-Color Rainbow Top Edge Bar --- */
         footer {
-            background: var(--brand-gold);
+            background: var(--elite-gold);
             color: #000000;
             padding: 60px 20px 25px 20px;
+            margin-top: 60px;
             position: relative;
+            z-index: 1;
         }
 
-        .footer-rainbow-bar {
+        .footer-rainbow-top-bar {
             position: absolute;
             top: 0;
             left: 0;
             height: 5px;
             width: 100%;
-            background: linear-gradient(to right, var(--brand-gold) 20%, var(--brand-green) 20% 40%, var(--brand-purple-bright) 40% 60%, var(--brand-cyan) 60% 80%, var(--brand-pink) 80%);
+            background: linear-gradient(to right, var(--elite-gold) 20%, var(--elite-green) 20% 40%, var(--elite-purple-dark) 40% 60%, var(--elite-cyan) 60% 80%, var(--elite-pink) 80%);
         }
 
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 35px;
             margin-bottom: 40px;
         }
 
-        .footer-col h4 {
+        /* Non-clickable Section Header Titles */
+        .footer-col-title {
             font-size: 1.1rem;
             margin-bottom: 18px;
-            color: var(--brand-purple-dark);
+            color: var(--elite-purple-dark);
             font-weight: 800;
+            display: block;
+            cursor: default;
+            user-select: none;
         }
 
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 10px; }
 
+        /* Clickable Dropdown Sub-links */
         .footer-col ul li a {
             color: #2D2100;
             text-decoration: none;
             transition: var(--transition);
             font-size: 0.92rem;
             font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .footer-col ul li a:hover {
-            color: var(--brand-purple-dark);
+            color: var(--elite-purple-dark);
             padding-left: 4px;
         }
 
@@ -504,6 +516,7 @@
         }
 
         @media (max-width: 900px) {
+            .nav-container { padding: 0 15px; }
             .contact-grid {
                 grid-template-columns: 1fr;
             }
@@ -512,38 +525,48 @@
 </head>
 <body>
 
-    <!-- Top Bar & Header Navigation -->
+    <!-- Header / Navigation Banner -->
     <header>
-        <div class="header-top-bar"></div>
+        <div class="header-gold-bar"></div>
         <div class="nav-container">
             <a href="index.html" class="logo-text">
-                ELITE <span class="logo-badge">CUHK</span>
+                <span class="logo-e1">E</span><span class="logo-l">L</span><span class="logo-i">I</span><span class="logo-t">T</span><span class="logo-e2">E</span>
+                <span class="logo-sub">CUHK</span>
             </a>
             
             <ul class="nav-menu">
+                <!-- Neutral Home Button -->
                 <li class="nav-item nav-home">
                     <a href="index.html" class="nav-link">Home</a>
                 </li>
                 
+                <!-- Color 1: About (Gold) -->
                 <li class="nav-item nav-about">
                     <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="index.html#vision-mission">Vision & Mission</a></li>
+                        <li class="dropdown-item"><a href="missionandvision.html">Mission and Vision</a></li>
+                        <li class="dropdown-item"><a href="our partner.html">Partnership</a></li>
                         <li class="dropdown-item"><a href="people.html">People</a></li>
-                        <li class="dropdown-item"><a href="partners.html">Our Partners</a></li>
-                        <li class="dropdown-item"><a href="contact.html">Contact us</a></li>
+                        <li class="dropdown-item"><a href="contact us.html">Contact us</a></li>
                     </ul>
                 </li>
 
+                <!-- Color 2: Products (Green) -->
                 <li class="nav-item nav-products">
                     <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="tellus.html">Tellus <span class="ai-badge">AI</span></a></li>
-                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="ai-badge">AI</span></a></li>
-                        <li class="dropdown-item"><a href="veriguide.html">VeriGuide</a></li>
+                        <li class="dropdown-item"><a href="tellus.html">Tellus</a></li>
+                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="badge-beta">Beta</span></a></li>
+                        <li class="dropdown-item"><a href="#">VeriGuide</a></li>
                     </ul>
                 </li>
 
+                <!-- Color 3: Projects (Purple - Direct Link, No Dropdown) -->
+                <li class="nav-item nav-projects">
+                    <a href="projects.html" class="nav-link">Projects</a>
+                </li>
+
+                <!-- Color 4: Services (Cyan) -->
                 <li class="nav-item nav-services">
                     <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
@@ -551,11 +574,12 @@
                     </ul>
                 </li>
 
-                <li class="nav-item nav-facilities">
-                    <a href="#" class="nav-link">facilities <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <!-- Color 5: Facilities (Pink) -->
+                <li class="nav-item nav-facility">
+                    <a href="#" class="nav-link">Facilities <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="#">Professional Studios</a></li>
-                        <li class="dropdown-item"><a href="#">Multi-Purpose Open Area</a></li>
+                        <li class="dropdown-item"><a href="studio.html">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="openarea.html">Multi-Purpose Open Area</a></li>
                     </ul>
                 </li>
             </ul>
@@ -661,7 +685,7 @@
                                     <option value="" disabled selected>Select a subject...</option>
                                     <option value="general">General Inquiry</option>
                                     <option value="elearning">e-Learning Consultation & MMCD</option>
-                                    <option value="studios">Studio & facilities Booking</option>
+                                    <option value="studios">Studio & Facility Booking</option>
                                     <option value="products">Products (Tellus / AcademiChat / VeriGuide)</option>
                                     <option value="other">Other Inquiry</option>
                                 </select>
@@ -697,45 +721,53 @@
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer with 5-Color Rainbow Top Edge Bar -->
     <footer>
-        <div class="footer-rainbow-bar"></div>
+        <div class="footer-rainbow-top-bar"></div>
         <div class="footer-container">
+            <!-- Col 1: ELITE Centre Info -->
             <div class="footer-col">
-                <h4>Centre Information</h4>
-                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
-                    Promoting AI-enhanced learning, courseware development, and educational technology innovation at CUHK.
-                </p>
+                <span class="footer-col-title">ELITE Centre</span>
+                <p style="color: #2D2100; font-size: 0.9rem; line-height: 1.5; font-weight: 500;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
             </div>
+
+            <!-- Col 2: About Us (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Navigation</h4>
+                <span class="footer-col-title">About Us</span>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#vision-mission">Vision & Mission</a></li>
+                    <li><a href="missionandvision.html">Mission and Vision</a></li>
+                    <li><a href="our partner.html">Partnership</a></li>
                     <li><a href="people.html">People</a></li>
-                    <li><a href="partners.html">Our Partners</a></li>
+                    <li><a href="contact us.html">Contact us</a></li>
                 </ul>
             </div>
+
+            <!-- Col 3: Products (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Products</h4>
+                <span class="footer-col-title">Products</span>
                 <ul>
-                    <li><a href="tellus.html">Tellus AI</a></li>
-                    <li><a href="academichat.html">AcademiChat AI</a></li>
-                    <li><a href="veriguide.html">VeriGuide</a></li>
+                    <li><a href="tellus.html">Tellus</a></li>
+                    <li><a href="academichat.html">AcademiChat <span class="badge-beta">Beta</span></a></li>
+                    <li><a href="#">VeriGuide</a></li>
                 </ul>
             </div>
+
+            <!-- Col 4: Services (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Contact Us</h4>
-                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
-                    6/F, Hui Yeung Shing Building<br>
-                    The Chinese University of Hong Kong<br>
-                    Shatin, N.T., Hong Kong<br><br>
-                    Email: elite-centre@cuhk.edu.hk
-                </p>
+                <span class="footer-col-title">Services</span>
+                <ul>
+                    <li><a href="#">e-Learning Consultation</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 5: Contact Us -->
+            <div class="footer-col">
+                <span class="footer-col-title">Contact Us</span>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">The Chinese University of Hong Kong<br>Shatin, N.T., Hong Kong</p>
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; 2026 The Chinese University of Hong Kong. All Rights Reserved. | <a href="#" style="color: #3D2D00;">Privacy</a> | <a href="#" style="color: #3D2D00;">Disclaimer</a>
+            &copy; 2026 Centre for e-Learning Innovation and Technology Enhancement (ELITE), CUHK. All Rights Reserved.
         </div>
     </footer>
 
