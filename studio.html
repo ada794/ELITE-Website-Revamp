@@ -10,14 +10,18 @@
     
     <style>
         :root {
-            /* Vibrant Brand Rainbow Palette */
-            --brand-gold: #FFC000;          
-            --brand-green: #8AC43A;         
+            /* Palette extracted directly from the ELITE Logo */
+            --elite-gold: #F5B000;          /* 'E' Gold */
+            --elite-green: #8AC43A;         /* 'L' Green */
+            --elite-purple-bright: #6366F1; /* Brighter Violet-Purple Accent */
+            --elite-purple-dark: #4A2582;   /* Primary Dark Royal Purple */
+            --elite-cyan: #38B6FF;          /* 'T' Cyan Blue */
+            --elite-pink: #E61B6B;          /* 'E' Magenta Pink */
+
+            /* Studio Section Colors */
             --brand-blue-primary: #0099FF;  
             --brand-blue-dark: #0066CC;     
             --brand-blue-light: #F0F9FF;    
-            --brand-cyan: #00E5FF;          
-            --brand-pink: #E61B6B;          
             
             --bg-body: #FFFFFF;
             --surface-white: #FFFFFF;
@@ -25,8 +29,8 @@
             --text-muted: #526075;
             --border-light: #E0EEF9;
             
-            --shadow-sm: 0 4px 15px rgba(0, 153, 255, 0.06);
-            --shadow-md: 0 12px 35px rgba(0, 153, 255, 0.16);
+            --shadow-sm: 0 4px 12px rgba(74, 37, 130, 0.05);
+            --shadow-md: 0 12px 30px rgba(74, 37, 130, 0.15);
             --transition: all 0.25s ease;
         }
 
@@ -49,19 +53,19 @@
             padding: 0 20px;
         }
 
-        /* --- Header & Brand-Colored Navigation --- */
+        /* --- Header & Top Navigation Banner --- */
         header {
             background: var(--surface-white);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .header-rainbow-bar {
+        .header-gold-bar {
             height: 5px;
+            background: var(--elite-gold);
             width: 100%;
-            background: linear-gradient(to right, var(--brand-gold) 20%, var(--brand-green) 20% 40%, var(--brand-blue-primary) 40% 60%, var(--brand-cyan) 60% 80%, var(--brand-pink) 80%);
         }
 
         .nav-container {
@@ -74,24 +78,29 @@
             height: 75px;
         }
 
+        /* Logo Text Colors Matching Logo Spectrum */
         .logo-text {
             font-size: 1.8rem;
             font-weight: 800;
             text-decoration: none;
-            color: var(--brand-blue-dark);
-            letter-spacing: -0.5px;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 10px;
         }
+        .logo-e1 { color: var(--elite-gold); }
+        .logo-l  { color: var(--elite-green); }
+        .logo-i  { color: var(--elite-purple-dark); }
+        .logo-t  { color: var(--elite-cyan); }
+        .logo-e2 { color: var(--elite-pink); }
 
         .logo-sub {
             font-size: 0.75rem;
             background: #FFFBEB;
-            color: var(--brand-gold);
-            border: 1px solid var(--brand-gold);
+            color: var(--elite-gold);
+            border: 1px solid var(--elite-gold);
             padding: 2px 8px;
             border-radius: 6px;
+            margin-left: 10px;
             font-weight: 700;
         }
 
@@ -101,7 +110,9 @@
             gap: 8px;
         }
 
-        .nav-item { position: relative; }
+        .nav-item {
+            position: relative;
+        }
 
         .nav-link {
             text-decoration: none;
@@ -116,45 +127,59 @@
             border-bottom: 3px solid transparent;
         }
 
-        /* Section Specific Brand Colors for Nav Links */
-        .nav-item.nav-gold:hover > .nav-link, 
-        .nav-item.nav-gold .nav-link.active {
-            color: #D97706;
-            border-bottom-color: var(--brand-gold);
+        /* Home Link: Stays black without color hover change */
+        .nav-item.nav-home:hover > .nav-link {
+            color: var(--text-main);
+            border-bottom-color: transparent;
         }
 
-        .nav-item.nav-green:hover > .nav-link, 
-        .nav-item.nav-green .nav-link.active {
-            color: #65A30D;
-            border-bottom-color: var(--brand-green);
+        /* 5 Logo Colors Starting from About Us */
+        /* Item 1: About (Gold) */
+        .nav-item.nav-about:hover > .nav-link {
+            color: #D99B00;
+            border-bottom-color: var(--elite-gold);
+        }
+        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-gold); }
+        .nav-item.nav-about .dropdown-item a:hover { background-color: #FFFBEB; color: #D99B00; }
+
+        /* Item 2: Products (Green) */
+        .nav-item.nav-products:hover > .nav-link {
+            color: var(--elite-green);
+            border-bottom-color: var(--elite-green);
+        }
+        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-green); }
+        .nav-item.nav-products .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
+
+        /* Item 3: Projects (Purple - Direct Link) */
+        .nav-item.nav-projects:hover > .nav-link {
+            color: var(--elite-purple-dark);
+            border-bottom-color: var(--elite-purple-dark);
         }
 
-        .nav-item.nav-blue:hover > .nav-link, 
-        .nav-item.nav-blue .nav-link.active {
-            color: var(--brand-blue-primary);
-            border-bottom-color: var(--brand-blue-primary);
+        /* Item 4: Services (Cyan) */
+        .nav-item.nav-services:hover > .nav-link {
+            color: #0088CC;
+            border-bottom-color: var(--elite-cyan);
         }
+        .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
+        .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
 
-        .nav-item.nav-cyan:hover > .nav-link, 
-        .nav-item.nav-cyan .nav-link.active {
-            color: #00B4D8;
-            border-bottom-color: var(--brand-cyan);
+        /* Item 5: Facilities (Pink) */
+        .nav-item.nav-facility:hover > .nav-link {
+            color: var(--elite-pink);
+            border-bottom-color: var(--elite-pink);
         }
+        .nav-item.nav-facility .dropdown { border-top: 3px solid var(--elite-pink); }
+        .nav-item.nav-facility .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
 
-        .nav-item.nav-pink:hover > .nav-link, 
-        .nav-item.nav-pink .nav-link.active {
-            color: var(--brand-pink);
-            border-bottom-color: var(--brand-pink);
-        }
-
-        /* Section Specific Dropdowns */
+        /* Dropdown Styling */
         .dropdown {
             position: absolute;
             top: 100%;
             left: 0;
-            width: 240px;
+            width: 230px;
             background: var(--surface-white);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-md);
             border-radius: 12px;
             padding: 10px 0;
             opacity: 0;
@@ -163,15 +188,23 @@
             transition: var(--transition);
             list-style: none;
             border: 1px solid var(--border-light);
+            z-index: 10000;
+            pointer-events: none;
         }
 
-        .nav-gold .dropdown { border-top: 3px solid var(--brand-gold); }
-        .nav-green .dropdown { border-top: 3px solid var(--brand-green); }
-        .nav-blue .dropdown { border-top: 3px solid var(--brand-blue-primary); }
-        .nav-cyan .dropdown { border-top: 3px solid var(--brand-cyan); }
-        .nav-pink .dropdown { border-top: 3px solid var(--brand-pink); }
+        /* Hover Interaction */
+        .nav-item:hover .dropdown { 
+            opacity: 1 !important; 
+            visibility: visible !important; 
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+        }
 
-        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-item {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
 
         .dropdown-item a {
             padding: 12px 20px;
@@ -183,22 +216,11 @@
             font-size: 0.92rem;
             font-weight: 500;
             transition: var(--transition);
+            width: 100%;
         }
 
-        .nav-gold .dropdown-item a:hover { background-color: #FFFBEB; color: #D97706; }
-        .nav-green .dropdown-item a:hover { background-color: #F7FEE7; color: #65A30D; }
-        .nav-blue .dropdown-item a:hover { background-color: #F0F9FF; color: var(--brand-blue-primary); }
-        .nav-cyan .dropdown-item a:hover { background-color: #ECFEFF; color: #00B4D8; }
-        .nav-pink .dropdown-item a:hover { background-color: #FDF2F8; color: var(--brand-pink); }
-
-        .ai-badge-blue {
-            background: var(--brand-blue-light);
-            color: var(--brand-blue-primary);
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 800;
-        }
+        /* Badges */
+        .badge-beta { background: var(--elite-gold); color: #000; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; text-transform: uppercase; }
 
         /* --- Hero Section --- */
         .hero {
@@ -207,6 +229,7 @@
             padding: 85px 20px;
             text-align: center;
             position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
@@ -245,6 +268,8 @@
         .facility-section {
             padding: 90px 0;
             border-bottom: 1px solid var(--border-light);
+            position: relative;
+            z-index: 1;
         }
 
         .facility-section:nth-child(even) {
@@ -410,6 +435,8 @@
             background: linear-gradient(135deg, #0099FF 0%, #0052D4 100%);
             color: white;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-container {
@@ -450,53 +477,63 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
 
-        /* --- Footer --- */
+        /* --- Full Amber Gold Footer with 5-Color Rainbow Top Edge Bar --- */
         footer {
-            background: var(--brand-gold);
+            background: var(--elite-gold);
             color: #000000;
-            padding: 65px 20px 25px 20px;
+            padding: 60px 20px 25px 20px;
+            margin-top: 60px;
             position: relative;
+            z-index: 1;
         }
 
-        .footer-rainbow-bar {
+        .footer-rainbow-top-bar {
             position: absolute;
             top: 0;
             left: 0;
             height: 5px;
             width: 100%;
-            background: linear-gradient(to right, var(--brand-gold) 20%, var(--brand-green) 20% 40%, var(--brand-blue-primary) 40% 60%, var(--brand-cyan) 60% 80%, var(--brand-pink) 80%);
+            background: linear-gradient(to right, var(--elite-gold) 20%, var(--elite-green) 20% 40%, var(--elite-purple-dark) 40% 60%, var(--elite-cyan) 60% 80%, var(--elite-pink) 80%);
         }
 
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 35px;
             margin-bottom: 40px;
         }
 
-        .footer-col h4 {
-            font-size: 1.15rem;
+        /* Non-clickable Section Header Titles */
+        .footer-col-title {
+            font-size: 1.1rem;
             margin-bottom: 18px;
-            color: var(--brand-blue-dark);
+            color: var(--elite-purple-dark);
             font-weight: 800;
+            display: block;
+            cursor: default;
+            user-select: none;
         }
 
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 10px; }
 
+        /* Clickable Dropdown Sub-links */
         .footer-col ul li a {
             color: #2D2100;
             text-decoration: none;
             transition: var(--transition);
-            font-size: 0.94rem;
+            font-size: 0.92rem;
             font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .footer-col ul li a:hover {
-            color: var(--brand-blue-dark);
-            padding-left: 5px;
+            color: var(--elite-purple-dark);
+            padding-left: 4px;
         }
 
         .footer-bottom {
@@ -504,11 +541,12 @@
             padding-top: 25px;
             border-top: 1px solid rgba(0, 0, 0, 0.15);
             color: #3D2D00;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 600;
         }
 
         @media (max-width: 900px) {
+            .nav-container { padding: 0 15px; }
             .facility-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 2.4rem; }
         }
@@ -516,54 +554,60 @@
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <!-- Header / Navigation Banner -->
     <header>
-        <div class="header-rainbow-bar"></div>
+        <div class="header-gold-bar"></div>
         <div class="nav-container">
             <a href="index.html" class="logo-text">
-                ELITE <span class="logo-sub">CUHK</span>
+                <span class="logo-e1">E</span><span class="logo-l">L</span><span class="logo-i">I</span><span class="logo-t">T</span><span class="logo-e2">E</span>
+                <span class="logo-sub">CUHK</span>
             </a>
             
             <ul class="nav-menu">
-                <!-- Home Section: Gold -->
-                <li class="nav-item nav-gold">
+                <!-- Neutral Home Button -->
+                <li class="nav-item nav-home">
                     <a href="index.html" class="nav-link">Home</a>
                 </li>
                 
-                <!-- About Section: Green -->
-                <li class="nav-item nav-green">
+                <!-- Color 1: About (Gold) -->
+                <li class="nav-item nav-about">
                     <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="index.html#vision-mission">Vision & Mission</a></li>
+                        <li class="dropdown-item"><a href="missionandvision.html">Mission and Vision</a></li>
+                        <li class="dropdown-item"><a href="our partner.html">Partnership</a></li>
                         <li class="dropdown-item"><a href="people.html">People</a></li>
-                        <li class="dropdown-item"><a href="partners.html">Our Partners</a></li>
-                        <li class="dropdown-item"><a href="contact.html">Contact us</a></li>
+                        <li class="dropdown-item"><a href="contact us.html">Contact us</a></li>
                     </ul>
                 </li>
 
-                <!-- Products Section: Blue -->
-                <li class="nav-item nav-blue">
+                <!-- Color 2: Products (Green) -->
+                <li class="nav-item nav-products">
                     <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="tellus.html">Tellus <span class="ai-badge-blue">AI</span></a></li>
-                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="ai-badge-blue">AI</span></a></li>
-                        <li class="dropdown-item"><a href="veriguide.html">VeriGuide</a></li>
+                        <li class="dropdown-item"><a href="tellus.html">Tellus</a></li>
+                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="badge-beta">Beta</span></a></li>
+                        <li class="dropdown-item"><a href="#">VeriGuide</a></li>
                     </ul>
                 </li>
 
-                <!-- Services Section: Cyan -->
-                <li class="nav-item nav-cyan">
+                <!-- Color 3: Projects (Purple - Direct Link, No Dropdown) -->
+                <li class="nav-item nav-projects">
+                    <a href="projects.html" class="nav-link">Projects</a>
+                </li>
+
+                <!-- Color 4: Services (Cyan) -->
+                <li class="nav-item nav-services">
                     <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
                         <li class="dropdown-item"><a href="#">e-Learning Consultation</a></li>
                     </ul>
                 </li>
 
-                <!-- Facility Section: Pink (Active) -->
-                <li class="nav-item nav-pink">
-                    <a href="#" class="nav-link active">Facility <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <!-- Color 5: Facilities (Pink) -->
+                <li class="nav-item nav-facility">
+                    <a href="#" class="nav-link">Facilities <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="studios.html">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="studio.html">Professional Studios</a></li>
                         <li class="dropdown-item"><a href="openarea.html">Multi-Purpose Open Area</a></li>
                     </ul>
                 </li>
@@ -583,154 +627,164 @@
         </div>
     </section>
 
-    <!-- Facility 1: Extended Reality (XR) & VR CAVE Studio -->
-    <section class="facility-section" id="xr-vr-studio">
-        <div class="container">
-            <div class="facility-grid">
-                <div>
-                    <span class="section-tag">Facility Room 1</span>
-                    <h2 class="section-title">Extended Reality (XR) & VR CAVE Studio</h2>
+    <main>
+        <!-- Facility 1: Extended Reality (XR) & VR CAVE Studio -->
+        <section class="facility-section" id="xr-vr-studio">
+            <div class="container">
+                <div class="facility-grid">
+                    <div>
+                        <span class="section-tag">Facility Room 1</span>
+                        <h2 class="section-title">Extended Reality (XR) & VR CAVE Studio</h2>
 
-                    <!-- Under Construction Warning -->
-                    <div class="construction-banner">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                        <div>
-                            <strong>Currently Under Construction</strong><br>
-                            This facility is undergoing setup. Reservation is temporarily unavailable.
+                        <!-- Under Construction Warning -->
+                        <div class="construction-banner">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <div>
+                                <strong>Currently Under Construction</strong><br>
+                                This facility is undergoing setup. Reservation is temporarily unavailable.
+                            </div>
                         </div>
+
+                        <p class="facility-desc">
+                            Our Virtual Studio is a cutting-edge facility that combines Virtual Production, Extended Reality (XR), and VR CAVE technologies to support the creation of high-quality, interactive, and immersive educational content.
+                        </p>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-circle-check"></i> High-resolution LED environment displaying real-time 3D scenes & virtual backgrounds</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Synchronized camera tracking & robotic camera system</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Active stereoscopic 3D, motion tracking, & surround sound audio</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Supports both individual and two-person co-teaching or interviews</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Seamless integration of slides, 3D graphics, and real-time visual media</li>
+                        </ul>
                     </div>
 
-                    <p class="facility-desc">
-                        Our Virtual Studio is a cutting-edge facility that combines Virtual Production, Extended Reality (XR), and VR CAVE technologies to support the creation of high-quality, interactive, and immersive educational content.
-                    </p>
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-circle-check"></i> High-resolution LED environment displaying real-time 3D scenes & virtual backgrounds</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Synchronized camera tracking & robotic camera system</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Active stereoscopic 3D, motion tracking, & surround sound audio</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Supports both individual and two-person co-teaching or interviews</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Seamless integration of slides, 3D graphics, and real-time visual media</li>
-                    </ul>
-                </div>
-
-                <div class="facility-card-visual">
-                    <!-- Photo Placeholder -->
-                    <div class="image-placeholder">
-                        <i class="fa-solid fa-image"></i>
-                        <span>XR / VR Studio Photo Space</span>
-                    </div>
-
-                    <div class="visual-header">
-                        <div class="visual-title">
-                            <i class="fa-solid fa-vr-cardboard" style="color: var(--brand-blue-primary);"></i> XR / VR CAVE Capabilities
+                    <div class="facility-card-visual">
+                        <!-- Photo Placeholder -->
+                        <div class="image-placeholder">
+                            <i class="fa-solid fa-image"></i>
+                            <span>XR / VR Studio Photo Space</span>
                         </div>
-                        <span style="font-size: 0.8rem; background: #FEF3C7; color: #92400E; padding: 4px 10px; border-radius: 20px; font-weight: 700;">Coming Soon</span>
-                    </div>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px;">
-                        Enables interactive visualization of complex 3D concepts and environments for simulation, education, training, and immersive digital content creation.
-                    </p>
-                    <div class="tech-pill-grid">
-                        <span class="tech-pill">Virtual Production</span>
-                        <span class="tech-pill">Real-Time Graphics</span>
-                        <span class="tech-pill">Motion Tracking</span>
-                        <span class="tech-pill">VR CAVE System</span>
-                        <span class="tech-pill">Co-Teaching Setup</span>
+
+                        <div class="visual-header">
+                            <div class="visual-title">
+                                <i class="fa-solid fa-vr-cardboard" style="color: var(--brand-blue-primary);"></i> XR / VR CAVE Capabilities
+                            </div>
+                            <span style="font-size: 0.8rem; background: #FEF3C7; color: #92400E; padding: 4px 10px; border-radius: 20px; font-weight: 700;">Coming Soon</span>
+                        </div>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px;">
+                            Enables interactive visualization of complex 3D concepts and environments for simulation, education, training, and immersive digital content creation.
+                        </p>
+                        <div class="tech-pill-grid">
+                            <span class="tech-pill">Virtual Production</span>
+                            <span class="tech-pill">Real-Time Graphics</span>
+                            <span class="tech-pill">Motion Tracking</span>
+                            <span class="tech-pill">VR CAVE System</span>
+                            <span class="tech-pill">Co-Teaching Setup</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Facility 2: Self-Recorded Studio -->
-    <section class="facility-section" id="self-recording-studio">
-        <div class="container">
-            <div class="facility-grid">
-                <div class="facility-card-visual">
-                    <!-- Photo Placeholder -->
-                    <div class="image-placeholder">
-                        <i class="fa-solid fa-image"></i>
-                        <span>Self-Recorded Studio Photo Space</span>
-                    </div>
-
-                    <div class="visual-header">
-                        <div class="visual-title">
-                            <i class="fa-solid fa-microphone-lines" style="color: var(--brand-blue-primary);"></i> Self-Service Recording
+        <!-- Facility 2: Self-Recorded Studio -->
+        <section class="facility-section" id="self-recording-studio">
+            <div class="container">
+                <div class="facility-grid">
+                    <div class="facility-card-visual">
+                        <!-- Photo Placeholder -->
+                        <div class="image-placeholder">
+                            <i class="fa-solid fa-image"></i>
+                            <span>Self-Recorded Studio Photo Space</span>
                         </div>
-                        <span style="font-size: 0.8rem; background: #E0F2FE; color: var(--brand-blue-dark); padding: 4px 10px; border-radius: 20px; font-weight: 700;">User-Friendly</span>
-                    </div>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px;">
-                        Designed for independence and ease of use, allowing teaching staff to walk in, record high-quality instructional content, and export seamlessly.
-                    </p>
-                    <div class="tech-pill-grid">
-                        <span class="tech-pill">One-Touch Start</span>
-                        <span class="tech-pill">Studio Lighting</span>
-                        <span class="tech-pill">Pro Audio Input</span>
-                        <span class="tech-pill">Automated Capture</span>
-                    </div>
-                </div>
 
-                <div>
-                    <span class="section-tag">Facility Room 2</span>
-                    <h2 class="section-title">Self-Recorded Studio</h2>
-                    <p class="facility-desc">
-                        A dedicated self-service recording room designed for instructors who wish to create lecture videos, online course materials, or micro-learning modules efficiently without needing full technical crew operation.
-                    </p>
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Automated studio control for effortless solo recording</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Professional acoustic isolation and high-definition audio capture</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Preset lighting setups for crystal-clear presenter visuals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Ideal for rapid course video production, podcasting, and micro-lectures</li>
-                    </ul>
+                        <div class="visual-header">
+                            <div class="visual-title">
+                                <i class="fa-solid fa-microphone-lines" style="color: var(--brand-blue-primary);"></i> Self-Service Recording
+                            </div>
+                            <span style="font-size: 0.8rem; background: #E0F2FE; color: var(--brand-blue-dark); padding: 4px 10px; border-radius: 20px; font-weight: 700;">User-Friendly</span>
+                        </div>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px;">
+                            Designed for independence and ease of use, allowing teaching staff to walk in, record high-quality instructional content, and export seamlessly.
+                        </p>
+                        <div class="tech-pill-grid">
+                            <span class="tech-pill">One-Touch Start</span>
+                            <span class="tech-pill">Studio Lighting</span>
+                            <span class="tech-pill">Pro Audio Input</span>
+                            <span class="tech-pill">Automated Capture</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="section-tag">Facility Room 2</span>
+                        <h2 class="section-title">Self-Recorded Studio</h2>
+                        <p class="facility-desc">
+                            A dedicated self-service recording room designed for instructors who wish to create lecture videos, online course materials, or micro-learning modules efficiently without needing full technical crew operation.
+                        </p>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-circle-check"></i> Automated studio control for effortless solo recording</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Professional acoustic isolation and high-definition audio capture</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Preset lighting setups for crystal-clear presenter visuals</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Ideal for rapid course video production, podcasting, and micro-lectures</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Booking CTA Banner -->
-    <section class="cta-section">
-        <div class="cta-container">
-            <h2>Book a Facility Session</h2>
-            <p>Interested in recording your course materials or utilizing our facilities? Get in touch with the ELITE team to reserve a studio space.</p>
-            <a href="contact.html" class="btn-cta">
-                Contact & Reservation <i class="fa-solid fa-arrow-right"></i>
-            </a>
-        </div>
-    </section>
+        <!-- Booking CTA Banner -->
+        <section class="cta-section">
+            <div class="cta-container">
+                <h2>Book a Facility Session</h2>
+                <p>Interested in recording your course materials or utilizing our facilities? Get in touch with the ELITE team to reserve a studio space.</p>
+                <a href="contact us.html" class="btn-cta">
+                    Contact & Reservation <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+    </main>
 
-    <!-- Footer -->
+    <!-- Footer with 5-Color Rainbow Top Edge Bar -->
     <footer>
-        <div class="footer-rainbow-bar"></div>
+        <div class="footer-rainbow-top-bar"></div>
         <div class="footer-container">
+            <!-- Col 1: ELITE Centre Info -->
             <div class="footer-col">
-                <h4>ELITE Centre</h4>
-                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
-                    Promoting AI-enhanced learning and educational technology innovation at CUHK.
-                </p>
+                <span class="footer-col-title">ELITE Centre</span>
+                <p style="color: #2D2100; font-size: 0.9rem; line-height: 1.5; font-weight: 500;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
             </div>
+
+            <!-- Col 2: About Us (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Navigation</h4>
+                <span class="footer-col-title">About Us</span>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#vision-mission">Vision & Mission</a></li>
+                    <li><a href="missionandvision.html">Mission and Vision</a></li>
+                    <li><a href="our partner.html">Partnership</a></li>
                     <li><a href="people.html">People</a></li>
-                    <li><a href="partners.html">Our Partners</a></li>
+                    <li><a href="contact us.html">Contact us</a></li>
                 </ul>
             </div>
+
+            <!-- Col 3: Products (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Products</h4>
+                <span class="footer-col-title">Products</span>
                 <ul>
-                    <li><a href="tellus.html">Tellus AI</a></li>
-                    <li><a href="academichat.html">AcademiChat AI</a></li>
-                    <li><a href="veriguide.html">VeriGuide</a></li>
+                    <li><a href="tellus.html">Tellus</a></li>
+                    <li><a href="academichat.html">AcademiChat <span class="badge-beta">Beta</span></a></li>
+                    <li><a href="#">VeriGuide</a></li>
                 </ul>
             </div>
+
+            <!-- Col 4: Services (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Contact Us</h4>
-                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
-                    6/F, Hui Yeung Shing Building<br>
-                    The Chinese University of Hong Kong<br>
-                    Shatin, N.T., Hong Kong<br><br>
-                    Email: elite-centre@cuhk.edu.hk
-                </p>
+                <span class="footer-col-title">Services</span>
+                <ul>
+                    <li><a href="#">e-Learning Consultation</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 5: Contact Us -->
+            <div class="footer-col">
+                <span class="footer-col-title">Contact Us</span>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">The Chinese University of Hong Kong<br>Shatin, N.T., Hong Kong</p>
             </div>
         </div>
         <div class="footer-bottom">
