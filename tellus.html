@@ -10,14 +10,18 @@
     
     <style>
         :root {
-            /* Vibrant Brand Rainbow Palette */
-            --brand-gold: #FFC000;          
-            --brand-green: #8AC43A;         
+            /* Palette extracted directly from the ELITE Logo */
+            --elite-gold: #F5B000;          /* 'E' Gold */
+            --elite-green: #8AC43A;         /* 'L' Green */
+            --elite-purple-bright: #6366F1; /* Brighter Violet-Purple Accent */
+            --elite-purple-dark: #4A2582;   /* Primary Dark Royal Purple */
+            --elite-cyan: #38B6FF;          /* 'T' Cyan Blue */
+            --elite-pink: #E61B6B;          /* 'E' Magenta Pink */
+
+            /* Product Accent Colors */
             --brand-blue-primary: #0099FF;  /* Electric Vibrant Blue */
             --brand-blue-dark: #0066CC;     /* Vivid Deep Blue Accent */
             --brand-blue-light: #F0F9FF;    /* Ultra Light Fresh Sky Blue */
-            --brand-cyan: #00E5FF;          /* Ultra Bright Neon Cyan */
-            --brand-pink: #E61B6B;          
             
             --bg-body: #FFFFFF;
             --surface-white: #FFFFFF;
@@ -25,8 +29,8 @@
             --text-muted: #526075;
             --border-light: #E0EEF9;
             
-            --shadow-sm: 0 4px 15px rgba(0, 153, 255, 0.06);
-            --shadow-md: 0 12px 35px rgba(0, 153, 255, 0.16);
+            --shadow-sm: 0 4px 12px rgba(74, 37, 130, 0.05);
+            --shadow-md: 0 12px 30px rgba(74, 37, 130, 0.15);
             --transition: all 0.25s ease;
         }
 
@@ -49,20 +53,19 @@
             padding: 0 20px;
         }
 
-        /* --- Header & Solid Golden Yellow Top Bar --- */
+        /* --- Header & Top Navigation Banner --- */
         header {
             background: var(--surface-white);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        /* Top Bar set exclusively to Golden Yellow */
-        .header-top-bar {
+        .header-gold-bar {
             height: 5px;
+            background: var(--elite-gold);
             width: 100%;
-            background-color: var(--brand-gold);
         }
 
         .nav-container {
@@ -75,24 +78,29 @@
             height: 75px;
         }
 
+        /* Logo Text Colors Matching Logo Spectrum */
         .logo-text {
             font-size: 1.8rem;
             font-weight: 800;
             text-decoration: none;
-            color: var(--brand-blue-dark);
-            letter-spacing: -0.5px;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 10px;
         }
+        .logo-e1 { color: var(--elite-gold); }
+        .logo-l  { color: var(--elite-green); }
+        .logo-i  { color: var(--elite-purple-dark); }
+        .logo-t  { color: var(--elite-cyan); }
+        .logo-e2 { color: var(--elite-pink); }
 
         .logo-sub {
             font-size: 0.75rem;
             background: #FFFBEB;
-            color: var(--brand-gold);
-            border: 1px solid var(--brand-gold);
+            color: var(--elite-gold);
+            border: 1px solid var(--elite-gold);
             padding: 2px 8px;
             border-radius: 6px;
+            margin-left: 10px;
             font-weight: 700;
         }
 
@@ -102,7 +110,9 @@
             gap: 8px;
         }
 
-        .nav-item { position: relative; }
+        .nav-item {
+            position: relative;
+        }
 
         .nav-link {
             text-decoration: none;
@@ -117,40 +127,59 @@
             border-bottom: 3px solid transparent;
         }
 
-        /* Brand Colors ONLY Implemented on Hover */
-        .nav-item.nav-gold:hover > .nav-link {
-            color: #D97706;
-            border-bottom-color: var(--brand-gold);
+        /* Home Link: Stays black without color hover change */
+        .nav-item.nav-home:hover > .nav-link {
+            color: var(--text-main);
+            border-bottom-color: transparent;
         }
 
-        .nav-item.nav-green:hover > .nav-link {
-            color: #65A30D;
-            border-bottom-color: var(--brand-green);
+        /* 5 Logo Colors Starting from About Us */
+        /* Item 1: About (Gold) */
+        .nav-item.nav-about:hover > .nav-link {
+            color: #D99B00;
+            border-bottom-color: var(--elite-gold);
+        }
+        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-gold); }
+        .nav-item.nav-about .dropdown-item a:hover { background-color: #FFFBEB; color: #D99B00; }
+
+        /* Item 2: Products (Green) */
+        .nav-item.nav-products:hover > .nav-link {
+            color: var(--elite-green);
+            border-bottom-color: var(--elite-green);
+        }
+        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-green); }
+        .nav-item.nav-products .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
+
+        /* Item 3: Projects (Purple - Direct Link) */
+        .nav-item.nav-projects:hover > .nav-link {
+            color: var(--elite-purple-dark);
+            border-bottom-color: var(--elite-purple-dark);
         }
 
-        .nav-item.nav-blue:hover > .nav-link {
-            color: var(--brand-blue-primary);
-            border-bottom-color: var(--brand-blue-primary);
+        /* Item 4: Services (Cyan) */
+        .nav-item.nav-services:hover > .nav-link {
+            color: #0088CC;
+            border-bottom-color: var(--elite-cyan);
         }
+        .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
+        .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
 
-        .nav-item.nav-cyan:hover > .nav-link {
-            color: #00B4D8;
-            border-bottom-color: var(--brand-cyan);
+        /* Item 5: Facilities (Pink) */
+        .nav-item.nav-facility:hover > .nav-link {
+            color: var(--elite-pink);
+            border-bottom-color: var(--elite-pink);
         }
+        .nav-item.nav-facility .dropdown { border-top: 3px solid var(--elite-pink); }
+        .nav-item.nav-facility .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
 
-        .nav-item.nav-pink:hover > .nav-link {
-            color: var(--brand-pink);
-            border-bottom-color: var(--brand-pink);
-        }
-
-        /* Dropdowns Header Accent Lines */
+        /* Dropdown Styling */
         .dropdown {
             position: absolute;
             top: 100%;
             left: 0;
-            width: 240px;
+            width: 230px;
             background: var(--surface-white);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-md);
             border-radius: 12px;
             padding: 10px 0;
             opacity: 0;
@@ -159,15 +188,23 @@
             transition: var(--transition);
             list-style: none;
             border: 1px solid var(--border-light);
+            z-index: 10000;
+            pointer-events: none;
         }
 
-        .nav-gold .dropdown { border-top: 3px solid var(--brand-gold); }
-        .nav-green .dropdown { border-top: 3px solid var(--brand-green); }
-        .nav-blue .dropdown { border-top: 3px solid var(--brand-blue-primary); }
-        .nav-cyan .dropdown { border-top: 3px solid var(--brand-cyan); }
-        .nav-pink .dropdown { border-top: 3px solid var(--brand-pink); }
+        /* Hover Interaction */
+        .nav-item:hover .dropdown { 
+            opacity: 1 !important; 
+            visibility: visible !important; 
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+        }
 
-        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-item {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
 
         .dropdown-item a {
             padding: 12px 20px;
@@ -179,22 +216,11 @@
             font-size: 0.92rem;
             font-weight: 500;
             transition: var(--transition);
+            width: 100%;
         }
 
-        .nav-gold .dropdown-item a:hover { background-color: #FFFBEB; color: #D97706; }
-        .nav-green .dropdown-item a:hover { background-color: #F7FEE7; color: #65A30D; }
-        .nav-blue .dropdown-item a:hover { background-color: #F0F9FF; color: var(--brand-blue-primary); }
-        .nav-cyan .dropdown-item a:hover { background-color: #ECFEFF; color: #00B4D8; }
-        .nav-pink .dropdown-item a:hover { background-color: #FDF2F8; color: var(--brand-pink); }
-
-        .ai-badge-blue {
-            background: var(--brand-blue-primary);
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 7px;
-            border-radius: 10px;
-            font-weight: 700;
-        }
+        /* Badges */
+        .badge-beta { background: var(--elite-gold); color: #000; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; text-transform: uppercase; }
 
         /* --- Hero Section --- */
         .hero {
@@ -203,6 +229,7 @@
             padding: 95px 20px;
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .hero::before {
@@ -359,6 +386,8 @@
         .features-section {
             padding: 95px 0;
             background: #FAFCFF;
+            position: relative;
+            z-index: 1;
         }
 
         .section-header {
@@ -435,6 +464,8 @@
         .workflow-section {
             padding: 95px 0;
             background: #FFFFFF;
+            position: relative;
+            z-index: 1;
         }
 
         .workflow-steps {
@@ -493,6 +524,7 @@
             color: white;
             text-align: center;
             position: relative;
+            z-index: 1;
         }
 
         .cta-container {
@@ -512,44 +544,63 @@
             margin-bottom: 35px;
         }
 
-        /* --- Footer --- */
+        /* --- Full Amber Gold Footer with 5-Color Rainbow Top Edge Bar --- */
         footer {
-            background: var(--brand-gold);
+            background: var(--elite-gold);
             color: #000000;
-            padding: 65px 20px 25px 20px;
+            padding: 60px 20px 25px 20px;
+            margin-top: 60px;
             position: relative;
+            z-index: 1;
+        }
+
+        .footer-rainbow-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 100%;
+            background: linear-gradient(to right, var(--elite-gold) 20%, var(--elite-green) 20% 40%, var(--elite-purple-dark) 40% 60%, var(--elite-cyan) 60% 80%, var(--elite-pink) 80%);
         }
 
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 35px;
             margin-bottom: 40px;
         }
 
-        .footer-col h4 {
-            font-size: 1.15rem;
+        /* Non-clickable Section Header Titles */
+        .footer-col-title {
+            font-size: 1.1rem;
             margin-bottom: 18px;
-            color: var(--brand-blue-dark);
+            color: var(--elite-purple-dark);
             font-weight: 800;
+            display: block;
+            cursor: default;
+            user-select: none;
         }
 
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 10px; }
 
+        /* Clickable Dropdown Sub-links */
         .footer-col ul li a {
             color: #2D2100;
             text-decoration: none;
             transition: var(--transition);
-            font-size: 0.94rem;
+            font-size: 0.92rem;
             font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .footer-col ul li a:hover {
-            color: var(--brand-blue-dark);
-            padding-left: 5px;
+            color: var(--elite-purple-dark);
+            padding-left: 4px;
         }
 
         .footer-bottom {
@@ -557,11 +608,12 @@
             padding-top: 25px;
             border-top: 1px solid rgba(0, 0, 0, 0.15);
             color: #3D2D00;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 600;
         }
 
         @media (max-width: 900px) {
+            .nav-container { padding: 0 15px; }
             .hero-container {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -577,53 +629,58 @@
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <!-- Header / Navigation Banner -->
     <header>
-        <!-- Golden Yellow Top Bar Line -->
-        <div class="header-top-bar"></div>
+        <div class="header-gold-bar"></div>
         <div class="nav-container">
             <a href="index.html" class="logo-text">
-                ELITE <span class="logo-sub">CUHK</span>
+                <span class="logo-e1">E</span><span class="logo-l">L</span><span class="logo-i">I</span><span class="logo-t">T</span><span class="logo-e2">E</span>
+                <span class="logo-sub">CUHK</span>
             </a>
             
             <ul class="nav-menu">
-                <!-- Home Section -->
-                <li class="nav-item nav-gold">
+                <!-- Neutral Home Button -->
+                <li class="nav-item nav-home">
                     <a href="index.html" class="nav-link">Home</a>
                 </li>
                 
-                <!-- About Section -->
-                <li class="nav-item nav-green">
+                <!-- Color 1: About (Gold) -->
+                <li class="nav-item nav-about">
                     <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="missionandvision.html">Vision & Mission</a></li>
+                        <li class="dropdown-item"><a href="missionandvision.html">Mission and Vision</a></li>
+                        <li class="dropdown-item"><a href="our partner.html">Partnership</a></li>
                         <li class="dropdown-item"><a href="people.html">People</a></li>
-                        <li class="dropdown-item"><a href="partners.html">Our Partners</a></li>
-                        <li class="dropdown-item"><a href="contact.html">Contact us</a></li>
+                        <li class="dropdown-item"><a href="contact us.html">Contact us</a></li>
                     </ul>
                 </li>
 
-                <!-- Products Section -->
-                <li class="nav-item nav-blue">
+                <!-- Color 2: Products (Green) -->
+                <li class="nav-item nav-products">
                     <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="tellus.html">Tellus <span class="ai-badge-blue">AI</span></a></li>
-                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="ai-badge-blue">AI</span></a></li>
-                        <li class="dropdown-item"><a href="veriguide.html">VeriGuide</a></li>
+                        <li class="dropdown-item"><a href="tellus.html">Tellus</a></li>
+                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="badge-beta">Beta</span></a></li>
+                        <li class="dropdown-item"><a href="#">VeriGuide</a></li>
                     </ul>
                 </li>
 
-                <!-- Services Section -->
-                <li class="nav-item nav-cyan">
+                <!-- Color 3: Projects (Purple - Direct Link, No Dropdown) -->
+                <li class="nav-item nav-projects">
+                    <a href="projects.html" class="nav-link">Projects</a>
+                </li>
+
+                <!-- Color 4: Services (Cyan) -->
+                <li class="nav-item nav-services">
                     <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
                         <li class="dropdown-item"><a href="#">e-Learning Consultation</a></li>
                     </ul>
                 </li>
 
-                <!-- Facility Section -->
-                <li class="nav-item nav-pink">
-                    <a href="#" class="nav-link">Facility <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <!-- Color 5: Facilities (Pink) -->
+                <li class="nav-item nav-facility">
+                    <a href="#" class="nav-link">Facilities <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
                         <li class="dropdown-item"><a href="studio.html">Professional Studios</a></li>
                         <li class="dropdown-item"><a href="openarea.html">Multi-Purpose Open Area</a></li>
@@ -676,147 +733,158 @@
         </div>
     </section>
 
-    <!-- Product Features -->
-    <section class="features-section" id="features">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle">Tailored for Higher Education</span>
-                <h2>Why Choose Tellus?</h2>
-            </div>
+    <main>
+        <!-- Product Features -->
+        <section class="features-section" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Tailored for Higher Education</span>
+                    <h2>Why Choose Tellus?</h2>
+                </div>
 
-            <div class="features-grid">
-                <!-- Feature 1 -->
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fa-solid fa-video"></i>
+                <div class="features-grid">
+                    <!-- Feature 1 -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <h3>AI Video Interviewing</h3>
+                        <p>Conduct automated video interviews effortlessly. Assess student oral presentations, language proficiency, and admission screening at scale.</p>
                     </div>
-                    <h3>AI Video Interviewing</h3>
-                    <p>Conduct automated video interviews effortlessly. Assess student oral presentations, language proficiency, and admission screening at scale.</p>
-                </div>
 
-                <!-- Feature 2 -->
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fa-solid fa-chart-line"></i>
+                    <!-- Feature 2 -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h3>Automated Candidate Screening</h3>
+                        <p>Save faculty time with intelligent screening and instant objective evaluation metrics tailored to your custom criteria.</p>
                     </div>
-                    <h3>Automated Candidate Screening</h3>
-                    <p>Save faculty time with intelligent screening and instant objective evaluation metrics tailored to your custom criteria.</p>
-                </div>
 
-                <!-- Feature 3 -->
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fa-solid fa-graduation-cap"></i>
+                    <!-- Feature 3 -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3>Education-Oriented Design</h3>
+                        <p>Specifically engineered for academic contexts, including course assessments, student helper interviews, and admission workflows.</p>
                     </div>
-                    <h3>Education-Oriented Design</h3>
-                    <p>Specifically engineered for academic contexts, including course assessments, student helper interviews, and admission workflows.</p>
-                </div>
 
-                <!-- Feature 4 -->
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fa-solid fa-shield-halved"></i>
+                    <!-- Feature 4 -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3>Objective & Fair Assessment</h3>
+                        <p>Reduce individual grading bias with standardized AI scoring models, ensuring consistent feedback across all submissions.</p>
                     </div>
-                    <h3>Objective & Fair Assessment</h3>
-                    <p>Reduce individual grading bias with standardized AI scoring models, ensuring consistent feedback across all submissions.</p>
-                </div>
 
-                <!-- Feature 5 -->
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fa-solid fa-comments"></i>
+                    <!-- Feature 5 -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                        <h3>Automated Feedback</h3>
+                        <p>Provide students with rich, actionable performance insights to help them refine their interview and speaking skills.</p>
                     </div>
-                    <h3>Automated Feedback</h3>
-                    <p>Provide students with rich, actionable performance insights to help them refine their interview and speaking skills.</p>
-                </div>
 
-                <!-- Feature 6 -->
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fa-solid fa-sliders"></i>
+                    <!-- Feature 6 -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h3>Customizable Rubrics</h3>
+                        <p>Set custom question sets, time limits, and rubric weights to align with specific course learning outcomes.</p>
                     </div>
-                    <h3>Customizable Rubrics</h3>
-                    <p>Set custom question sets, time limits, and rubric weights to align with specific course learning outcomes.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Workflow Section -->
-    <section class="workflow-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle">Simple 3-Step Process</span>
-                <h2>How Tellus Works</h2>
-            </div>
-
-            <div class="workflow-steps">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h4>Create Interview</h4>
-                    <p>Educators set up interview prompts, define response limits, and configure customized scoring rubrics.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h4>Students Record</h4>
-                    <p>Students answer recorded video prompts anywhere, anytime via browser or mobile device at their own pace.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h4>AI Analysis & Insights</h4>
-                    <p>Tellus generates objective performance scores and structured feedback reports for educators to review.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CTA Banner -->
-    <section class="cta-section">
-        <div class="cta-container">
-            <h2>Ready to Transform Your Assessments?</h2>
-            <p>Join higher education institutions utilizing Tellus for scalable, fair, and automated video interviews.</p>
-            <a href="https://tellus.keep.edu.hk/login" target="_blank" class="btn-primary">
-                Get Started Today <i class="fa-solid fa-arrow-right"></i>
-            </a>
-        </div>
-    </section>
+        <!-- Workflow Section -->
+        <section class="workflow-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Simple 3-Step Process</span>
+                    <h2>How Tellus Works</h2>
+                </div>
 
-    <!-- Footer -->
+                <div class="workflow-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Create Interview</h4>
+                        <p>Educators set up interview prompts, define response limits, and configure customized scoring rubrics.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Students Record</h4>
+                        <p>Students answer recorded video prompts anywhere, anytime via browser or mobile device at their own pace.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>AI Analysis & Insights</h4>
+                        <p>Tellus generates objective performance scores and structured feedback reports for educators to review.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Banner -->
+        <section class="cta-section">
+            <div class="cta-container">
+                <h2>Ready to Transform Your Assessments?</h2>
+                <p>Join higher education institutions utilizing Tellus for scalable, fair, and automated video interviews.</p>
+                <a href="https://tellus.keep.edu.hk/login" target="_blank" class="btn-primary">
+                    Get Started Today <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer with 5-Color Rainbow Top Edge Bar -->
     <footer>
+        <div class="footer-rainbow-top-bar"></div>
         <div class="footer-container">
+            <!-- Col 1: ELITE Centre Info -->
             <div class="footer-col">
-                <h4>ELITE Centre</h4>
-                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
-                    Promoting AI-enhanced learning and educational technology innovation at CUHK.
-                </p>
+                <span class="footer-col-title">ELITE Centre</span>
+                <p style="color: #2D2100; font-size: 0.9rem; line-height: 1.5; font-weight: 500;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
             </div>
+
+            <!-- Col 2: About Us (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Navigation</h4>
+                <span class="footer-col-title">About Us</span>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#vision-mission">Vision & Mission</a></li>
+                    <li><a href="missionandvision.html">Mission and Vision</a></li>
+                    <li><a href="our partner.html">Partnership</a></li>
                     <li><a href="people.html">People</a></li>
-                    <li><a href="partners.html">Our Partners</a></li>
+                    <li><a href="contact us.html">Contact us</a></li>
                 </ul>
             </div>
+
+            <!-- Col 3: Products (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Products</h4>
+                <span class="footer-col-title">Products</span>
                 <ul>
-                    <li><a href="tellus.html">Tellus AI</a></li>
-                    <li><a href="academichat.html">AcademiChat AI</a></li>
-                    <li><a href="veriguide.html">VeriGuide</a></li>
+                    <li><a href="tellus.html">Tellus</a></li>
+                    <li><a href="academichat.html">AcademiChat <span class="badge-beta">Beta</span></a></li>
+                    <li><a href="#">VeriGuide</a></li>
                 </ul>
             </div>
+
+            <!-- Col 4: Services (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Contact Us</h4>
-                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
-                    6/F, Hui Yeung Shing Building<br>
-                    The Chinese University of Hong Kong<br>
-                    Shatin, N.T., Hong Kong<br><br>
-                    Email: elite-centre@cuhk.edu.hk
-                </p>
+                <span class="footer-col-title">Services</span>
+                <ul>
+                    <li><a href="#">e-Learning Consultation</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 5: Contact Us -->
+            <div class="footer-col">
+                <span class="footer-col-title">Contact Us</span>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">The Chinese University of Hong Kong<br>Shatin, N.T., Hong Kong</p>
             </div>
         </div>
         <div class="footer-bottom">
