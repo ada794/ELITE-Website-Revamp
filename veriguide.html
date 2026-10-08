@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeriGuide - Academic Honesty & AI Detection | ELITE CUHK</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Palette extracted directly from the ELITE Logo */
+            --elite-gold: #F5B000;          /* 'E' Gold */
+            --elite-green: #8AC43A;         /* 'L' Green */
+            --elite-purple-bright: #6366F1; /* Brighter Violet-Purple Accent */
+            --elite-purple-dark: #4A2582;   /* Primary Dark Royal Purple */
+            --elite-cyan: #38B6FF;          /* 'T' Cyan Blue */
+            --elite-pink: #E61B6B;          /* 'E' Magenta Pink */
+
+            /* VeriGuide Brand Palette */
+            --vg-teal-primary: #0D9488;
+            --vg-teal-dark: #0F766E;
+            --vg-teal-light: #F0FDFA;
+
+            --bg-body: #F8FAFC;
+            --surface-white: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border-light: #E2E8F0;
+            
+            --shadow-sm: 0 4px 12px rgba(74, 37, 130, 0.05);
+            --shadow-md: 0 12px 30px rgba(74, 37, 130, 0.15);
+            --transition: all 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header & Top Navigation Banner --- */
+        header {
+            background: var(--surface-white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-gold-bar {
+            height: 5px;
+            background: var(--elite-gold);
+            width: 100%;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 75px;
+        }
+
+        /* Logo Text Colors Matching Logo Spectrum */
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        .logo-e1 { color: var(--elite-gold); }
+        .logo-l  { color: var(--elite-green); }
+        .logo-i  { color: var(--elite-purple-dark); }
+        .logo-t  { color: var(--elite-cyan); }
+        .logo-e2 { color: var(--elite-pink); }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            background: #FFFBEB;
+            color: var(--elite-gold);
+            border: 1px solid var(--elite-gold);
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-left: 10px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 26px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-item.nav-home:hover > .nav-link { color: var(--text-main); border-bottom-color: transparent; }
+
+        /* Navigation Hover Colors */
+        .nav-item.nav-about:hover > .nav-link { color: #D99B00; border-bottom-color: var(--elite-gold); }
+        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-gold); }
+        .nav-item.nav-about .dropdown-item a:hover { background-color: #FFFBEB; color: #D99B00; }
+
+        .nav-item.nav-products:hover > .nav-link { color: var(--elite-green); border-bottom-color: var(--elite-green); }
+        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-green); }
+        .nav-item.nav-products .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
+
+        .nav-item.nav-projects:hover > .nav-link { color: var(--elite-purple-dark); border-bottom-color: var(--elite-purple-dark); }
+
+        .nav-item.nav-services:hover > .nav-link { color: #0088CC; border-bottom-color: var(--elite-cyan); }
+        .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
+        .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
+
+        .nav-item.nav-facility:hover > .nav-link { color: var(--elite-pink); border-bottom-color: var(--elite-pink); }
+        .nav-item.nav-facility .dropdown { border-top: 3px solid var(--elite-pink); }
+        .nav-item.nav-facility .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 230px;
+            background: var(--surface-white);
+            box-shadow: var(--shadow-md);
+            border-radius: 12px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            list-style: none;
+            border: 1px solid var(--border-light);
+            z-index: 10000;
+            pointer-events: none;
+        }
+
+        .nav-item:hover .dropdown { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+
+        .dropdown-item a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .badge-beta { background: var(--elite-gold); color: #000; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; text-transform: uppercase; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(135deg, #0F766E 0%, #0D9488 60%, #38B6FF 100%);
+            color: white;
+            padding: 85px 0;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 15px 35px rgba(13, 148, 136, 0.2);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #FFFFFF;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 18px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-vg-gold {
+            background: var(--elite-gold);
+            color: #000;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(245, 176, 0, 0.4);
+        }
+
+        .btn-vg-gold:hover { background: #E0A000; transform: translateY(-2px); }
+
+        .btn-vg-outline {
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            color: white;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-vg-outline:hover { background: white; color: var(--vg-teal-dark); }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-radius: 20px;
+            padding: 28px;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .report-box {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            color: var(--text-main);
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .score-pill {
+            background: #DCFCE7;
+            color: #166534;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.85rem;
+        }
+
+        /* --- COMMON SECTION STYLES --- */
+        section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--vg-teal-dark);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* --- FEATURES GRID --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: var(--surface-white);
+            padding: 35px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: #99F6E4;
+        }
+
+        .feature-icon {
+            width: 58px;
+            height: 58px;
+            background: var(--vg-teal-light);
+            color: var(--vg-teal-primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        /* --- ROLES & FUNCTIONALITY TABS --- */
+        .functions-section {
+            background: #F8FAFC;
+        }
+
+        .roles-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .role-btn {
+            padding: 10px 26px;
+            border-radius: 25px;
+            border: 2px solid var(--vg-teal-primary);
+            background: transparent;
+            color: var(--vg-teal-dark);
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .role-btn.active, .role-btn:hover {
+            background: var(--vg-teal-primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);
+        }
+
+        .function-content { display: none; }
+        .function-content.active { display: block; }
+
+        .function-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .function-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .function-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .function-list li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--elite-green);
+        }
+
+        /* --- HOW IT WORKS --- */
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 24px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+
+        .step-num {
+            width: 45px;
+            height: 45px;
+            background: var(--vg-teal-primary);
+            color: white;
+            font-weight: 800;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px auto;
+            font-size: 1.1rem;
+        }
+
+        .step-card h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        /* --- CALL TO ACTION --- */
+        .cta-section {
+            background: linear-gradient(135deg, var(--vg-teal-dark) 0%, var(--vg-teal-primary) 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(13, 148, 136, 0.25);
+            margin-bottom: 60px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 30px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Full Amber Gold Footer with 5-Color Rainbow Top Edge Bar --- */
+        footer {
+            background: var(--elite-gold);
+            color: #000000;
+            padding: 60px 20px 25px 20px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-rainbow-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 100%;
+            background: linear-gradient(to right, var(--elite-gold) 20%, var(--elite-green) 20% 40%, var(--elite-purple-dark) 40% 60%, var(--elite-cyan) 60% 80%, var(--elite-pink) 80%);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 35px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col-title {
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            color: var(--elite-purple-dark);
+            font-weight: 800;
+            display: block;
+            cursor: default;
+            user-select: none;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+
+        .footer-col ul li a {
+            color: #2D2100;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.92rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-col ul li a:hover { color: var(--elite-purple-dark); padding-left: 4px; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            color: #3D2D00;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .nav-container { padding: 0 15px; }
+            .hero-grid, .function-row { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Banner -->
+    <header>
+        <div class="header-gold-bar"></div>
+        <div class="nav-container">
+            <a href="index.html" class="logo-text">
+                <span class="logo-e1">E</span><span class="logo-l">L</span><span class="logo-i">I</span><span class="logo-t">T</span><span class="logo-e2">E</span>
+                <span class="logo-sub">CUHK</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item nav-home">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                
+                <li class="nav-item nav-about">
+                    <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="missionandvision.html">Mission and Vision</a></li>
+                        <li class="dropdown-item"><a href="our partner.html">Partnership</a></li>
+                        <li class="dropdown-item"><a href="people.html">People</a></li>
+                        <li class="dropdown-item"><a href="contact us.html">Contact us</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-products">
+                    <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="tellus.html">Tellus</a></li>
+                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="badge-beta">Beta</span></a></li>
+                        <li class="dropdown-item"><a href="veriguide.html">VeriGuide</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-projects">
+                    <a href="projects.html" class="nav-link">Projects</a>
+                </li>
+
+                <li class="nav-item nav-services">
+                    <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="#">e-Learning Consultation</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-facility">
+                    <a href="#" class="nav-link">Facilities <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <ul class="dropdown">
+                        <li class="dropdown-item"><a href="studio.html">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="openarea.html">Multi-Purpose Open Area</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div>
+                    <span class="hero-badge"><i class="fa-solid fa-shield-halved"></i> Academic Integrity System</span>
+                    <h1>VeriGuide</h1>
+                    <p>An institutional-grade plagiarism detection and academic honesty system supporting multi-language text matching, AI-generated content checking, and seamless LMS integration for CUHK courses.</p>
+                    <div class="hero-actions">
+                        <a href="https://academic2.veriguide.org/portalcuhk/" target="_blank" class="btn-vg-gold">CUHK VeriGuide Portal <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem;"></i></a>
+                        <a href="https://keep.edu.hk/veriguide/" target="_blank" class="btn-vg-outline">Visit KEEP VeriGuide <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem;"></i></a>
+                    </div>
+                </div>
+
+                <div class="hero-card">
+                    <div class="report-box">
+                        <div class="report-header">
+                            <strong style="font-size: 0.95rem; color: var(--vg-teal-dark);"><i class="fa-solid fa-file-lines"></i> Similarity Assessment Report</strong>
+                            <span class="score-pill">92% Originality Score</span>
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;"><strong>Source Coverage:</strong> Web pages, academic journals, internal student archives, & AI content indicators.</p>
+                        <div style="background: var(--vg-teal-light); border: 1px solid #99F6E4; padding: 10px; border-radius: 8px; font-size: 0.82rem; color: var(--vg-teal-dark); font-weight: 600;">
+                            <i class="fa-solid fa-circle-check"></i> Academic Integrity Verification Verified.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- Features Section -->
+        <section>
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Core Features & Technological Strengths</h2>
+                    <p class="section-subtitle">Promoting academic honesty through advanced text matching technology, AI evaluation, and comprehensive originality analytics.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-language"></i></div>
+                        <h3>Multilingual & Cross-Script Detection</h3>
+                        <p>Specially engineered for English, Traditional Chinese, and Simplified Chinese text, detecting paraphrased or cross-script matching across documents.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-robot"></i></div>
+                        <h3>AI-Generated Text Detection</h3>
+                        <p>Evaluates stylistic patterns and structural markers to help educators identify potential Generative AI involvement in submitted work.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3>Readability & Text Statistics</h3>
+                        <p>Provides readability metrics, word count analytics, character distributions, and sentence complexity evaluations alongside match ratios.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-plug"></i></div>
+                        <h3>Seamless LMS & Blackboard Integration</h3>
+                        <p>Connects directly into CUHK Blackboard and Open edX environments for automated assignment collection and instant report generation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Functions & User Roles -->
+        <section class="functions-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Tailored Functions for Students & Instructors</h2>
+                    <p class="section-subtitle">Streamlined submission workflows designed for academic evaluation, peer checking, and assignment tracking.</p>
+                </div>
+
+                <!-- Role Switcher -->
+                <div class="roles-tabs">
+                    <button class="role-btn active" onclick="switchRole('instructor')">For Instructors & TAs</button>
+                    <button class="role-btn" onclick="switchRole('student')">For Students</button>
+                </div>
+
+                <!-- Instructor Panel -->
+                <div id="role-instructor" class="function-content active">
+                    <div class="function-row">
+                        <div>
+                            <h3 style="font-size: 1.6rem; color: var(--vg-teal-dark); font-weight:800; margin-bottom: 15px;">Course Management & Integrity Oversight</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Configure custom assignment parameters, set similarity threshold alerts, and review side-by-side source comparisons.</p>
+                            
+                            <ul class="function-list">
+                                <li><strong>Side-by-Side Source View:</strong> Inspect original text juxtaposed directly with matched online, journal, or internal paper sources.</li>
+                                <li><strong>Custom Threshold Alerts:</strong> Flag submissions that exceed customized similarity limits for closer instructor review.</li>
+                                <li><strong>Batch Assignment Management:</strong> Export aggregate class reports, originality scores, and submission records directly to Excel.</li>
+                                <li><strong>Peer-to-Peer Copying Check:</strong> Cross-check current submissions against both historical archives and classmate assignments in real-time.</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: var(--vg-teal-light); height: 300px; border-radius: 14px; border: 1.5px dashed var(--vg-teal-primary); display:flex; align-items:center; justify-content:center; color: var(--vg-teal-dark); font-weight:700; text-align: center; padding: 20px;">
+                            <i class="fa-solid fa-magnifying-glass-chart" style="font-size: 2rem; margin-bottom: 10px; display:block;"></i>
+                            [Instructor Similarity Analytics & Source Comparison UI]
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student Panel -->
+                <div id="role-student" class="function-content">
+                    <div class="function-row">
+                        <div>
+                            <h3 style="font-size: 1.6rem; color: var(--vg-teal-dark); font-weight:800; margin-bottom: 15px;">Easy Submissions & Formal Verification</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Upload coursework effortlessly using your official CUHK EID and obtain certified submission receipts for academic record-keeping.</p>
+                            
+                            <ul class="function-list">
+                                <li><strong>Official Academic Receipts:</strong> Receive a downloadable PDF submission receipt upon submitting coursework to verify timely submission.</li>
+                                <li><strong>Single Sign-On (SSO):</strong> Log in seamlessly using your official CUHK EID / MyCUHK credentials without creating separate passwords.</li>
+                                <li><strong>Draft Submission checking:</strong> Review preliminary similarity reports for draft papers when permitted by course instructors.</li>
+                                <li><strong>Multi-Format File Support:</strong> Upload PDF, Microsoft Word (.doc/.docx), plain text, and rich text documents smoothly.</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: var(--vg-teal-light); height: 300px; border-radius: 14px; border: 1.5px dashed var(--vg-teal-primary); display:flex; align-items:center; justify-content:center; color: var(--vg-teal-dark); font-weight:700; text-align: center; padding: 20px;">
+                            <i class="fa-solid fa-file-circle-check" style="font-size: 2rem; margin-bottom: 10px; display:block;"></i>
+                            [Student Portal Submission & Receipt Receipt UI]
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Workflow Section -->
+        <section>
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">How VeriGuide Works</h2>
+                    <p class="section-subtitle">A straightforward 3-step verification workflow for students, teaching assistants, and course instructors.</p>
+                </div>
+
+                <div class="workflow-grid">
+                    <div class="step-card">
+                        <div class="step-num">1</div>
+                        <h4>Submit Assignment</h4>
+                        <p>Students upload coursework directly via CUHK Blackboard or the dedicated VeriGuide Portal using CUHK SSO.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">2</div>
+                        <h4>Automated Scanning</h4>
+                        <p>VeriGuide checks the text against academic databases, web sources, AI models, and internal repository archives.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">3</div>
+                        <h4>Review Report & Receipt</h4>
+                        <p>Instructors access side-by-side similarity reports, while students download an official submission receipt.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call To Action -->
+        <section style="padding: 0 20px;">
+            <div class="container">
+                <div class="cta-section">
+                    <h2>Access the VeriGuide Portal</h2>
+                    <p>Log in using your official CUHK Electronic ID (EID) or explore system documentation through KEEP VeriGuide.</p>
+                    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                        <a href="https://academic2.veriguide.org/portalcuhk/" target="_blank" class="btn-vg-gold">CUHK VeriGuide Portal <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem;"></i></a>
+                        <a href="contact us.html" class="btn-vg-outline">Contact Technical Support</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer with 5-Color Rainbow Top Edge Bar -->
+    <footer>
+        <div class="footer-rainbow-top-bar"></div>
+        <div class="footer-container">
+            <!-- Col 1: ELITE Centre Info -->
+            <div class="footer-col">
+                <span class="footer-col-title">ELITE Centre</span>
+                <p style="color: #2D2100; font-size: 0.9rem; line-height: 1.5; font-weight: 500;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
+            </div>
+
+            <!-- Col 2: About Us -->
+            <div class="footer-col">
+                <span class="footer-col-title">About Us</span>
+                <ul>
+                    <li><a href="missionandvision.html">Mission and Vision</a></li>
+                    <li><a href="our partner.html">Partnership</a></li>
+                    <li><a href="people.html">People</a></li>
+                    <li><a href="contact us.html">Contact us</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Products -->
+            <div class="footer-col">
+                <span class="footer-col-title">Products</span>
+                <ul>
+                    <li><a href="tellus.html">Tellus</a></li>
+                    <li><a href="academichat.html">AcademiChat <span class="badge-beta">Beta</span></a></li>
+                    <li><a href="veriguide.html">VeriGuide</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 4: Services -->
+            <div class="footer-col">
+                <span class="footer-col-title">Services</span>
+                <ul>
+                    <li><a href="#">e-Learning Consultation</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 5: Contact Us -->
+            <div class="footer-col">
+                <span class="footer-col-title">Contact Us</span>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">The Chinese University of Hong Kong<br>Shatin, N.T., Hong Kong</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Centre for e-Learning Innovation and Technology Enhancement (ELITE), CUHK. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Interactive Role Switcher Script -->
+    <script>
+        function switchRole(role) {
+            const buttons = document.querySelectorAll('.role-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            const contents = document.querySelectorAll('.function-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            if (role === 'instructor') {
+                buttons[0].classList.add('active');
+                document.getElementById('role-instructor').classList.add('active');
+            } else if (role === 'student') {
+                buttons[1].classList.add('active');
+                document.getElementById('role-student').classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
