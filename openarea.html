@@ -10,13 +10,16 @@
     
     <style>
         :root {
-            /* 5 Logo Brand Colors */
-            --brand-gold: #FFC000;          
-            --brand-green: #8AC43A;         
+            /* Palette extracted directly from the ELITE Logo */
+            --elite-gold: #F5B000;          /* 'E' Gold */
+            --elite-green: #8AC43A;         /* 'L' Green */
+            --elite-purple-bright: #6366F1; /* Brighter Violet-Purple Accent */
+            --elite-purple-dark: #4A2582;   /* Primary Dark Royal Purple */
+            --elite-cyan: #38B6FF;          /* 'T' Cyan Blue */
+            --elite-pink: #E61B6B;          /* 'E' Magenta Pink */
+
+            /* Open Area Colors */
             --brand-blue-primary: #0099FF;  
-            --brand-cyan: #00E5FF;          
-            --brand-pink: #E61B6B;          
-            
             --brand-blue-dark: #0066CC;     
             --brand-blue-light: #F0F9FF;    
             
@@ -26,8 +29,8 @@
             --text-muted: #526075;
             --border-light: #E0EEF9;
             
-            --shadow-sm: 0 4px 15px rgba(0, 153, 255, 0.06);
-            --shadow-md: 0 12px 35px rgba(0, 153, 255, 0.16);
+            --shadow-sm: 0 4px 12px rgba(74, 37, 130, 0.05);
+            --shadow-md: 0 12px 30px rgba(74, 37, 130, 0.15);
             --transition: all 0.25s ease;
         }
 
@@ -50,20 +53,19 @@
             padding: 0 20px;
         }
 
-        /* --- Header & Navigation --- */
+        /* --- Header & Top Navigation Banner --- */
         header {
             background: var(--surface-white);
-            box-shadow: 0 4px 20px rgba(0, 153, 255, 0.08);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        /* Top Bar: Solid Golden Yellow */
-        .header-top-bar {
+        .header-gold-bar {
             height: 5px;
+            background: var(--elite-gold);
             width: 100%;
-            background-color: var(--brand-gold);
         }
 
         .nav-container {
@@ -76,24 +78,29 @@
             height: 75px;
         }
 
+        /* Logo Text Colors Matching Logo Spectrum */
         .logo-text {
             font-size: 1.8rem;
             font-weight: 800;
             text-decoration: none;
-            color: var(--brand-blue-dark);
-            letter-spacing: -0.5px;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 10px;
         }
+        .logo-e1 { color: var(--elite-gold); }
+        .logo-l  { color: var(--elite-green); }
+        .logo-i  { color: var(--elite-purple-dark); }
+        .logo-t  { color: var(--elite-cyan); }
+        .logo-e2 { color: var(--elite-pink); }
 
         .logo-sub {
             font-size: 0.75rem;
             background: #FFFBEB;
-            color: var(--brand-gold);
-            border: 1px solid var(--brand-gold);
+            color: var(--elite-gold);
+            border: 1px solid var(--elite-gold);
             padding: 2px 8px;
             border-radius: 6px;
+            margin-left: 10px;
             font-weight: 700;
         }
 
@@ -103,7 +110,9 @@
             gap: 8px;
         }
 
-        .nav-item { position: relative; }
+        .nav-item {
+            position: relative;
+        }
 
         .nav-link {
             text-decoration: none;
@@ -118,78 +127,84 @@
             border-bottom: 3px solid transparent;
         }
 
-        /* --- Individual 5-Color Hover Styles for the 5 Nav Items --- */
-        /* Item 1: Gold (Home) */
-        .nav-item.nav-gold:hover > .nav-link,
-        .nav-item.nav-gold .nav-link.active {
-            color: var(--brand-gold);
-            border-bottom-color: var(--brand-gold);
-        }
-        .nav-item.nav-gold .dropdown {
-            border-top: 3px solid var(--brand-gold);
+        /* Home Link: Stays black without color hover change */
+        .nav-item.nav-home:hover > .nav-link {
+            color: var(--text-main);
+            border-bottom-color: transparent;
         }
 
-        /* Item 2: Green (About) */
-        .nav-item.nav-green:hover > .nav-link,
-        .nav-item.nav-green .nav-link.active {
-            color: var(--brand-green);
-            border-bottom-color: var(--brand-green);
+        /* 5 Logo Colors Starting from About Us */
+        /* Item 1: About (Gold) */
+        .nav-item.nav-about:hover > .nav-link {
+            color: #D99B00;
+            border-bottom-color: var(--elite-gold);
         }
-        .nav-item.nav-green .dropdown {
-            border-top: 3px solid var(--brand-green);
+        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-gold); }
+        .nav-item.nav-about .dropdown-item a:hover { background-color: #FFFBEB; color: #D99B00; }
+
+        /* Item 2: Products (Green) */
+        .nav-item.nav-products:hover > .nav-link {
+            color: var(--elite-green);
+            border-bottom-color: var(--elite-green);
+        }
+        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-green); }
+        .nav-item.nav-products .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
+
+        /* Item 3: Projects (Purple - Direct Link) */
+        .nav-item.nav-projects:hover > .nav-link {
+            color: var(--elite-purple-dark);
+            border-bottom-color: var(--elite-purple-dark);
         }
 
-        /* Item 3: Blue (Products) */
-        .nav-item.nav-blue:hover > .nav-link,
-        .nav-item.nav-blue .nav-link.active {
-            color: var(--brand-blue-primary);
-            border-bottom-color: var(--brand-blue-primary);
+        /* Item 4: Services (Cyan) */
+        .nav-item.nav-services:hover > .nav-link {
+            color: #0088CC;
+            border-bottom-color: var(--elite-cyan);
         }
-        .nav-item.nav-blue .dropdown {
-            border-top: 3px solid var(--brand-blue-primary);
-        }
+        .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
+        .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
 
-        /* Item 4: Cyan (Services) */
-        .nav-item.nav-cyan:hover > .nav-link,
-        .nav-item.nav-cyan .nav-link.active {
-            color: var(--brand-cyan);
-            border-bottom-color: var(--brand-cyan);
+        /* Item 5: Facilities (Pink) */
+        .nav-item.nav-facility:hover > .nav-link {
+            color: var(--elite-pink);
+            border-bottom-color: var(--elite-pink);
         }
-        .nav-item.nav-cyan .dropdown {
-            border-top: 3px solid var(--brand-cyan);
-        }
+        .nav-item.nav-facility .dropdown { border-top: 3px solid var(--elite-pink); }
+        .nav-item.nav-facility .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
 
-        /* Item 5: Pink (Facility) */
-        .nav-item.nav-pink:hover > .nav-link,
-        .nav-item.nav-pink .nav-link.active {
-            color: var(--brand-pink);
-            border-bottom-color: var(--brand-pink);
-        }
-        .nav-item.nav-pink .dropdown {
-            border-top: 3px solid var(--brand-pink);
-        }
-
-        /* Dropdown Menu */
+        /* Dropdown Styling */
         .dropdown {
             position: absolute;
             top: 100%;
             left: 0;
-            width: 240px;
+            width: 230px;
             background: var(--surface-white);
-            box-shadow: 0 12px 30px rgba(0,153,255,0.15);
-            border-radius: 0 0 12px 12px;
+            box-shadow: var(--shadow-md);
+            border-radius: 12px;
             padding: 10px 0;
             opacity: 0;
             visibility: hidden;
             transform: translateY(10px);
             transition: var(--transition);
             list-style: none;
-            border-left: 1px solid var(--border-light);
-            border-right: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
+            border: 1px solid var(--border-light);
+            z-index: 10000;
+            pointer-events: none;
         }
 
-        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        /* Hover Interaction */
+        .nav-item:hover .dropdown { 
+            opacity: 1 !important; 
+            visibility: visible !important; 
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+        }
+
+        .dropdown-item {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
 
         .dropdown-item a {
             padding: 12px 20px;
@@ -201,21 +216,11 @@
             font-size: 0.92rem;
             font-weight: 500;
             transition: var(--transition);
+            width: 100%;
         }
 
-        .dropdown-item a:hover {
-            background-color: var(--brand-blue-light);
-            color: var(--brand-blue-dark);
-        }
-
-        .ai-badge-blue {
-            font-size: 0.65rem;
-            background: #E0F2FE;
-            color: var(--brand-blue-primary);
-            padding: 1px 6px;
-            border-radius: 4px;
-            font-weight: 800;
-        }
+        /* Badges */
+        .badge-beta { background: var(--elite-gold); color: #000; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; text-transform: uppercase; }
 
         /* --- Hero Section --- */
         .hero {
@@ -224,6 +229,7 @@
             padding: 85px 20px;
             text-align: center;
             position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
@@ -262,6 +268,8 @@
         .facility-section {
             padding: 80px 0;
             border-bottom: 1px solid var(--border-light);
+            position: relative;
+            z-index: 1;
         }
 
         .section-header {
@@ -375,6 +383,8 @@
             padding: 60px 20px;
             border-top: 1px solid var(--border-light);
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .booking-banner-card {
@@ -404,7 +414,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(135deg, var(--brand-pink) 0%, #C7135A 100%);
+            background: linear-gradient(135deg, var(--elite-pink) 0%, #C7135A 100%);
             color: white;
             padding: 16px 36px;
             border-radius: 50px;
@@ -420,54 +430,63 @@
             box-shadow: 0 12px 25px rgba(230, 27, 107, 0.45);
         }
 
-        /* --- Footer --- */
+        /* --- Full Amber Gold Footer with 5-Color Rainbow Top Edge Bar --- */
         footer {
-            background: var(--brand-gold);
+            background: var(--elite-gold);
             color: #000000;
-            padding: 65px 20px 25px 20px;
+            padding: 60px 20px 25px 20px;
+            margin-top: 60px;
             position: relative;
+            z-index: 1;
         }
 
-        /* Footer Top Bar: 5 Colors Gradient Bar Restored */
-        .footer-rainbow-bar {
+        .footer-rainbow-top-bar {
             position: absolute;
             top: 0;
             left: 0;
             height: 5px;
             width: 100%;
-            background: linear-gradient(to right, var(--brand-gold) 20%, var(--brand-green) 20% 40%, var(--brand-blue-primary) 40% 60%, var(--brand-cyan) 60% 80%, var(--brand-pink) 80%);
+            background: linear-gradient(to right, var(--elite-gold) 20%, var(--elite-green) 20% 40%, var(--elite-purple-dark) 40% 60%, var(--elite-cyan) 60% 80%, var(--elite-pink) 80%);
         }
 
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 35px;
             margin-bottom: 40px;
         }
 
-        .footer-col h4 {
-            font-size: 1.15rem;
+        /* Non-clickable Section Header Titles */
+        .footer-col-title {
+            font-size: 1.1rem;
             margin-bottom: 18px;
-            color: var(--brand-blue-dark);
+            color: var(--elite-purple-dark);
             font-weight: 800;
+            display: block;
+            cursor: default;
+            user-select: none;
         }
 
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 10px; }
 
+        /* Clickable Dropdown Sub-links */
         .footer-col ul li a {
             color: #2D2100;
             text-decoration: none;
             transition: var(--transition);
-            font-size: 0.94rem;
+            font-size: 0.92rem;
             font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .footer-col ul li a:hover {
-            color: var(--brand-blue-dark);
-            padding-left: 5px;
+            color: var(--elite-purple-dark);
+            padding-left: 4px;
         }
 
         .footer-bottom {
@@ -475,67 +494,73 @@
             padding-top: 25px;
             border-top: 1px solid rgba(0, 0, 0, 0.15);
             color: #3D2D00;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 600;
         }
 
         @media (max-width: 900px) {
+            .nav-container { padding: 0 15px; }
             .hero h1 { font-size: 2.4rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <!-- Header / Navigation Banner -->
     <header>
-        <!-- Solid Golden Yellow Line on Top Nav -->
-        <div class="header-top-bar"></div>
+        <div class="header-gold-bar"></div>
         <div class="nav-container">
             <a href="index.html" class="logo-text">
-                ELITE <span class="logo-sub">CUHK</span>
+                <span class="logo-e1">E</span><span class="logo-l">L</span><span class="logo-i">I</span><span class="logo-t">T</span><span class="logo-e2">E</span>
+                <span class="logo-sub">CUHK</span>
             </a>
             
             <ul class="nav-menu">
-                <!-- Color 1: Gold (Home linked explicitly to index.html) -->
-                <li class="nav-item nav-gold">
+                <!-- Neutral Home Button -->
+                <li class="nav-item nav-home">
                     <a href="index.html" class="nav-link">Home</a>
                 </li>
                 
-                <!-- Color 2: Green -->
-                <li class="nav-item nav-green">
+                <!-- Color 1: About (Gold) -->
+                <li class="nav-item nav-about">
                     <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="index.html#vision-mission">Vision & Mission</a></li>
+                        <li class="dropdown-item"><a href="missionandvision.html">Mission and Vision</a></li>
+                        <li class="dropdown-item"><a href="our partner.html">Partnership</a></li>
                         <li class="dropdown-item"><a href="people.html">People</a></li>
-                        <li class="dropdown-item"><a href="partners.html">Our Partners</a></li>
-                        <li class="dropdown-item"><a href="contact.html">Contact us</a></li>
+                        <li class="dropdown-item"><a href="contact us.html">Contact us</a></li>
                     </ul>
                 </li>
 
-                <!-- Color 3: Blue -->
-                <li class="nav-item nav-blue">
+                <!-- Color 2: Products (Green) -->
+                <li class="nav-item nav-products">
                     <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="tellus.html">Tellus <span class="ai-badge-blue">AI</span></a></li>
-                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="ai-badge-blue">AI</span></a></li>
-                        <li class="dropdown-item"><a href="veriguide.html">VeriGuide</a></li>
+                        <li class="dropdown-item"><a href="tellus.html">Tellus</a></li>
+                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="badge-beta">Beta</span></a></li>
+                        <li class="dropdown-item"><a href="#">VeriGuide</a></li>
                     </ul>
                 </li>
 
-                <!-- Color 4: Cyan -->
-                <li class="nav-item nav-cyan">
+                <!-- Color 3: Projects (Purple - Direct Link, No Dropdown) -->
+                <li class="nav-item nav-projects">
+                    <a href="projects.html" class="nav-link">Projects</a>
+                </li>
+
+                <!-- Color 4: Services (Cyan) -->
+                <li class="nav-item nav-services">
                     <a href="#" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
                         <li class="dropdown-item"><a href="#">e-Learning Consultation</a></li>
                     </ul>
                 </li>
 
-                <!-- Color 5: Pink -->
-                <li class="nav-item nav-pink">
-                    <a href="#" class="nav-link active">facilities<i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <!-- Color 5: Facilities (Pink) -->
+                <li class="nav-item nav-facility">
+                    <a href="#" class="nav-link">Facilities <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="studios.html">Professional Studios</a></li>
-                        <li class="dropdown-item"><a href="studios.html#open-area">Multi-Purpose Open Area</a></li>
+                        <li class="dropdown-item"><a href="studio.html">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="openarea.html">Multi-Purpose Open Area</a></li>
                     </ul>
                 </li>
             </ul>
@@ -555,95 +580,104 @@
         </div>
     </section>
 
-    <!-- Multi-Purpose Open Area Section -->
-    <section class="facility-section" id="open-area">
-        <div class="container">
-            <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 30px auto;">
-                <span class="section-tag">Collaborative Space</span>
-                <h2 class="section-title">Multi-Purpose Open Area</h2>
-                <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">
-                    The multi-purpose open area offers a space for teachers to do preparation using AR/VR/MR, attend training/consultation, and post-production. Two iMac workstations are available for teachers to prepare their materials prior to recording/filming in the studios. Teachers can check and perform post-production editing on their materials/videos. It does not require a reservation and is available on a first come, first served basis. If you need face-to-face training or consultation services provided by Media Production Specialists from ELITE, prior booking is needed.
-                </p>
-            </div>
-
-            <!-- Photo Placeholder for Open Area -->
-            <div class="image-placeholder" style="max-width: 800px; margin: 0 auto 40px auto; height: 260px;">
-                <i class="fa-solid fa-image"></i>
-                <span>Multi-Purpose Open Area Photo Space</span>
-            </div>
-
-            <div class="open-area-cards">
-                <div class="oa-card">
-                    <div class="oa-icon"><i class="fa-solid fa-desktop"></i></div>
-                    <h4>iMac Workstations</h4>
-                    <p>Two iMac workstations available on a first-come, first-served basis without reservation for material preparation and post-production editing.</p>
+    <main>
+        <!-- Multi-Purpose Open Area Section -->
+        <section class="facility-section" id="open-area">
+            <div class="container">
+                <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 30px auto;">
+                    <span class="section-tag">Collaborative Space</span>
+                    <h2 class="section-title">Multi-Purpose Open Area</h2>
+                    <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">
+                        The multi-purpose open area offers a space for teachers to do preparation using AR/VR/MR, attend training/consultation, and post-production. Two iMac workstations are available for teachers to prepare their materials prior to recording/filming in the studios. Teachers can check and perform post-production editing on their materials/videos. It does not require a reservation and is available on a first come, first served basis. If you need face-to-face training or consultation services provided by Media Production Specialists from ELITE, prior booking is needed.
+                    </p>
                 </div>
 
-                <div class="oa-card">
-                    <div class="oa-icon"><i class="fa-solid fa-headset"></i></div>
-                    <h4>Training & Consultation</h4>
-                    <p>Face-to-face training and consultation services provided by ELITE Media Production Specialists (prior booking required).</p>
+                <!-- Photo Placeholder for Open Area -->
+                <div class="image-placeholder" style="max-width: 800px; margin: 0 auto 40px auto; height: 260px;">
+                    <i class="fa-solid fa-image"></i>
+                    <span>Multi-Purpose Open Area Photo Space</span>
                 </div>
 
-                <div class="oa-card">
-                    <div class="oa-icon"><i class="fa-solid fa-users-rays"></i></div>
-                    <h4>Multi-Purpose Room</h4>
-                    <p>Capacity of up to 30 people for (re)viewing course materials, hosting workshops/seminars, and demonstrating new eLearning technologies.</p>
+                <div class="open-area-cards">
+                    <div class="oa-card">
+                        <div class="oa-icon"><i class="fa-solid fa-desktop"></i></div>
+                        <h4>iMac Workstations</h4>
+                        <p>Two iMac workstations available on a first-come, first-served basis without reservation for material preparation and post-production editing.</p>
+                    </div>
+
+                    <div class="oa-card">
+                        <div class="oa-icon"><i class="fa-solid fa-headset"></i></div>
+                        <h4>Training & Consultation</h4>
+                        <p>Face-to-face training and consultation services provided by ELITE Media Production Specialists (prior booking required).</p>
+                    </div>
+
+                    <div class="oa-card">
+                        <div class="oa-icon"><i class="fa-solid fa-users-rays"></i></div>
+                        <h4>Multi-Purpose Room</h4>
+                        <p>Capacity of up to 30 people for (re)viewing course materials, hosting workshops/seminars, and demonstrating new eLearning technologies.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Bottom Reservation Banner -->
-    <section class="booking-banner-section">
-        <div class="container">
-            <div class="booking-banner-card">
-                <h3>Ready to Reserve a Space or Consultation?</h3>
-                <p>Book a session with our ELITE Media Production Specialists or reserve our facilities for your teaching needs.</p>
-                <a href="https://www.elite.cuhk.edu.hk/studios" target="_blank" class="booking-btn">
-                    <i class="fa-solid fa-calendar-check"></i>
-                    <span>Book Consultation / Space</span>
-                </a>
+        <!-- Bottom Reservation Banner -->
+        <section class="booking-banner-section">
+            <div class="container">
+                <div class="booking-banner-card">
+                    <h3>Ready to Reserve a Space or Consultation?</h3>
+                    <p>Book a session with our ELITE Media Production Specialists or reserve our facilities for your teaching needs.</p>
+                    <a href="contact us.html" class="booking-btn">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Book Consultation / Space</span>
+                    </a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
+    <!-- Footer with 5-Color Rainbow Top Edge Bar -->
     <footer>
-        <!-- 5-Color Rainbow Gradient Bar Restored on Footer -->
-        <div class="footer-rainbow-bar"></div>
+        <div class="footer-rainbow-top-bar"></div>
         <div class="footer-container">
+            <!-- Col 1: ELITE Centre Info -->
             <div class="footer-col">
-                <h4>ELITE Centre</h4>
-                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
-                    Promoting AI-enhanced learning and educational technology innovation at CUHK.
-                </p>
+                <span class="footer-col-title">ELITE Centre</span>
+                <p style="color: #2D2100; font-size: 0.9rem; line-height: 1.5; font-weight: 500;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
             </div>
+
+            <!-- Col 2: About Us (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Navigation</h4>
+                <span class="footer-col-title">About Us</span>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#vision-mission">Vision & Mission</a></li>
+                    <li><a href="missionandvision.html">Mission and Vision</a></li>
+                    <li><a href="our partner.html">Partnership</a></li>
                     <li><a href="people.html">People</a></li>
-                    <li><a href="partners.html">Our Partners</a></li>
+                    <li><a href="contact us.html">Contact us</a></li>
                 </ul>
             </div>
+
+            <!-- Col 3: Products (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Products</h4>
+                <span class="footer-col-title">Products</span>
                 <ul>
-                    <li><a href="tellus.html">Tellus AI</a></li>
-                    <li><a href="academichat.html">AcademiChat AI</a></li>
-                    <li><a href="veriguide.html">VeriGuide</a></li>
+                    <li><a href="tellus.html">Tellus</a></li>
+                    <li><a href="academichat.html">AcademiChat <span class="badge-beta">Beta</span></a></li>
+                    <li><a href="#">VeriGuide</a></li>
                 </ul>
             </div>
+
+            <!-- Col 4: Services (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Contact Us</h4>
-                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">
-                    6/F, Hui Yeung Shing Building<br>
-                    The Chinese University of Hong Kong<br>
-                    Shatin, N.T., Hong Kong<br><br>
-                    Email: elite-centre@cuhk.edu.hk
-                </p>
+                <span class="footer-col-title">Services</span>
+                <ul>
+                    <li><a href="#">e-Learning Consultation</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 5: Contact Us -->
+            <div class="footer-col">
+                <span class="footer-col-title">Contact Us</span>
+                <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">The Chinese University of Hong Kong<br>Shatin, N.T., Hong Kong</p>
             </div>
         </div>
         <div class="footer-bottom">
