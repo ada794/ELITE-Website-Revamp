@@ -14,7 +14,7 @@
             --elite-gold: #F5B000;          /* 'E' Gold */
             --elite-green: #8AC43A;         /* 'L' Green */
             --elite-purple-bright: #6366F1; /* Brighter Violet-Purple Accent */
-            --elite-purple-dark: #4F46E5;   /* Readable Bright Purple for Titles */
+            --elite-purple-dark: #4A2582;   /* Primary Dark Royal Purple */
             --elite-cyan: #38B6FF;          /* 'T' Cyan Blue */
             --elite-pink: #E61B6B;          /* 'E' Magenta Pink */
             
@@ -24,8 +24,8 @@
             --text-muted: #64748B;
             --border-light: #E2E8F0;
             
-            --shadow-sm: 0 4px 12px rgba(99, 102, 241, 0.08);
-            --shadow-md: 0 12px 30px rgba(99, 102, 241, 0.15);
+            --shadow-sm: 0 4px 12px rgba(74, 37, 130, 0.05);
+            --shadow-md: 0 12px 30px rgba(74, 37, 130, 0.15);
             --transition: all 0.25s ease;
         }
 
@@ -85,7 +85,7 @@
         }
         .logo-e1 { color: var(--elite-gold); }
         .logo-l  { color: var(--elite-green); }
-        .logo-i  { color: var(--elite-purple-bright); }
+        .logo-i  { color: var(--elite-purple-dark); }
         .logo-t  { color: var(--elite-cyan); }
         .logo-e2 { color: var(--elite-pink); }
 
@@ -123,26 +123,52 @@
             border-bottom: 3px solid transparent;
         }
 
-        /* Dynamic Logo-Colored Navigation Hover States */
-        .nav-item.nav-home:hover > .nav-link { color: #D99B00; border-bottom-color: var(--elite-gold); }
-        
-        .nav-item.nav-about:hover > .nav-link { color: var(--elite-green); border-bottom-color: var(--elite-green); }
-        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-green); }
-        .nav-item.nav-about .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
+        /* Home Link: Stays black without color hover change */
+        .nav-item.nav-home:hover > .nav-link {
+            color: var(--text-main);
+            border-bottom-color: transparent;
+        }
 
-        .nav-item.nav-products:hover > .nav-link { color: var(--elite-purple-bright); border-bottom-color: var(--elite-purple-bright); }
-        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-purple-bright); }
-        .nav-item.nav-products .dropdown-item a:hover { background-color: #EEF2FF; color: var(--elite-purple-dark); }
+        /* 5 Logo Colors Starting from About Us */
+        /* Item 1: About (Gold) */
+        .nav-item.nav-about:hover > .nav-link {
+            color: #D99B00;
+            border-bottom-color: var(--elite-gold);
+        }
+        .nav-item.nav-about .dropdown { border-top: 3px solid var(--elite-gold); }
+        .nav-item.nav-about .dropdown-item a:hover { background-color: #FFFBEB; color: #D99B00; }
 
-        .nav-item.nav-services:hover > .nav-link { color: #0088CC; border-bottom-color: var(--elite-cyan); }
+        /* Item 2: Products (Green) */
+        .nav-item.nav-products:hover > .nav-link {
+            color: var(--elite-green);
+            border-bottom-color: var(--elite-green);
+        }
+        .nav-item.nav-products .dropdown { border-top: 3px solid var(--elite-green); }
+        .nav-item.nav-products .dropdown-item a:hover { background-color: #F4F9ED; color: var(--elite-green); }
+
+        /* Item 3: Projects (Purple - Direct Link) */
+        .nav-item.nav-projects:hover > .nav-link {
+            color: var(--elite-purple-dark);
+            border-bottom-color: var(--elite-purple-dark);
+        }
+
+        /* Item 4: Services (Cyan) */
+        .nav-item.nav-services:hover > .nav-link {
+            color: #0088CC;
+            border-bottom-color: var(--elite-cyan);
+        }
         .nav-item.nav-services .dropdown { border-top: 3px solid var(--elite-cyan); }
         .nav-item.nav-services .dropdown-item a:hover { background-color: #EDF8FF; color: #0088CC; }
 
-        .nav-item.nav-facility:hover > .nav-link { color: var(--elite-pink); border-bottom-color: var(--elite-pink); }
+        /* Item 5: Facilities (Pink) */
+        .nav-item.nav-facility:hover > .nav-link {
+            color: var(--elite-pink);
+            border-bottom-color: var(--elite-pink);
+        }
         .nav-item.nav-facility .dropdown { border-top: 3px solid var(--elite-pink); }
         .nav-item.nav-facility .dropdown-item a:hover { background-color: #FDF2F7; color: var(--elite-pink); }
 
-        /* Dropdown Base Styles */
+        /* Dropdown Styling */
         .dropdown {
             position: absolute;
             top: 100%;
@@ -158,9 +184,23 @@
             transition: var(--transition);
             list-style: none;
             border: 1px solid var(--border-light);
+            z-index: 10000;
+            pointer-events: none;
         }
 
-        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        /* Hover Interaction */
+        .nav-item:hover .dropdown { 
+            opacity: 1 !important; 
+            visibility: visible !important; 
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+        }
+
+        .dropdown-item {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
 
         .dropdown-item a {
             padding: 12px 20px;
@@ -172,13 +212,13 @@
             font-size: 0.92rem;
             font-weight: 500;
             transition: var(--transition);
+            width: 100%;
         }
 
-        /* AI Badges */
-        .ai-badge-pink { background: var(--elite-pink); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
-        .ai-badge-cyan { background: var(--elite-cyan); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+        /* Badges */
+        .badge-beta { background: var(--elite-gold); color: #000; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; text-transform: uppercase; }
 
-        /* --- SECTION 1: HERO SECTION (Brighter Vivid Purple-Cyan Gradient) --- */
+        /* --- SECTION 1: HERO SECTION --- */
         .product-hero {
             background: linear-gradient(135deg, var(--elite-purple-bright) 0%, #38B6FF 100%);
             color: white;
@@ -186,6 +226,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(99, 102, 241, 0.25);
+            z-index: 1;
         }
 
         .hero-grid {
@@ -316,6 +357,8 @@
         /* --- Common Section Styles --- */
         section {
             padding: 70px 0;
+            position: relative;
+            z-index: 1;
         }
 
         .section-header {
@@ -337,7 +380,7 @@
             margin: 0 auto;
         }
 
-        /* --- Section 2: Key Features & Highlights --- */
+        /* --- SECTION 2: KEY FEATURES --- */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -384,7 +427,7 @@
             font-size: 0.92rem;
         }
 
-        /* --- Section 3: Detailed Functions (User Roles) --- */
+        /* --- SECTION 3: DETAILED FUNCTIONS & ROLE SWITCHER --- */
         .functions-section {
             background: #F8FAFC;
         }
@@ -412,6 +455,14 @@
             color: white;
             border-color: var(--elite-purple-bright);
             box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .function-content {
+            display: none;
+        }
+
+        .function-content.active {
+            display: block;
         }
 
         .function-row {
@@ -449,7 +500,7 @@
             color: var(--elite-green);
         }
 
-        /* --- Section 4: Related Projects & Case Studies --- */
+        /* --- SECTION 4: CASE STUDIES --- */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -496,7 +547,7 @@
             font-weight: 600;
         }
 
-        /* --- Section 5: Testimonials & Endorsements --- */
+        /* --- SECTION 5: TESTIMONIALS --- */
         .testimonials-section {
             background: #F8FAFC;
         }
@@ -559,7 +610,7 @@
             color: var(--text-muted);
         }
 
-        /* --- Section 6: Call to Action Banner (Brighter Purple Gradient) --- */
+        /* --- SECTION 6: CTA BANNER --- */
         .cta-banner {
             background: linear-gradient(135deg, var(--elite-purple-bright) 0%, #4338CA 100%);
             color: white;
@@ -585,13 +636,14 @@
             margin-right: auto;
         }
 
-        /* --- Full Amber Gold Footer with 5-Color Rainbow Top Edge Bar --- */
+        /* --- Footer --- */
         footer {
             background: var(--elite-gold);
             color: #000000;
             padding: 60px 20px 25px 20px;
             margin-top: 60px;
             position: relative;
+            z-index: 1;
         }
 
         .footer-rainbow-top-bar {
@@ -600,32 +652,30 @@
             left: 0;
             height: 5px;
             width: 100%;
-            background: linear-gradient(to right, var(--elite-gold) 20%, var(--elite-green) 20% 40%, var(--elite-purple-bright) 40% 60%, var(--elite-cyan) 60% 80%, var(--elite-pink) 80%);
+            background: linear-gradient(to right, var(--elite-gold) 20%, var(--elite-green) 20% 40%, var(--elite-purple-dark) 40% 60%, var(--elite-cyan) 60% 80%, var(--elite-pink) 80%);
         }
 
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 35px;
             margin-bottom: 40px;
         }
 
-        .footer-col h4 {
+        .footer-col-title {
             font-size: 1.1rem;
             margin-bottom: 18px;
             color: var(--elite-purple-dark);
             font-weight: 800;
+            display: block;
+            cursor: default;
+            user-select: none;
         }
 
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
 
         .footer-col ul li a {
             color: #2D2100;
@@ -633,6 +683,9 @@
             transition: var(--transition);
             font-size: 0.92rem;
             font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .footer-col ul li a:hover {
@@ -648,6 +701,13 @@
             font-size: 0.88rem;
             font-weight: 600;
         }
+
+        @media (max-width: 900px) {
+            .nav-container { padding: 0 15px; }
+            .hero-grid, .function-row {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -656,7 +716,7 @@
     <header>
         <div class="header-gold-bar"></div>
         <div class="nav-container">
-            <a href="#" class="logo-text">
+            <a href="index.html" class="logo-text">
                 <span class="logo-e1">E</span><span class="logo-l">L</span><span class="logo-i">I</span><span class="logo-t">T</span><span class="logo-e2">E</span>
                 <span class="logo-sub">CUHK</span>
             </a>
@@ -669,21 +729,24 @@
                 <li class="nav-item nav-about">
                     <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="#">Who are we</a></li>
-                        <li class="dropdown-item"><a href="#">Our mission</a></li>
-                        <li class="dropdown-item"><a href="#">Partnership</a></li>
-                        <li class="dropdown-item"><a href="#">People</a></li>
-                        <li class="dropdown-item"><a href="#">Contact us</a></li>
+                        <li class="dropdown-item"><a href="missionandvision.html">Mission and Vision</a></li>
+                        <li class="dropdown-item"><a href="our partner.html">Partnership</a></li>
+                        <li class="dropdown-item"><a href="people.html">People</a></li>
+                        <li class="dropdown-item"><a href="contact us.html">Contact us</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item nav-products">
                     <a href="#" class="nav-link">Products <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="#">Tellus <span class="ai-badge-pink">AI</span></a></li>
-                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="ai-badge-cyan">AI</span></a></li>
+                        <li class="dropdown-item"><a href="tellus.html">Tellus</a></li>
+                        <li class="dropdown-item"><a href="academichat.html">AcademiChat <span class="badge-beta">Beta</span></a></li>
                         <li class="dropdown-item"><a href="#">VeriGuide</a></li>
                     </ul>
+                </li>
+
+                <li class="nav-item nav-projects">
+                    <a href="projects.html" class="nav-link">Projects</a>
                 </li>
 
                 <li class="nav-item nav-services">
@@ -694,10 +757,10 @@
                 </li>
 
                 <li class="nav-item nav-facility">
-                    <a href="#" class="nav-link">Facility <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <a href="#" class="nav-link">Facilities <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="#">Professional Studios</a></li>
-                        <li class="dropdown-item"><a href="#">Multi-Purpose Open Area</a></li>
+                        <li class="dropdown-item"><a href="studio.html">Professional Studios</a></li>
+                        <li class="dropdown-item"><a href="openarea.html">Multi-Purpose Open Area</a></li>
                     </ul>
                 </li>
             </ul>
@@ -737,183 +800,227 @@
         </div>
     </header>
 
-    <!-- SECTION 2: KEY FEATURES & HIGHLIGHTS -->
-    <section>
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Why Adopt AcademiChat?</h2>
-                <p class="section-subtitle">Move beyond simple AI search answers with an interactive mentor built explicitly for deep academic inquiry.</p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
-                    <h3>Socratic Guided Dialogue</h3>
-                    <p>Engages students with probing questions and hints, pushing them to explain reasoning and identify knowledge gaps independently.</p>
+    <main>
+        <!-- SECTION 2: KEY FEATURES & HIGHLIGHTS -->
+        <section>
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Why Adopt AcademiChat?</h2>
+                    <p class="section-subtitle">Move beyond simple AI search answers with an interactive mentor built explicitly for deep academic inquiry.</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-file-pdf"></i></div>
-                    <h3>Course-Grounded Context</h3>
-                    <p>Instructors easily upload lecture slides, syllabi, and readings to keep the AI strictly bounded within official course scope.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
-                    <h3>Learning Milestones & Analytics</h3>
-                    <p>Tracks student inquiry trends and common conceptual roadblocks, providing teachers with real-time insight into class comprehension.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
-                    <h3>Automated Quiz & Schema Generator</h3>
-                    <p>Instantly converts existing lecture materials into tailored practice quizzes, structural layout mappings, and grading rubrics.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 3: DETAILED FUNCTIONS & USER ROLES -->
-    <section class="functions-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Designed for Instructors and Students</h2>
-                <p class="section-subtitle">Tailored workflows that empower teaching teams while offering personalized 24/7 support to learners.</p>
-            </div>
-
-            <div class="roles-tabs">
-                <button class="role-btn active">For Instructors & TAs</button>
-                <button class="role-btn">For Students</button>
-            </div>
-
-            <div class="function-row">
-                <div>
-                    <h3 style="font-size: 1.6rem; color: var(--elite-purple-dark); font-weight:800; margin-bottom: 15px;">Transforming Course Management & Insights</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Save time on routine Q&A while gaining unprecedented clarity into how your students process difficult course concepts.</p>
-                    
-                    <ul class="function-list">
-                        <li><strong>Instant Material Conversion:</strong> Upload lecture PDFs to automatically build Socratic review guides and practice sets.</li>
-                        <li><strong>Customizable Guardrails:</strong> Set strict guidelines for answer lengths, allowed hints, and strict adherence to course sources.</li>
-                        <li><strong>Discussion Analytics:</strong> Access automated summaries and sentiment logs of student-AI interactions to fine-tune upcoming lectures.</li>
-                        <li><strong>LMS Integration:</strong> Connect seamlessly with CUHK Blackboard and Open edX platforms.</li>
-                    </ul>
-                </div>
-
-                <div style="background: #EEF2FF; height: 300px; border-radius: 14px; border: 1.5px dashed var(--elite-purple-bright); display:flex; align-items:center; justify-content:center; color: var(--elite-purple-dark); font-weight:700;">
-                    [Instructor Dashboard UI Preview]
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 4: RELATED PROJECTS & CASE STUDIES -->
-    <section>
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Real-World University Implementations</h2>
-                <p class="section-subtitle">See how faculties at CUHK are adopting AcademiChat to enhance learning outcomes at scale.</p>
-            </div>
-
-            <div class="projects-grid">
-                <div class="case-card">
-                    <div class="case-tag">UGC Strategic Fund Project</div>
-                    <h3>Foundation Biology: 24/7 Socratic Learning Assistant</h3>
-                    <p style="color: var(--text-muted); font-size:0.92rem;">Deployed in a 400-student lecture setting to assist with complex biochemical pathway problem sets without giving direct answers.</p>
-                    <div class="case-impact">
-                        <i class="fa-solid fa-chart-pie" style="color:var(--elite-purple-dark);"></i> <strong>Impact:</strong> 88% of students reported higher confidence during mid-term exam prep.
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+                        <h3>Socratic Guided Dialogue</h3>
+                        <p>Engages students with probing questions and hints, pushing them to explain reasoning and identify knowledge gaps independently.</p>
                     </div>
-                </div>
 
-                <div class="case-card">
-                    <div class="case-tag">Faculty of Business Project</div>
-                    <h3>Case Study Analysis & Socratic Guidance</h3>
-                    <p style="color: var(--text-muted); font-size:0.92rem;">Integrated into MBA strategy modules to challenge students' underlying business model assumptions prior to class presentations.</p>
-                    <div class="case-impact">
-                        <i class="fa-solid fa-clock" style="color:var(--elite-purple-dark);"></i> <strong>Impact:</strong> Reduced TA routine e-mail volume by over 60%.
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                        <h3>Course-Grounded Context</h3>
+                        <p>Instructors easily upload lecture slides, syllabi, and readings to keep the AI strictly bounded within official course scope.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3>Learning Outcomes Analytics</h3>
+                        <p>Evaluates student dialogue patterns to determine whether learners are successfully obtaining intended course learning outcomes.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
+                        <h3>Pedagogical Effectiveness Insights</h3>
+                        <p>Gives instructors data-driven feedback on teaching clarity, common conceptual bottlenecks, and student mastery levels.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- SECTION 5: TESTIMONIALS & ENDORSEMENTS -->
-    <section class="testimonials-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Faculty & Student Endorsements</h2>
-                <p class="section-subtitle">Hear what educators and learners say about their experience with AcademiChat.</p>
-            </div>
+        <!-- SECTION 3: DETAILED FUNCTIONS & USER ROLES -->
+        <section class="functions-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Designed for Instructors and Students</h2>
+                    <p class="section-subtitle">Tailored workflows that empower teaching teams while offering personalized 24/7 support to learners.</p>
+                </div>
 
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
-                    <p class="testimonial-text">"AcademiChat solved our biggest concern with Generative AI—students copying answers. By enforcing Socratic dialogue, it forces them to think deeply and explain their logic step-by-step."</p>
-                    <div class="author-info">
-                        <div class="author-avatar">SL</div>
-                        <div class="author-details">
-                            <h4>Prof. S. Lam</h4>
-                            <p>School of Life Sciences, CUHK</p>
+                <!-- Tab Buttons -->
+                <div class="roles-tabs">
+                    <button class="role-btn active" onclick="switchRole('instructor')">For Instructors & TAs</button>
+                    <button class="role-btn" onclick="switchRole('student')">For Students</button>
+                </div>
+
+                <!-- Content 1: Instructors -->
+                <div id="role-instructor" class="function-content active">
+                    <div class="function-row">
+                        <div>
+                            <h3 style="font-size: 1.6rem; color: var(--elite-purple-dark); font-weight:800; margin-bottom: 15px;">Teaching Effectiveness & Learning Outcomes</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Understand how your students engage with course content and verify whether they obtain key learning objectives throughout the term.</p>
+                            
+                            <ul class="function-list">
+                                <li><strong>Learning Outcome Tracking:</strong> Monitor student chat interactions to evaluate if key intended learning outcomes (ILOs) are being met.</li>
+                                <li><strong>Teaching Effectiveness Insights:</strong> Receive aggregate data highlighting which lecture topics require further review or instructional adjustment.</li>
+                                <li><strong>Customizable Guardrails:</strong> Set strict guidelines for answer lengths, allowed hints, and adherence to uploaded course readings.</li>
+                                <li><strong>Discussion Analytics:</strong> Access automated summaries and sentiment logs of student-AI interactions without compromising privacy.</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: #EEF2FF; height: 300px; border-radius: 14px; border: 1.5px dashed var(--elite-purple-bright); display:flex; align-items:center; justify-content:center; color: var(--elite-purple-dark); font-weight:700; text-align: center; padding: 20px;">
+                            <i class="fa-solid fa-chart-pie" style="font-size: 2rem; margin-bottom: 10px; display:block;"></i>
+                            [Instructor Learning Outcomes Analytics UI]
                         </div>
                     </div>
                 </div>
 
-                <div class="testimonial-card">
-                    <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
-                    <p class="testimonial-text">"It feels like having a private tutor available at 2 AM. When I get stuck on a physics concept, AcademiChat doesn't just hand me the solution—it asks me the right question to help me figure it out myself."</p>
-                    <div class="author-info">
-                        <div class="author-avatar">KY</div>
-                        <div class="author-details">
-                            <h4>Kevin Y.</h4>
-                            <p>Year 2 Science Undergraduate</p>
+                <!-- Content 2: Students -->
+                <div id="role-student" class="function-content">
+                    <div class="function-row">
+                        <div>
+                            <h3 style="font-size: 1.6rem; color: var(--elite-purple-dark); font-weight:800; margin-bottom: 15px;">Personalized Socratic Mentorship Any Time</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Work through complex course concepts at your own pace with a 24/7 AI companion that helps you figure out answers independently.</p>
+                            
+                            <ul class="function-list">
+                                <li><strong>24/7 Step-by-Step Problem Solving:</strong> Get interactive hints and guided questions that coach you toward solutions rather than simply giving away answers.</li>
+                                <li><strong>Grounded Course Support:</strong> Ask questions about lecture slides, assigned papers, and exam syllabi with answers drawn strictly from official class material.</li>
+                                <li><strong>Safe & Judgment-Free Practice:</strong> Test your understanding, clarify confusing terms, and review foundational concepts without fear of asking "silly questions."</li>
+                                <li><strong>Self-Paced Concept Checks:</strong> Receive instant feedback on your reasoning to ensure you are mastering course outcomes before major exams.</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: #EEF2FF; height: 300px; border-radius: 14px; border: 1.5px dashed var(--elite-purple-bright); display:flex; align-items:center; justify-content:center; color: var(--elite-purple-dark); font-weight:700; text-align: center; padding: 20px;">
+                            <i class="fa-solid fa-comments" style="font-size: 2rem; margin-bottom: 10px; display:block;"></i>
+                            [Student Interactive Learning Chat UI]
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 4: CASE STUDIES -->
+        <section>
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Real-World University Implementations</h2>
+                    <p class="section-subtitle">See how faculties at CUHK are adopting AcademiChat to enhance learning outcomes at scale.</p>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="case-card">
+                        <div class="case-tag">UGC Strategic Fund Project</div>
+                        <h3>Foundation Biology: 24/7 Socratic Learning Assistant</h3>
+                        <p style="color: var(--text-muted); font-size:0.92rem;">Deployed in a 400-student lecture setting to assist with complex biochemical pathway problem sets without giving direct answers.</p>
+                        <div class="case-impact">
+                            <i class="fa-solid fa-chart-pie" style="color:var(--elite-purple-dark);"></i> <strong>Impact:</strong> 88% of students reported higher confidence during mid-term exam prep.
+                        </div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-tag">Faculty of Business Project</div>
+                        <h3>Case Study Analysis & Socratic Guidance</h3>
+                        <p style="color: var(--text-muted); font-size:0.92rem;">Integrated into MBA strategy modules to challenge students' underlying business model assumptions prior to class presentations.</p>
+                        <div class="case-impact">
+                            <i class="fa-solid fa-clock" style="color:var(--elite-purple-dark);"></i> <strong>Impact:</strong> Reduced TA routine e-mail volume by over 60%.
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- SECTION 6: CALL TO ACTION BANNER -->
-    <section style="padding: 0 20px;">
-        <div class="container">
-            <div class="cta-banner" id="consultation">
-                <h2>Interested in Adopting AcademiChat for Your Course?</h2>
-                <p>Contact the ELITE team to schedule a personalized platform demonstration, set up course guardrails, or launch a pilot run for your department.</p>
-                <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
-                    <a href="mailto:elite@cuhk.edu.hk" class="btn btn-gold">Request Course Pilot</a>
-                    <a href="https://keep.edu.hk/academichat/" target="_blank" class="btn btn-outline-white">Visit KEEP AcademiChat Portal</a>
+        <!-- SECTION 5: TESTIMONIALS -->
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Faculty & Student Endorsements</h2>
+                    <p class="section-subtitle">Hear what educators and learners say about their experience with AcademiChat.</p>
+                </div>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="testimonial-text">"AcademiChat solved our biggest concern with Generative AI—students copying answers. By enforcing Socratic dialogue, it forces them to think deeply and explain their logic step-by-step."</p>
+                        <div class="author-info">
+                            <div class="author-avatar">SL</div>
+                            <div class="author-details">
+                                <h4>Prof. S. Lam</h4>
+                                <p>School of Life Sciences, CUHK</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="testimonial-text">"It feels like having a private tutor available at 2 AM. When I get stuck on a physics concept, AcademiChat doesn't just hand me the solution—it asks me the right question to help me figure it out myself."</p>
+                        <div class="author-info">
+                            <div class="author-avatar">KY</div>
+                            <div class="author-details">
+                                <h4>Kevin Y.</h4>
+                                <p>Year 2 Science Undergraduate</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- SECTION 6: CALL TO ACTION BANNER -->
+        <section style="padding: 0 20px;">
+            <div class="container">
+                <div class="cta-banner" id="consultation">
+                    <h2>Interested in Adopting AcademiChat for Your Course?</h2>
+                    <p>Contact the ELITE team to schedule a personalized platform demonstration, set up course guardrails, or launch a pilot run for your department.</p>
+                    <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
+                        <a href="mailto:elite@cuhk.edu.hk" class="btn btn-gold">Request Course Pilot</a>
+                        <a href="https://keep.edu.hk/academichat/" target="_blank" class="btn btn-outline-white">Visit KEEP AcademiChat Portal</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer with 5-Color Rainbow Top Edge Bar -->
     <footer>
         <div class="footer-rainbow-top-bar"></div>
         <div class="footer-container">
+            <!-- Col 1: ELITE Centre Info -->
             <div class="footer-col">
-                <h4>ELITE Centre</h4>
+                <span class="footer-col-title">ELITE Centre</span>
                 <p style="color: #2D2100; font-size: 0.9rem; line-height: 1.5; font-weight: 500;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
             </div>
+
+            <!-- Col 2: About Us (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Navigation</h4>
+                <span class="footer-col-title">About Us</span>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Facility</a></li>
+                    <li><a href="missionandvision.html">Mission and Vision</a></li>
+                    <li><a href="our partner.html">Partnership</a></li>
+                    <li><a href="people.html">People</a></li>
+                    <li><a href="contact us.html">Contact us</a></li>
                 </ul>
             </div>
+
+            <!-- Col 3: Products (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Products</h4>
+                <span class="footer-col-title">Products</span>
                 <ul>
-                    <li><a href="#">Tellus AI</a></li>
-                    <li><a href="academichat.html">AcademiChat AI</a></li>
+                    <li><a href="tellus.html">Tellus</a></li>
+                    <li><a href="academichat.html">AcademiChat <span class="badge-beta">Beta</span></a></li>
                     <li><a href="#">VeriGuide</a></li>
                 </ul>
             </div>
+
+            <!-- Col 4: Services (Header non-clickable, sub-items clickable) -->
             <div class="footer-col">
-                <h4>Contact Us</h4>
+                <span class="footer-col-title">Services</span>
+                <ul>
+                    <li><a href="#">e-Learning Consultation</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 5: Contact Us -->
+            <div class="footer-col">
+                <span class="footer-col-title">Contact Us</span>
                 <p style="color: #2D2100; font-size: 0.9rem; font-weight: 500;">The Chinese University of Hong Kong<br>Shatin, N.T., Hong Kong</p>
             </div>
         </div>
@@ -921,6 +1028,28 @@
             &copy; 2026 Centre for e-Learning Innovation and Technology Enhancement (ELITE), CUHK. All Rights Reserved.
         </div>
     </footer>
+
+    <!-- Interactive Tab Switcher Script -->
+    <script>
+        function switchRole(role) {
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.role-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Remove active class from all content panels
+            const contents = document.querySelectorAll('.function-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Activate clicked button and corresponding content panel
+            if (role === 'instructor') {
+                buttons[0].classList.add('active');
+                document.getElementById('role-instructor').classList.add('active');
+            } else if (role === 'student') {
+                buttons[1].classList.add('active');
+                document.getElementById('role-student').classList.add('active');
+            }
+        }
+    </script>
 
 </body>
 </html>
