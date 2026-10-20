@@ -191,10 +191,10 @@
         .ai-badge-pink { background: var(--elite-pink); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
         .ai-badge-cyan { background: var(--elite-cyan); color: white; font-size: 0.7rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
 
-        /* --- Hero Showcase Section (matching reference design layout) --- */
+        /* --- Hero Showcase Section --- */
         .hero-section {
             background: #FFFFFF;
-            padding: 65px 20px 55px 20px;
+            padding: 60px 20px 40px 20px;
         }
 
         .hero-container {
@@ -284,6 +284,55 @@
             height: auto;
             display: block;
             object-fit: cover;
+        }
+
+        /* --- Condensed Vision & Mission Section --- */
+        .vision-mission-section {
+            background: #F1F5F9;
+            padding: 50px 20px;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .vm-container {
+            max-width: 1150px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .vm-card {
+            background: var(--surface-white);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            border-left: 5px solid var(--elite-purple);
+        }
+
+        .vm-card.vision-card {
+            border-left-color: var(--elite-gold);
+        }
+
+        .vm-card h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--elite-purple);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vision-card h3 {
+            color: #9A7100;
+        }
+
+        .vm-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         /* --- Sections Shared Styling --- */
@@ -514,7 +563,7 @@
         }
 
         @media (max-width: 900px) {
-            .hero-top-row {
+            .hero-top-row, .vm-container {
                 grid-template-columns: 1fr;
             }
         }
@@ -536,10 +585,10 @@
                     <a href="index.html" class="nav-link">Home</a>
                 </li>
                 
+                <!-- About Dropdown without Mission & Vision item -->
                 <li class="nav-item nav-about">
                     <a href="#" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                     <ul class="dropdown">
-                        <li class="dropdown-item"><a href="missionandvision.html">Mission and Vision</a></li>
                         <li class="dropdown-item"><a href="our partner.html">Partnership</a></li>
                         <li class="dropdown-item"><a href="people.html">People</a></li>
                         <li class="dropdown-item"><a href="contact us.html">Contact us</a></li>
@@ -580,12 +629,10 @@
 
     <!-- Main Homepage Content -->
     <main>
-        <!-- 1. Hero Showcase Section matching image layout without extra text -->
+        <!-- 1. Hero Showcase Section -->
         <div class="hero-section">
             <div class="hero-container">
-                <!-- Side-by-Side Top Row -->
                 <div class="hero-top-row">
-                    <!-- Left Column: Content & Buttons -->
                     <div>
                         <h1 class="hero-title">Shaping Education with AI-Enhanced Learning</h1>
                         <p class="hero-desc">
@@ -597,7 +644,6 @@
                         </div>
                     </div>
 
-                    <!-- Right Column: CPR Image Wrapper -->
                     <div class="hero-image-wrapper">
                         <img src="https://www.cpr.cuhk.edu.hk/wp-content/upload/resources/press/photo/56c7406f28411.jpg" alt="CUHK ELITE Teaching Showcase" class="hero-image">
                     </div>
@@ -605,8 +651,22 @@
             </div>
         </div>
 
-        <!-- 2. Featured Products Section -->
-        <section id="products" style="background: var(--surface-white); max-width: 100%; padding: 70px 20px; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+        <!-- 2. Condensed Vision & Mission Section -->
+        <div class="vision-mission-section">
+            <div class="vm-container">
+                <div class="vm-card vision-card">
+                    <h3><i class="fa-solid fa-eye"></i> Our Vision</h3>
+                    <p>To become a central hub that advances CUHK's position as a global leader in education with technology, fostering excellence, innovation, and sustainable pedagogical transformation.</p>
+                </div>
+                <div class="vm-card">
+                    <h3><i class="fa-solid fa-bullseye"></i> Our Mission</h3>
+                    <p>To develop and promote a strong culture, capacity, and competence at CUHK in eLearning practices and educational technology, supporting both internal and external academic communities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Featured Products Section -->
+        <section id="products" style="background: var(--surface-white); max-width: 100%; padding: 70px 20px; border-bottom: 1px solid var(--border-light);">
             <div style="max-width: 1200px; margin: 0 auto;">
                 <h2 class="section-title">Featured Products</h2>
                 <p class="section-subtitle">Cutting-edge platforms developed in-house to transform teaching and assessment</p>
@@ -660,7 +720,7 @@
             </div>
         </section>
 
-        <!-- 3. What We Do Section -->
+        <!-- 4. What We Do Section -->
         <section id="services">
             <h2 class="section-title">What We Do</h2>
             <p class="section-subtitle">Supporting academic excellence through three key pillars</p>
@@ -684,7 +744,7 @@
             </div>
         </section>
 
-        <!-- 4. Facilities Showcase Section -->
+        <!-- 5. Facilities Showcase Section -->
         <section id="facility">
             <h2 class="section-title">Facilities Showcase</h2>
             <p class="section-subtitle">Explore our state-of-the-art media production studios and open areas</p>
@@ -719,10 +779,10 @@
                 <h4 style="color:var(--elite-purple);">ELITE Centre</h4>
                 <p style="color: #2D2100; font-size: 0.9rem; line-height: 1.5; font-weight: 500;">Promoting AI-enhanced learning and educational technology innovation at CUHK.</p>
             </div>
+            <!-- About Us column without Mission & Vision link -->
             <div class="footer-col">
                 <h4 style="color:var(--elite-purple);">About Us</h4>
                 <ul>
-                    <li><a href="missionandvision.html">Mission and Vision</a></li>
                     <li><a href="our partner.html">Partnership</a></li>
                     <li><a href="people.html">People</a></li>
                     <li><a href="contact us.html">Contact us</a></li>
